@@ -10,13 +10,13 @@ ScVI & ScANVI:
 
 .. code-block:: bash
 
-   pip install pip install scvi-tools
+   pip install scvi-tools
 
 Scib:
 
 .. code-block:: bash
 
-   pip install pip git+https://github.com/theislab/scib
+   pip install git+https://github.com/theislab/scib
 
 Mars
   Nothing to install here atm. Repo is cloned in this one.
