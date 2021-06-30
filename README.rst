@@ -7,11 +7,13 @@ Repository for all scripts used for LATAQ paper.
 Usage and installation
 -------------------------------
 ScVI & ScANVI:
+
 .. code-block:: bash
 
    pip install pip install scvi-tools
 
 Scib:
+
 .. code-block:: bash
 
    pip install pip git+https://github.com/theislab/scib
