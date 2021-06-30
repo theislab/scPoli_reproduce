@@ -27,3 +27,6 @@ Seurat
   Install Seurat (4.0.3)
   Install SeuratDisk (0.0.0.9019)
 
+LATAQ
+   Scripts are in the LATAQ repo at the moment.
+
