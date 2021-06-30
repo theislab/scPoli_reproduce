@@ -28,5 +28,5 @@ Seurat
   Install SeuratDisk (0.0.0.9019)
 
 LATAQ
-   Scripts are in the LATAQ repo at the moment.
+   Scripts are in the LATAQ repo at the moment for easier testing during development.
 
