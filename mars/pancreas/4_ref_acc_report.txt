@@ -1,0 +1,13 @@
+                      precision    recall  f1-score   support
+
+     Pancreas Acinar       0.00      0.00      0.00         6
+      Pancreas Alpha       0.00      0.00      0.00       241
+       Pancreas Beta       0.51      0.96      0.67       300
+      Pancreas Delta       0.00      0.00      0.00        21
+     Pancreas Ductal       0.50      0.74      0.60        27
+Pancreas Endothelial       0.00      0.00      0.00        12
+      Pancreas Gamma       0.00      0.00      0.00        12
+   Pancreas Stellate       0.59      1.00      0.74        13
+          unassigned       0.00      0.00      0.00         0
+
+         avg / total       0.28      0.51      0.36       632
