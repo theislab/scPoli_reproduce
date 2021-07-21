@@ -387,4 +387,5 @@ INITIALIZING NEW NETWORK..............
   2%|▏         | 2/100 [40:15<23:02:29, 846.42s/trial, best loss: -0.8798624505335524]                                                                                       |████----------------| 20.0%  - val_loss: 1779.9442777194 - val_trvae_loss: 1779.9442777194
   2%|▏         | 2/100 [40:20<23:02:29, 846.42s/trial, best loss: -0.8798624505335524]                                                                                      
 Initializing unlabeled landmarks with Leiden-Clustering with an unknown number of clusters.
-  2%|▏         | 2/100 [40:21<23:02:29, 846.42s/trial, best loss: -0.8798624505335524]
+  2%|▏         | 2/100 [40:21<23:02:29, 846.42s/trial, best loss: -0.8798624505335524]                                                                                      Leiden Clustering succesful. Found 4 clusters.
+  2%|▏         | 2/100 [41:23<23:02:29, 846.42s/trial, best loss: -0.8798624505335524]
