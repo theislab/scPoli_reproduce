@@ -1,12 +1,15 @@
 
 Namespace(experiment='lung', max_evals=100, n_epochs=20, n_pre_epochs=4)
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       
-INITIALIZING NEW NETWORK..............
+  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       Embedding dictionary:
+
+  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Num conditions: 10
+
+  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Embedding dim: 10
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       Encoder Architecture:
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Input Layer in, out and cond:
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       4000
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       10
+  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       0
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Hidden Layer
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       1
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       in/out:
@@ -14,10 +17,10 @@ INITIALIZING NEW NETWORK..............
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Mean/Var Layer in/out:
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       100
+  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       30
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       Decoder Architecture:
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	First Layer in, out and cond: 
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       100
+  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       30
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       10
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Hidden Layer
@@ -28,8 +31,8 @@ INITIALIZING NEW NETWORK..............
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Output Layer in/out: 
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
   0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       4000
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                        |█-------------------| 5.0%  - val_loss: 1004.0824890137 - val_trvae_loss: 1004.0824890137
-  0%|          | 0/100 [00:06<?, ?trial/s, best loss=?]                                                        |██------------------| 10.0%  - val_loss: 978.6881408691 - val_trvae_loss: 978.6881408691
-  0%|          | 0/100 [00:08<?, ?trial/s, best loss=?]                                                        |███-----------------| 15.0%  - val_loss: 966.5940246582 - val_trvae_loss: 966.5940246582
-  0%|          | 0/100 [00:09<?, ?trial/s, best loss=?]                                                        |████----------------| 20.0%  - val_loss: 943.3716888428 - val_trvae_loss: 943.3716888428
-  0%|          | 0/100 [00:11<?, ?trial/s, best loss=?]  0%|          | 0/100 [00:11<?, ?trial/s, best loss=?]
+  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                        |█-------------------| 5.0%  - val_loss: 995.4047050476 - val_trvae_loss: 995.4047050476
+  0%|          | 0/100 [00:06<?, ?trial/s, best loss=?]                                                        |██------------------| 10.0%  - val_loss: 965.3721618652 - val_trvae_loss: 965.3721618652
+  0%|          | 0/100 [00:08<?, ?trial/s, best loss=?]                                                        |███-----------------| 15.0%  - val_loss: 954.4214668274 - val_trvae_loss: 954.4214668274
+  0%|          | 0/100 [00:09<?, ?trial/s, best loss=?]                                                        |████----------------| 20.0%  - val_loss: 934.4309616089 - val_trvae_loss: 934.4309616089
+  0%|          | 0/100 [00:10<?, ?trial/s, best loss=?]  0%|          | 0/100 [00:11<?, ?trial/s, best loss=?]

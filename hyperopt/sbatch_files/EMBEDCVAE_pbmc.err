@@ -1,4 +1,21 @@
+WARNING: You’re trying to run this on 100 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 70 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1248: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1248: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1248: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+WARNING: You’re trying to run this on 60 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 60 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
@@ -6,47 +23,17 @@ WARNING: You’re trying to run this on 70 dimensions of `.X`, if you really wan
          Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 60 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 70 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 70 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 60 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 100 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 100 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 100 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 70 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 100 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 70 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
@@ -56,25 +43,45 @@ WARNING: You’re trying to run this on 100 dimensions of `.X`, if you really wa
          Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+WARNING: You’re trying to run this on 100 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 70 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 70 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 60 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+WARNING: You’re trying to run this on 100 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 100 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 100 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
-WARNING: You’re trying to run this on 60 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+WARNING: You’re trying to run this on 70 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 100 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.
 WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 70 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 60 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 100 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 70 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 100 dimensions of `.X`, if you really want this, set `use_rep='X'`.
          Falling back to preprocessing with `sc.pp.pca` and default params.

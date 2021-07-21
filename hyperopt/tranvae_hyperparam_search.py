@@ -1,4 +1,5 @@
 import argparse
+from typing import Type
 import pandas as pd
 import scanpy as sc
 import numpy as np
@@ -97,34 +98,40 @@ def objective(params):
         latent_dim=int(params['latent_dim']),
         use_mmd=False,
     )
-    tranvae.train(
-        n_epochs=EPOCHS,
-        early_stopping_kwargs=early_stopping_kwargs,
-        pretraining_epochs=PRE_EPOCHS,
-        #alpha_epoch_anneal=params['alpha_epoch_anneal'],
-        #eta=params['eta'],
-        tau=0,
-        clustering_res=params['clustering_res'],
-        labeled_loss_metric=params['loss_metric'],
-        unlabeled_loss_metric=params['loss_metric']
-    )
+    try:
+        tranvae.train(
+            n_epochs=EPOCHS,
+            early_stopping_kwargs=early_stopping_kwargs,
+            pretraining_epochs=PRE_EPOCHS,
+            #alpha_epoch_anneal=params['alpha_epoch_anneal'],
+            #eta=params['eta'],
+            tau=0,
+            clustering_res=params['clustering_res'],
+            labeled_loss_metric=params['loss_metric'],
+            unlabeled_loss_metric=params['loss_metric']
+        )
+    except TypeError:
+        continue
     tranvae.save(REF_PATH, overwrite=True)
     tranvae_query = TRANVAE.load_query_data(
         adata=target_adata,
         reference_model=REF_PATH,
         labeled_indices=[],
     )
-    tranvae_query.train(
-        n_epochs=EPOCHS,
-        early_stopping_kwargs=early_stopping_kwargs,
-        pretraining_epochs=PRE_EPOCHS,
-        #eta=params['eta'],
-        #tau=0,
-        weight_decay=0,
-        clustering_res=params['clustering_res'],
-        labeled_loss_metric=params['loss_metric'],
-        unlabeled_loss_metric=params['loss_metric']
-    )
+    try:
+        tranvae_query.train(
+            n_epochs=EPOCHS,
+            early_stopping_kwargs=early_stopping_kwargs,
+            pretraining_epochs=PRE_EPOCHS,
+            #eta=params['eta'],
+            #tau=0,
+            weight_decay=0,
+            clustering_res=params['clustering_res'],
+            labeled_loss_metric=params['loss_metric'],
+            unlabeled_loss_metric=params['loss_metric']
+        )
+    except TypeError:
+        continue
     results_dict = tranvae_query.classify(
         adata.X, 
         adata.obs[condition_key], 

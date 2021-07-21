@@ -1,7 +1,7 @@
 job exception: 'NoneType' object is not subscriptable
 
 Traceback (most recent call last):
-  File "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/hyperopt/tranvae_hyperparam_search.py", line 150, in <module>
+  File "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/hyperopt/embedcvae_hyperparam_search.py", line 150, in <module>
     best = fmin(
   File "/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/hyperopt/fmin.py", line 507, in fmin
     return trials.fmin(
@@ -17,7 +17,7 @@ Traceback (most recent call last):
     result = self.domain.evaluate(spec, ctrl)
   File "/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/hyperopt/base.py", line 907, in evaluate
     rval = self.fn(pyll_rval)
-  File "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/hyperopt/tranvae_hyperparam_search.py", line 100, in objective
+  File "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/hyperopt/embedcvae_hyperparam_search.py", line 100, in objective
     tranvae.train(
   File "/storage/groups/ml01/workspace/carlo.dedonno/LATAQ/lataq/models/lataq_model.py", line 158, in train
     self.trainer.train(n_epochs, lr, eps)
