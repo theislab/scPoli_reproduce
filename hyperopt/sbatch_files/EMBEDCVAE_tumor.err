@@ -1,2 +1,0 @@
-WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
-         Falling back to preprocessing with `sc.pp.pca` and default params.

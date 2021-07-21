@@ -1,7 +1,7 @@
-job exception: 'NoneType' object is not subscriptable
+job exception: local variable 'results_dict' referenced before assignment
 
 Traceback (most recent call last):
-  File "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/hyperopt/tranvae_hyperparam_search.py", line 150, in <module>
+  File "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/hyperopt/tranvae_hyperparam_search.py", line 153, in <module>
     best = fmin(
   File "/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/hyperopt/fmin.py", line 507, in fmin
     return trials.fmin(
@@ -17,16 +17,6 @@ Traceback (most recent call last):
     result = self.domain.evaluate(spec, ctrl)
   File "/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/hyperopt/base.py", line 907, in evaluate
     rval = self.fn(pyll_rval)
-  File "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/hyperopt/tranvae_hyperparam_search.py", line 100, in objective
-    tranvae.train(
-  File "/storage/groups/ml01/workspace/carlo.dedonno/LATAQ/lataq/models/lataq_model.py", line 158, in train
-    self.trainer.train(n_epochs, lr, eps)
-  File "/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/scArches-0.3.5-py3.8.egg/scarches/trainers/trvae/trainer.py", line 218, in train
-    self.on_epoch_begin(lr, eps)
-  File "/storage/groups/ml01/workspace/carlo.dedonno/LATAQ/lataq/trainers/lataq.py", line 237, in on_epoch_begin
-    self.initialize_landmarks()
-  File "/storage/groups/ml01/workspace/carlo.dedonno/LATAQ/lataq/trainers/lataq.py", line 163, in initialize_landmarks
-    self.landmarks_labeled, self.landmarks_labeled_q = self.update_labeled_landmarks(
-  File "/storage/groups/ml01/workspace/carlo.dedonno/LATAQ/lataq/trainers/lataq.py", line 383, in update_labeled_landmarks
-    landmark = previous_landmarks[value].unsqueeze(0)
-TypeError: 'NoneType' object is not subscriptable
+  File "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/hyperopt/tranvae_hyperparam_search.py", line 149, in objective
+    'loss': -results_dict[cell_type_key[-1]]['report']['weighted avg']['f1-score'],
+UnboundLocalError: local variable 'results_dict' referenced before assignment

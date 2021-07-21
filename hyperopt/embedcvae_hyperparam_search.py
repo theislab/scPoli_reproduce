@@ -88,60 +88,62 @@ results_list = []
 def objective(params):
     EPOCHS = args.n_epochs
     PRE_EPOCHS = args.n_pre_epochs
-    
-    tranvae = EMBEDCVAE(
-        adata=source_adata,
-        condition_key=condition_key,
-        cell_type_keys=cell_type_key,
-        hidden_layer_sizes=[128]*int(params['hidden_layer_sizes']),
-        latent_dim=int(params['latent_dim']),
-        use_mmd=False,
-    )
-    tranvae.train(
-        n_epochs=EPOCHS,
-        early_stopping_kwargs=early_stopping_kwargs,
-        pretraining_epochs=PRE_EPOCHS,
-        #alpha_epoch_anneal=params['alpha_epoch_anneal'],
-        #eta=params['eta'],
-        tau=0,
-        clustering_res=params['clustering_res'],
-        labeled_loss_metric=params['loss_metric'],
-        unlabeled_loss_metric=params['loss_metric']
-    )
-    tranvae.save(REF_PATH, overwrite=True)
-    tranvae_query = EMBEDCVAE.load_query_data(
-        adata=target_adata,
-        reference_model=REF_PATH,
-        labeled_indices=[],
-    )
-    tranvae_query.train(
-        n_epochs=EPOCHS,
-        early_stopping_kwargs=early_stopping_kwargs,
-        pretraining_epochs=PRE_EPOCHS,
-        #eta=params['eta'],
-        #tau=0,
-        weight_decay=0,
-        clustering_res=params['clustering_res'],
-        labeled_loss_metric=params['loss_metric'],
-        unlabeled_loss_metric=params['loss_metric']
-    )
-    results_dict = tranvae_query.classify(
-        adata.X, 
-        adata.obs[condition_key], 
-        metric=params['loss_metric']
-    )
-    for i in range(len(cell_type_key)):
-        preds = results_dict[cell_type_key[i]]['preds']
-        probs = results_dict[cell_type_key[i]]['probs']
-        results_dict[cell_type_key[i]]['report'] = classification_report(
-            y_true=adata.obs[cell_type_key[i]], 
-            y_pred=preds,
-            output_dict=True
+    try:
+        tranvae = EMBEDCVAE(
+            adata=source_adata,
+            condition_key=condition_key,
+            cell_type_keys=cell_type_key,
+            hidden_layer_sizes=[128]*int(params['hidden_layer_sizes']),
+            latent_dim=int(params['latent_dim']),
+            use_mmd=False,
         )
-    params_list.append(params)
-    results_list.append(results_dict[cell_type_key[0]]['report'])
-    
-    del tranvae, tranvae_query
+        tranvae.train(
+            n_epochs=EPOCHS,
+            early_stopping_kwargs=early_stopping_kwargs,
+            pretraining_epochs=PRE_EPOCHS,
+            #alpha_epoch_anneal=params['alpha_epoch_anneal'],
+            #eta=params['eta'],
+            tau=0,
+            clustering_res=params['clustering_res'],
+            labeled_loss_metric=params['loss_metric'],
+            unlabeled_loss_metric=params['loss_metric']
+        )
+        tranvae.save(REF_PATH, overwrite=True)
+        tranvae_query = EMBEDCVAE.load_query_data(
+            adata=target_adata,
+            reference_model=REF_PATH,
+            labeled_indices=[],
+        )
+        tranvae_query.train(
+            n_epochs=EPOCHS,
+            early_stopping_kwargs=early_stopping_kwargs,
+            pretraining_epochs=PRE_EPOCHS,
+            #eta=params['eta'],
+            #tau=0,
+            weight_decay=0,
+            clustering_res=params['clustering_res'],
+            labeled_loss_metric=params['loss_metric'],
+            unlabeled_loss_metric=params['loss_metric']
+        )
+        results_dict = tranvae_query.classify(
+            adata.X, 
+            adata.obs[condition_key], 
+            metric=params['loss_metric']
+        )
+        for i in range(len(cell_type_key)):
+            preds = results_dict[cell_type_key[i]]['preds']
+            probs = results_dict[cell_type_key[i]]['probs']
+            results_dict[cell_type_key[i]]['report'] = classification_report(
+                y_true=adata.obs[cell_type_key[i]], 
+                y_pred=preds,
+                output_dict=True
+            )
+        params_list.append(params)
+        results_list.append(results_dict[cell_type_key[0]]['report'])
+        
+        del tranvae, tranvae_query
+    except TypeError:
+        pass
     return {
         'loss': -results_dict[cell_type_key[-1]]['report']['weighted avg']['f1-score'],
         'status': STATUS_OK,
