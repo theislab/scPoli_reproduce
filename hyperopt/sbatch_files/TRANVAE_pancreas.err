@@ -1,0 +1,83 @@
+WARNING: You’re trying to run this on 100 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 70 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1248: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1248: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1248: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+WARNING: You’re trying to run this on 70 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 60 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1248: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1248: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1248: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 100 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 60 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 60 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 70 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 70 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+WARNING: You’re trying to run this on 80 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1248: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1248: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1248: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+WARNING: You’re trying to run this on 90 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+job exception: Sizes of tensors must match except in dimension 1. Got 10 and 70 in dimension 0 (The offending index is 1)
+
+Traceback (most recent call last):
+  File "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/hyperopt/tranvae_hyperparam_search.py", line 149, in <module>
+    best = fmin(
+  File "/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/hyperopt/fmin.py", line 507, in fmin
+    return trials.fmin(
+  File "/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/hyperopt/base.py", line 682, in fmin
+    return fmin(
+  File "/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/hyperopt/fmin.py", line 553, in fmin
+    rval.exhaust()
+  File "/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/hyperopt/fmin.py", line 356, in exhaust
+    self.run(self.max_evals - n_done, block_until_done=self.asynchronous)
+  File "/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/hyperopt/fmin.py", line 292, in run
+    self.serial_evaluate()
+  File "/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/hyperopt/fmin.py", line 170, in serial_evaluate
+    result = self.domain.evaluate(spec, ctrl)
+  File "/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/hyperopt/base.py", line 907, in evaluate
+    rval = self.fn(pyll_rval)
+  File "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/hyperopt/tranvae_hyperparam_search.py", line 111, in objective
+    tranvae_query = TRANVAE.load_query_data(
+  File "/storage/groups/ml01/workspace/carlo.dedonno/LATAQ/lataq/models/tranvae/tranvae_model.py", line 218, in load_query_data
+    new_model._load_expand_params_from_dict(model_state_dict)
+  File "/home/icb/carlo.dedonno/anaconda3/envs/lataq/lib/python3.8/site-packages/scArches-0.3.5-py3.8.egg/scarches/models/base/_base.py", line 103, in _load_expand_params_from_dict
+    fixed_ten = torch.cat([load_ten, new_ten[..., -dim_diff:]], dim=-1)
+RuntimeError: Sizes of tensors must match except in dimension 1. Got 10 and 70 in dimension 0 (The offending index is 1)
