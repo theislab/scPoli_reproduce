@@ -4,13 +4,13 @@ seml:
   output_dir: hyperopt/logs
   project_root_dir: /storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce
 slurm:
-  experiments_per_job: 2
+  experiments_per_job: 1
   sbatch_options_template: GPU
   sbatch_options:
-    mem: 50G          # memory
+    mem: 25G          # memory
     cpus-per-task: 2  # num cores
     time: 0-06:00     # max time, D-HH:MM
-  max_jobs_per_batch: 6
+  max_jobs_per_batch: 8
 
 ###### BEGIN PARAMETER CONFIGURATION ######
 

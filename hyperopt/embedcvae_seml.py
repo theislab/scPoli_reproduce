@@ -126,6 +126,7 @@ def run(
         x = adata.X,
         c = adata.obs[condition_key]
     )
+    latent_adata = sc.AnnData(latent_adata)
     conditions, _ = label_encoder(latent_adata, condition_key=condition_key)
     labels, _ = label_encoder(latent_adata, condition_key=cell_type_key[0])
     latent_adata.obs[condition_key] = conditions.squeeze(axis=1)
