@@ -7,3 +7,4 @@ own_tests/
 build/
 dist/
 tmp/
+hyperopt/logs/

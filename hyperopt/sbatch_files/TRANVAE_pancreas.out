@@ -1,211 +1,0 @@
-
-Namespace(experiment='pancreas', max_evals=100, n_epochs=20, n_pre_epochs=4)
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       
-INITIALIZING NEW NETWORK..............
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       Encoder Architecture:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Input Layer in, out and cond:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       4000
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       7
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       1
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       2
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       3
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       4
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Mean/Var Layer in/out:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       50
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       Decoder Architecture:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	First Layer in, out and cond: 
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       50
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       7
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       1
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       2
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       3
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       4
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Output Layer in/out: 
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       4000
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                        |█-------------------| 5.0%  - val_loss: 1227.9223521839 - val_trvae_loss: 1227.9223521839
-  0%|          | 0/100 [00:08<?, ?trial/s, best loss=?]                                                        |██------------------| 10.0%  - val_loss: 1204.4831986861 - val_trvae_loss: 1204.4831986861
-  0%|          | 0/100 [00:09<?, ?trial/s, best loss=?]                                                        |███-----------------| 15.0%  - val_loss: 1135.9903342507 - val_trvae_loss: 1135.9903342507
-  0%|          | 0/100 [00:10<?, ?trial/s, best loss=?]                                                        |████----------------| 20.0%  - val_loss: 1114.9598055753 - val_trvae_loss: 1114.9598055753
-  0%|          | 0/100 [00:12<?, ?trial/s, best loss=?]                                                        |█████---------------| 25.0%  - val_loss: 1184.5364102450 - val_trvae_loss: 1161.0101873224 - val_classifier_loss: 23.5262178941 - val_labeled_loss: 23.5262178941
-  0%|          | 0/100 [00:14<?, ?trial/s, best loss=?]                                                        |██████--------------| 30.0%  - val_loss: 1170.2546164773 - val_trvae_loss: 1145.5150590376 - val_classifier_loss: 24.7395657626 - val_labeled_loss: 24.7395657626
-  0%|          | 0/100 [00:16<?, ?trial/s, best loss=?]                                                        |███████-------------| 35.0%  - val_loss: 1162.5277099609 - val_trvae_loss: 1139.5539661754 - val_classifier_loss: 22.9737522819 - val_labeled_loss: 22.9737522819
-  0%|          | 0/100 [00:18<?, ?trial/s, best loss=?]                                                        |████████------------| 40.0%  - val_loss: 1169.1895751953 - val_trvae_loss: 1144.0707785866 - val_classifier_loss: 25.1187919270 - val_labeled_loss: 25.1187919270
-  0%|          | 0/100 [00:20<?, ?trial/s, best loss=?]                                                        |█████████-----------| 45.0%  - val_loss: 1149.2936789773 - val_trvae_loss: 1124.8986372514 - val_classifier_loss: 24.3950578516 - val_labeled_loss: 24.3950578516
-  0%|          | 0/100 [00:22<?, ?trial/s, best loss=?]                                                        |██████████----------| 50.0%  - val_loss: 1141.1997181286 - val_trvae_loss: 1117.5945379084 - val_classifier_loss: 23.6051597595 - val_labeled_loss: 23.6051597595
-  0%|          | 0/100 [00:24<?, ?trial/s, best loss=?]                                                        |███████████---------| 55.0%  - val_loss: 1136.0518465909 - val_trvae_loss: 1115.2187721946 - val_classifier_loss: 20.8330772573 - val_labeled_loss: 20.8330772573
-  0%|          | 0/100 [00:25<?, ?trial/s, best loss=?]                                                        |████████████--------| 60.0%  - val_loss: 1133.4572642933 - val_trvae_loss: 1110.0620893999 - val_classifier_loss: 23.3951852972 - val_labeled_loss: 23.3951852972
-  0%|          | 0/100 [00:27<?, ?trial/s, best loss=?]                                                        |█████████████-------| 65.0%  - val_loss: 1129.5492165305 - val_trvae_loss: 1105.5947154652 - val_classifier_loss: 23.9545010653 - val_labeled_loss: 23.9545010653
-  0%|          | 0/100 [00:29<?, ?trial/s, best loss=?]                                                        |██████████████------| 70.0%  - val_loss: 1137.2992831143 - val_trvae_loss: 1115.1652055220 - val_classifier_loss: 22.1340701363 - val_labeled_loss: 22.1340701363
-  0%|          | 0/100 [00:31<?, ?trial/s, best loss=?]                                                        |███████████████-----| 75.0%  - val_loss: 1125.1492365057 - val_trvae_loss: 1101.7429088246 - val_classifier_loss: 23.4063517831 - val_labeled_loss: 23.4063517831
-  0%|          | 0/100 [00:33<?, ?trial/s, best loss=?]                                                        |████████████████----| 80.0%  - val_loss: 1127.7035245028 - val_trvae_loss: 1104.8273481889 - val_classifier_loss: 22.8761747534 - val_labeled_loss: 22.8761747534
-  0%|          | 0/100 [00:35<?, ?trial/s, best loss=?]                                                        |█████████████████---| 85.0%  - val_loss: 1125.5914528587 - val_trvae_loss: 1102.5217950994 - val_classifier_loss: 23.0696648684 - val_labeled_loss: 23.0696648684
-  0%|          | 0/100 [00:37<?, ?trial/s, best loss=?]                                                        |██████████████████--| 90.0%  - val_loss: 1135.8642800071 - val_trvae_loss: 1103.1408913352 - val_classifier_loss: 32.7233780948 - val_labeled_loss: 32.7233780948
-  0%|          | 0/100 [00:38<?, ?trial/s, best loss=?]                                                        |███████████████████-| 95.0%  - val_loss: 1126.9034534801 - val_trvae_loss: 1101.9734219638 - val_classifier_loss: 24.9300367182 - val_labeled_loss: 24.9300367182
-  0%|          | 0/100 [00:40<?, ?trial/s, best loss=?]                                                        |████████████████████| 100.0%  - val_loss: 1129.9733775746 - val_trvae_loss: 1106.7756902521 - val_classifier_loss: 23.1976940849 - val_labeled_loss: 23.1976940849
-  0%|          | 0/100 [00:42<?, ?trial/s, best loss=?]                                                       Saving best state of network...
-  0%|          | 0/100 [00:42<?, ?trial/s, best loss=?]                                                       Best State was in Epoch
-  0%|          | 0/100 [00:42<?, ?trial/s, best loss=?]                                                       10
-  0%|          | 0/100 [00:42<?, ?trial/s, best loss=?]                                                       AnnData object with n_obs × n_vars = 3289 × 4000
-    obs: 'study', 'cell_type'
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       
-INITIALIZING NEW NETWORK..............
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       Encoder Architecture:
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       	Input Layer in, out and cond:
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       4000
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       9
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       1
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       2
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       3
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       4
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       	Mean/Var Layer in/out:
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       50
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       Decoder Architecture:
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       	First Layer in, out and cond: 
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       50
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       9
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       1
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       2
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       3
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       	Hidden Layer
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       4
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       in/out:
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       	Output Layer in/out: 
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                       4000
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                        |█-------------------| 5.0%  - val_loss: 1710.6201171875 - val_trvae_loss: 1710.6201171875
-  0%|          | 0/100 [00:43<?, ?trial/s, best loss=?]                                                        |██------------------| 10.0%  - val_loss: 1678.8235677083 - val_trvae_loss: 1678.8235677083
-  0%|          | 0/100 [00:44<?, ?trial/s, best loss=?]                                                        |███-----------------| 15.0%  - val_loss: 1683.5572102865 - val_trvae_loss: 1683.5572102865
-  0%|          | 0/100 [00:44<?, ?trial/s, best loss=?]                                                        |████----------------| 20.0%  - val_loss: 1662.2456054688 - val_trvae_loss: 1662.2456054688
-  0%|          | 0/100 [00:44<?, ?trial/s, best loss=?]                                                       
-Initializing unlabeled landmarks with Leiden-Clustering with an unknown number of clusters.
-  0%|          | 0/100 [00:44<?, ?trial/s, best loss=?]                                                       Leiden Clustering succesful. Found 3 clusters.
-  0%|          | 0/100 [00:58<?, ?trial/s, best loss=?]                                                        |█████---------------| 25.0%  - val_loss: 1664.1767171224 - val_trvae_loss: 1664.1740722656 - val_classifier_loss: 0.0026432289 - val_unlabeled_loss: 2.6432287693
-  0%|          | 0/100 [00:58<?, ?trial/s, best loss=?]                                                        |██████--------------| 30.0%  - val_loss: 1654.4414876302 - val_trvae_loss: 1654.4388834635 - val_classifier_loss: 0.0025906710 - val_unlabeled_loss: 2.5906709035
-  0%|          | 0/100 [00:58<?, ?trial/s, best loss=?]                                                        |███████-------------| 35.0%  - val_loss: 1647.0973307292 - val_trvae_loss: 1647.0947672526 - val_classifier_loss: 0.0025651713 - val_unlabeled_loss: 2.5651710828
-  0%|          | 0/100 [00:59<?, ?trial/s, best loss=?]                                                        |████████------------| 40.0%  - val_loss: 1636.5857747396 - val_trvae_loss: 1636.5831298828 - val_classifier_loss: 0.0026008913 - val_unlabeled_loss: 2.6008911928
-  0%|          | 0/100 [00:59<?, ?trial/s, best loss=?]                                                        |█████████-----------| 45.0%  - val_loss: 1638.2829182943 - val_trvae_loss: 1638.2803141276 - val_classifier_loss: 0.0025929678 - val_unlabeled_loss: 2.5929677486
-  0%|          | 0/100 [00:59<?, ?trial/s, best loss=?]                                                        |██████████----------| 50.0%  - val_loss: 1629.3502197266 - val_trvae_loss: 1629.3476155599 - val_classifier_loss: 0.0026220325 - val_unlabeled_loss: 2.6220324039
-  0%|          | 0/100 [01:00<?, ?trial/s, best loss=?]                                                        |███████████---------| 55.0%  - val_loss: 1633.3332519531 - val_trvae_loss: 1633.3306884766 - val_classifier_loss: 0.0025717519 - val_unlabeled_loss: 2.5717518330
-  0%|          | 0/100 [01:00<?, ?trial/s, best loss=?]                                                        |████████████--------| 60.0%  - val_loss: 1622.0897216797 - val_trvae_loss: 1622.0870768229 - val_classifier_loss: 0.0026316259 - val_unlabeled_loss: 2.6316258113
-  0%|          | 0/100 [01:00<?, ?trial/s, best loss=?]                                                        |█████████████-------| 65.0%  - val_loss: 1624.7336018880 - val_trvae_loss: 1624.7308756510 - val_classifier_loss: 0.0027316458 - val_unlabeled_loss: 2.7316456636
-  0%|          | 0/100 [01:01<?, ?trial/s, best loss=?]                                                        |██████████████------| 70.0%  - val_loss: 1626.3479410807 - val_trvae_loss: 1626.3452148438 - val_classifier_loss: 0.0027162921 - val_unlabeled_loss: 2.7162919044
-  0%|          | 0/100 [01:01<?, ?trial/s, best loss=?]                                                        |███████████████-----| 75.0%  - val_loss: 1613.1068929036 - val_trvae_loss: 1613.1042887370 - val_classifier_loss: 0.0026003392 - val_unlabeled_loss: 2.6003390948
-  0%|          | 0/100 [01:01<?, ?trial/s, best loss=?]                                                        |████████████████----| 80.0%  - val_loss: 1613.2964680990 - val_trvae_loss: 1613.2938639323 - val_classifier_loss: 0.0026387509 - val_unlabeled_loss: 2.6387507121
-  0%|          | 0/100 [01:02<?, ?trial/s, best loss=?]                                                        |█████████████████---| 85.0%  - val_loss: 1604.7553304036 - val_trvae_loss: 1604.7526448568 - val_classifier_loss: 0.0026840641 - val_unlabeled_loss: 2.6840639114
-  0%|          | 0/100 [01:02<?, ?trial/s, best loss=?]                                                        |██████████████████--| 90.0%  - val_loss: 1609.9439290365 - val_trvae_loss: 1609.9412434896 - val_classifier_loss: 0.0026482324 - val_unlabeled_loss: 2.6482322216
-  0%|          | 0/100 [01:02<?, ?trial/s, best loss=?]                                                        |███████████████████-| 95.0%  - val_loss: 1602.2243652344 - val_trvae_loss: 1602.2218017578 - val_classifier_loss: 0.0025655190 - val_unlabeled_loss: 2.5655187766
-  0%|          | 0/100 [01:03<?, ?trial/s, best loss=?]                                                        |████████████████████| 100.0%  - val_loss: 1601.4594319661 - val_trvae_loss: 1601.4567464193 - val_classifier_loss: 0.0026572720 - val_unlabeled_loss: 2.6572717826
-  0%|          | 0/100 [01:03<?, ?trial/s, best loss=?]                                                       Saving best state of network...
-  0%|          | 0/100 [01:03<?, ?trial/s, best loss=?]                                                       Best State was in Epoch
-  0%|          | 0/100 [01:03<?, ?trial/s, best loss=?]                                                       6
-  0%|          | 0/100 [01:03<?, ?trial/s, best loss=?]  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     
-INITIALIZING NEW NETWORK..............
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     Encoder Architecture:
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     	Input Layer in, out and cond:
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     4000
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     128
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     7
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     	Hidden Layer
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     1
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     in/out:
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     128
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     128
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     	Mean/Var Layer in/out:
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     128
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     70
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     Decoder Architecture:
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     	First Layer in, out and cond: 
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     70
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     128
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     7
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     	Hidden Layer
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     1
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     in/out:
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     128
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     128
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     	Output Layer in/out: 
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     128
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                     4000
-  1%|          | 1/100 [01:04<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                      |█-------------------| 5.0%  - val_loss: 1188.4996559837 - val_trvae_loss: 1188.4996559837
-  1%|          | 1/100 [01:06<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                      |██------------------| 10.0%  - val_loss: 1130.2129905007 - val_trvae_loss: 1130.2129905007
-  1%|          | 1/100 [01:07<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                      |███-----------------| 15.0%  - val_loss: 1110.6894753196 - val_trvae_loss: 1110.6894753196
-  1%|          | 1/100 [01:08<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                      |████----------------| 20.0%  - val_loss: 1094.6164217862 - val_trvae_loss: 1094.6164217862
-  1%|          | 1/100 [01:09<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                      |█████---------------| 25.0%  - val_loss: 1170.3544145064 - val_trvae_loss: 1132.6566162109 - val_classifier_loss: 37.6977972551 - val_labeled_loss: 37.6977972551
-  1%|          | 1/100 [01:11<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                      |██████--------------| 30.0%  - val_loss: 1162.4744984020 - val_trvae_loss: 1127.6319912997 - val_classifier_loss: 34.8424935774 - val_labeled_loss: 34.8424935774
-  1%|          | 1/100 [01:13<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                      |███████-------------| 35.0%  - val_loss: 1157.3497536399 - val_trvae_loss: 1121.8084272905 - val_classifier_loss: 35.5413083163 - val_labeled_loss: 35.5413083163
-  1%|          | 1/100 [01:14<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                      |████████------------| 40.0%  - val_loss: 1154.1332452947 - val_trvae_loss: 1119.7910822088 - val_classifier_loss: 34.3421476538 - val_labeled_loss: 34.3421476538
-  1%|          | 1/100 [01:16<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                      |█████████-----------| 45.0%  - val_loss: 1148.6382279830 - val_trvae_loss: 1114.8142755682 - val_classifier_loss: 33.8239378496 - val_labeled_loss: 33.8239378496
-  1%|          | 1/100 [01:18<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                      |██████████----------| 50.0%  - val_loss: 1142.1345214844 - val_trvae_loss: 1108.2131014737 - val_classifier_loss: 33.9214023243 - val_labeled_loss: 33.9214023243
-  1%|          | 1/100 [01:19<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                      |███████████---------| 55.0%  - val_loss: 1136.6453524503 - val_trvae_loss: 1104.5111527876 - val_classifier_loss: 32.1341920332 - val_labeled_loss: 32.1341920332
-  1%|          | 1/100 [01:21<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                      |████████████--------| 60.0%  - val_loss: 1137.5980668501 - val_trvae_loss: 1106.7621959339 - val_classifier_loss: 30.8358749043 - val_labeled_loss: 30.8358749043
-  1%|          | 1/100 [01:23<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]                                                                                      |█████████████-------| 65.0%  - val_loss: 1134.2588223544 - val_trvae_loss: 1100.0913973722 - val_classifier_loss: 34.1674381603 - val_labeled_loss: 34.1674381603
-  1%|          | 1/100 [01:24<1:45:50, 64.15s/trial, best loss: -0.21783292534104368]

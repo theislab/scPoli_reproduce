@@ -1,25 +1,0 @@
-
-Namespace(experiment='lung', max_evals=100, n_epochs=20, n_pre_epochs=4)
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       
-INITIALIZING NEW NETWORK..............
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       Encoder Architecture:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Input Layer in, out and cond:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       4000
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       10
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Mean/Var Layer in/out:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       50
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       Decoder Architecture:
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	First Layer in, out and cond: 
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       50
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       10
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       	Output Layer in/out: 
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       128
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                       4000
-  0%|          | 0/100 [00:00<?, ?trial/s, best loss=?]                                                        |█-------------------| 5.0%  - val_loss: 994.7916717529 - val_trvae_loss: 994.7916717529
-  0%|          | 0/100 [00:07<?, ?trial/s, best loss=?]                                                        |██------------------| 10.0%  - val_loss: 965.3176574707 - val_trvae_loss: 965.3176574707
-  0%|          | 0/100 [00:08<?, ?trial/s, best loss=?]                                                        |███-----------------| 15.0%  - val_loss: 958.0392532349 - val_trvae_loss: 958.0392532349
-  0%|          | 0/100 [00:10<?, ?trial/s, best loss=?]                                                        |████----------------| 20.0%  - val_loss: 937.4654693604 - val_trvae_loss: 937.4654693604
-  0%|          | 0/100 [00:11<?, ?trial/s, best loss=?]  0%|          | 0/100 [00:12<?, ?trial/s, best loss=?]
