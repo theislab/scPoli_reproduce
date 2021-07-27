@@ -59,6 +59,7 @@ def run(
     adata = remove_sparsity(adata)
     source_adata = adata[adata.obs.study.isin(reference)].copy()
     target_adata = adata[adata.obs.study.isin(query)].copy()
+    logging.info('Data loaded succesfully')
 
     early_stopping_kwargs = {
         "early_stopping_metric": "val_classifier_loss",
@@ -80,6 +81,7 @@ def run(
         latent_dim=int(latent_dim),
         use_mmd=False,
     )
+    logging.info('Model instantiated')
     tranvae.train(
         n_epochs=EPOCHS,
         early_stopping_kwargs=early_stopping_kwargs,
@@ -91,6 +93,7 @@ def run(
         eta=eta,
     )
     tranvae.save(REF_PATH, overwrite=True)
+    logging.info('Model trained and saved, initiate surgery')
     tranvae_query = EMBEDCVAE.load_query_data(
         adata=target_adata,
         reference_model=REF_PATH,
@@ -106,6 +109,7 @@ def run(
             labeled_loss_metric=loss_metric,
             unlabeled_loss_metric=loss_metric
         )
+    logging.info('Computing metrics')
     results_dict = tranvae_query.classify(
             adata.X, 
             adata.obs[condition_key], 
@@ -122,6 +126,7 @@ def run(
             )
         ).transpose()
 
+    logging.info('Compute integration metrics')
     latent_adata = tranvae_query.get_latent(
         x = adata.X,
         c = adata.obs[condition_key]

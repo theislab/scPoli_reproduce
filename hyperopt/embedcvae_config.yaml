@@ -3,6 +3,7 @@ seml:
   name: embedcvae_hyperparam_tuning
   output_dir: hyperopt/logs
   project_root_dir: /storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce
+  conda_environment: lataq_cuda
 slurm:
   experiments_per_job: 1
   sbatch_options_template: GPU
@@ -10,7 +11,8 @@ slurm:
     mem: 25G          # memory
     cpus-per-task: 2  # num cores
     time: 0-06:00     # max time, D-HH:MM
-  max_jobs_per_batch: 1
+    #exclude: supergpu05
+  max_jobs_per_batch: 8
 
 ###### BEGIN PARAMETER CONFIGURATION ######
 
@@ -53,7 +55,7 @@ random:
   hidden_layers:
     type: randint
     min: 1
-    max: 4
+    max: 5
     #num: 5
     
   eta:  #weight for landmark loss (both labeled and unlabeled)

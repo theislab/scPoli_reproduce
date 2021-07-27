@@ -47,7 +47,7 @@ def run(
     )
 
     DATA_DIR = '/storage/groups/ml01/workspace/carlo.dedonno/LATAQ/data'
-    REF_PATH = f'/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/tmp/ref_model_tranvae_{overwrite}'
+    REF_PATH = f'/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/tmp/ref_model_embedcvae_{overwrite}'
     EXP_PARAMS = EXPERIMENT_INFO[data]
     FILE_NAME = EXP_PARAMS['file_name']
     adata = sc.read(f'{DATA_DIR}/{FILE_NAME}')
@@ -59,6 +59,7 @@ def run(
     adata = remove_sparsity(adata)
     source_adata = adata[adata.obs.study.isin(reference)].copy()
     target_adata = adata[adata.obs.study.isin(query)].copy()
+    logging.info('Data loaded succesfully')
 
     early_stopping_kwargs = {
         "early_stopping_metric": "val_classifier_loss",
@@ -80,6 +81,7 @@ def run(
         latent_dim=int(latent_dim),
         use_mmd=False,
     )
+    logging.info('Model instantiated')
     tranvae.train(
         n_epochs=EPOCHS,
         early_stopping_kwargs=early_stopping_kwargs,
@@ -91,6 +93,7 @@ def run(
         eta=eta,
     )
     tranvae.save(REF_PATH, overwrite=True)
+    logging.info('Model trained and saved, initiate surgery')
     tranvae_query = TRANVAE.load_query_data(
         adata=target_adata,
         reference_model=REF_PATH,
@@ -106,6 +109,7 @@ def run(
             labeled_loss_metric=loss_metric,
             unlabeled_loss_metric=loss_metric
         )
+    logging.info('Computing metrics')
     results_dict = tranvae_query.classify(
             adata.X, 
             adata.obs[condition_key], 
@@ -122,11 +126,12 @@ def run(
             )
         ).transpose()
 
+    logging.info('Compute integration metrics')
     latent_adata = tranvae_query.get_latent(
         x = adata.X,
         c = adata.obs[condition_key]
     )
-    latent_adata = sc.AnnData(X=latent_adata)
+    latent_adata = sc.AnnData(latent_adata)
     latent_adata.obs[condition_key] = adata.obs[condition_key].tolist()
     latent_adata.obs[cell_type_key[0]] = adata.obs[cell_type_key[0]].tolist()
     conditions, _ = label_encoder(latent_adata, condition_key=condition_key)
@@ -141,5 +146,6 @@ def run(
         'ebm': ebm,
         'knn': knn,
     }
+
     rmtree(REF_PATH)
     return results

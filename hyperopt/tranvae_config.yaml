@@ -3,6 +3,7 @@ seml:
   name: tranvae_hyperparam_tuning
   output_dir: hyperopt/logs
   project_root_dir: /storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce
+  conda_environment: lataq_cuda
 slurm:
   experiments_per_job: 1
   sbatch_options_template: GPU
