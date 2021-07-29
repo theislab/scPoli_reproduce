@@ -1,6 +1,3 @@
-import sys
-sys.path.append('../')
-
 import logging
 from sacred import Experiment
 import seml
@@ -11,7 +8,7 @@ from sklearn.calibration import CalibratedClassifierCV
 from sklearn.svm import LinearSVC
 from sklearn.metrics import classification_report
 from scarches.dataset.trvae.data_handling import remove_sparsity
-from exp_dict import EXPERIMENT_INFO
+from lataq_reproduce.exp_dict import EXPERIMENT_INFO
 import pickle
 
 ex = Experiment()
@@ -62,11 +59,11 @@ def run(
 
     train_X = source_adata.X
     train_X = np.log1p(train_X)
-    train_Y = source_adata.obs[cell_type_key]
+    train_Y = source_adata.obs[cell_type_key[0]]
 
     test_X = target_adata.X
     test_X = np.log1p(test_X)
-    test_Y = target_adata.obs[cell_type_key]
+    test_Y = target_adata.obs[cell_type_key[0]]
 
     Classifier = LinearSVC()
     clf = CalibratedClassifierCV(Classifier)
@@ -81,20 +78,19 @@ def run(
     prob = np.max(clf.predict_proba(test_X), axis=1)
     unlabeled = np.where(prob < THRESHOLD)
     predicted[unlabeled] = 'Unknown'
-    acc = np.mean(predicted == test_Y)
 
     report = pd.DataFrame(
         classification_report(
             y_true=test_Y,
             y_pred=predicted,
-            labels=np.array(target_adata.obs[cell_type_key].unique().tolist()),
+            labels=np.array(target_adata.obs[cell_type_key[0]].unique().tolist()),
             output_dict=True,
         )
     ).transpose()
 
     full_X = adata.X
     full_X = np.log1p(full_X)
-    full_Y = adata.obs[cell_type_key]
+    full_Y = adata.obs[cell_type_key[0]]
 
     full_predicted = clf.predict(full_X)
     full_prob = np.max(clf.predict_proba(full_X), axis=1)

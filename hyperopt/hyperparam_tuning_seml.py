@@ -8,7 +8,7 @@ from sklearn.metrics import classification_report
 from lataq.metrics.metrics import metrics
 from scarches.dataset.trvae.data_handling import remove_sparsity
 from lataq.models import EMBEDCVAE, TRANVAE
-from utils import entropy_batch_mixing, knn_purity, label_encoder
+from lataq_reproduce.utils import label_encoder
 from exp_dict import EXPERIMENT_INFO
 from shutil import rmtree
 np.random.seed(420)
@@ -187,7 +187,9 @@ def run(
         pcr_=True,
         graph_conn_=True,
         isolated_labels_=True,
-        hvg_score_=False
+        hvg_score_=False,
+        ebm_=True,
+        knn_=True,
     )
     
     scores = scores.T
@@ -198,10 +200,10 @@ def run(
                      'PCR_batch', 
                      'isolated_label_F1', 
                      'isolated_label_silhouette', 
-                     'graph_conn'
+                     'graph_conn',
+                     'ebm',
+                     'knn',
                     ]]
-    scores['ebm'] = ebm
-    scores['knn'] = knn
 
     results = {
         'classification_report': classification_df,
