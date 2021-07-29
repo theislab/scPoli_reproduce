@@ -77,13 +77,13 @@ def run(
     )
     query_time = time.time() - query_time
     vae_q.save(
-        f'{RES_PATH}/scvi_query_model', 
+        f'{RES_PATH}/scvi_query_model',
         overwrite=True
     )
     #save query time
     adata_latent = sc.AnnData(vae_q.get_latent_representation())
-    adata_latent.obs[cell_type_key[0]] = target_adata.obs[cell_type_key[0]].tolist()
-    adata_latent.obs[condition_key] = target_adata.obs[condition_key].tolist()
+    adata_latent.obs['celltype'] = target_adata.obs[cell_type_key[0]].tolist()
+    adata_latent.obs['batch'] = target_adata.obs[condition_key].tolist()
     adata_latent.write_h5ad(
         f'{RES_PATH}/adata_latent.h5ad'
     )
@@ -93,7 +93,7 @@ def run(
     sc.tl.umap(adata_latent)
     sc.pl.umap(
         adata_latent,
-        color=[condition_key],
+        color=['batch'],
         frameon=False,
         wspace=0.6,
         show=False
@@ -105,7 +105,7 @@ def run(
     plt.close()
     sc.pl.umap(
         adata_latent,
-        color=[cell_type_key[0]],
+        color=['celltype'],
         frameon=False,
         wspace=0.6,
         show=False
@@ -123,8 +123,8 @@ def run(
     )
 
     adata_latent = sc.AnnData(vae_q.get_latent_representation(adata_full))
-    adata_latent.obs[cell_type_key[0]] = adata_full.obs[cell_type_key[0]].tolist()
-    adata_latent.obs[condition_key] = adata_full.obs[condition_key].tolist()
+    adata_latent.obs['celltype'] = adata_full.obs[cell_type_key[0]].tolist()
+    adata_latent.obs['batch'] = adata_full.obs[condition_key].tolist()
     adata_latent.write_h5ad(
         f'{RES_PATH}/adata_latent_full.h5ad'
     )
@@ -134,7 +134,7 @@ def run(
     sc.tl.umap(adata_latent)
     sc.pl.umap(
         adata_latent,
-        color=[condition_key],
+        color=['batch'],
         frameon=False,
         wspace=0.6,
         show=False
@@ -146,7 +146,7 @@ def run(
     plt.close()
     sc.pl.umap(
         adata_latent,
-        color=[cell_type_key[0]],
+        color=['celltype'],
         frameon=False,
         wspace=0.6,
         show=False
@@ -160,16 +160,16 @@ def run(
     # adata_latent = sc.AnnData(adata_latent)
     # adata_latent.obs[condition_key] = adata.obs[condition_key].tolist()
     # adata_latent.obs[cell_type_key[0]] = adata.obs[cell_type_key[0]].tolist()
-    conditions, _ = label_encoder(adata_latent, condition_key=condition_key)
-    labels, _ = label_encoder(adata_latent, condition_key=cell_type_key[0])
-    adata_latent.obs[condition_key] = conditions.squeeze(axis=1)
-    adata_latent.obs[cell_type_key[0]] = labels.squeeze(axis=1)
+    conditions, _ = label_encoder(adata_latent, condition_key='batch')
+    labels, _ = label_encoder(adata_latent, condition_key='celltype')
+    adata_latent.obs['batch'] = conditions.squeeze(axis=1)
+    adata_latent.obs['celltype'] = labels.squeeze(axis=1)
 
     scores = metrics(
         adata, 
-        adata_latent, 
-        condition_key, 
-        cell_type_key[0],
+        adata_latent,
+        'batch', 
+        'celltype',
         nmi_=True,
         ari_=False,
         silhouette_=False,
@@ -195,6 +195,8 @@ def run(
                     ]]
 
     results = {
+        'reference_time': ref_time,
+        'query_time': query_time,
         'classification_report': np.nan,
         'classification_report_query': np.nan,
         'integration_scores': scores
