@@ -181,12 +181,12 @@ def run(
         latent_adata, 
         condition_key, 
         cell_type_key[0],
-        nmi_=True, 
-        ari_=True, 
-        silhouette_=True, 
-        pcr_=True, 
+        nmi_=True,
+        ari_=True,
+        silhouette_=True,
+        pcr_=True,
         graph_conn_=True,
-        isolated_labels_=True, 
+        isolated_labels_=True,
         hvg_score_=False
     )
     

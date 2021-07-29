@@ -8,3 +8,5 @@ build/
 dist/
 tmp/
 hyperopt/logs/
+benchmarks/logs/
+results/
