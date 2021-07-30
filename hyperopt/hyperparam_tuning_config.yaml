@@ -23,11 +23,11 @@ grid:
   data: 
     type: choice
     options:
-      - pancreas
+      #- pancreas
       #- pbmc
       - brain
-      - scvelo
-      - tumor
+      #- scvelo
+      #- tumor
       #- lung
       #- lung_h
   model:

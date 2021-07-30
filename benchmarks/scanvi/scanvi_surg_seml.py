@@ -39,13 +39,22 @@ def run(
         f'Dataset: {data}'
     )
 
-    DATA_DIR = '/storage/groups/ml01/workspace/carlo.dedonno/LATAQ/data'
+    DATA_DIR = '/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/data'
     RES_PATH = (
         f'/storage/groups/ml01/workspace/carlo.dedonno/'
         f'lataq_reproduce/results/scanvi/{data}'
     )
     EXP_PARAMS = EXPERIMENT_INFO[data]
     FILE_NAME = EXP_PARAMS['file_name']
+
+    arches_params = dict(
+        use_layer_norm="both",
+        use_batch_norm="none",
+        encode_covariates=True,
+        dropout_rate=0.2,
+        n_layers=2,
+        deeply_inject_covariates=False
+    )
 
     #LOADING DATA
     adata = sc.read(f'{DATA_DIR}/{FILE_NAME}')

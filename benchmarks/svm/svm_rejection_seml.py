@@ -38,7 +38,7 @@ def run(
         f'Dataset: {data}'
     )
 
-    DATA_DIR = '/storage/groups/ml01/workspace/carlo.dedonno/LATAQ/data'
+    DATA_DIR = '/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/data'
     RES_PATH = (
         f'/storage/groups/ml01/workspace/carlo.dedonno/'
         f'lataq_reproduce/results/svm'

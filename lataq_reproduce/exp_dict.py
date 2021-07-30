@@ -1,6 +1,6 @@
 EXPERIMENT_INFO = {
     'pancreas': {
-        'file_name': 'benchmark_pancreas_shrinked.h5ad',
+        'file_name': 'pancreas.h5ad',
         'condition_key': 'study',
         'cell_type_key': ['cell_type'],
         'reference': [
@@ -18,7 +18,7 @@ EXPERIMENT_INFO = {
         ],
     },
     'pbmc': {
-        'file_name': 'benchmark_pbmc_shrinked.h5ad',
+        'file_name': 'pbmc.h5ad',
         'condition_key': 'condition',
         'cell_type_key': ['cell_type'],
         'reference': [
@@ -31,7 +31,7 @@ EXPERIMENT_INFO = {
         ],
     },
     'brain': {
-        'file_name': 'benchmark_brain_shrinked.h5ad',
+        'file_name': 'brain.h5ad',
         'condition_key': 'study',
         'cell_type_key': ['cell_type'],
         'reference': [
@@ -57,7 +57,7 @@ EXPERIMENT_INFO = {
         ],
     },
     'lung': {
-        'file_name': 'benchmark_lung_shrinked.h5ad',
+        'file_name': 'lung.h5ad',
         'condition_key': 'condition',
         'cell_type_key': ['cell_type'],
         'reference': [
@@ -69,7 +69,7 @@ EXPERIMENT_INFO = {
         ],
     },
     'tumor': {
-        'file_name': 'benchmark_tumor_shrinked.h5ad',
+        'file_name': 'tumor.h5ad',
         'condition_key': 'study',
         'cell_type_key': ['cell_type'],
         'reference': [

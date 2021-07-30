@@ -48,7 +48,7 @@ def run(
         f'clustering res: {clustering_res}, hidden layers: {hidden_layers}'
     )
 
-    DATA_DIR = '/storage/groups/ml01/workspace/carlo.dedonno/LATAQ/data'
+    DATA_DIR = '/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/data'
     REF_PATH = f'/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/tmp/ref_model_embedcvae_{overwrite}'
     EXP_PARAMS = EXPERIMENT_INFO[data]
     FILE_NAME = EXP_PARAMS['file_name']
@@ -181,25 +181,25 @@ def run(
         latent_adata, 
         condition_key, 
         cell_type_key[0],
-        nmi_=True,
-        ari_=True,
+        nmi_=False,
+        ari_=False,
         silhouette_=True,
         pcr_=True,
         graph_conn_=True,
-        isolated_labels_=True,
-        hvg_score_=False,
+        isolated_labels_=False,
+        hvg_score_=True,
         ebm_=True,
         knn_=True,
     )
-    
+    logging.info('Completed integration metrics')
     scores = scores.T
-    scores = scores[['NMI_cluster/label', 
-                     'ARI_cluster/label', 
+    scores = scores[[#'NMI_cluster/label', 
+                     #'ARI_cluster/label', 
                      'ASW_label', 
                      'ASW_label/batch',
                      'PCR_batch', 
-                     'isolated_label_F1', 
-                     'isolated_label_silhouette', 
+                     #'isolated_label_F1', 
+                     #'isolated_label_silhouette', 
                      'graph_conn',
                      'ebm',
                      'knn',
