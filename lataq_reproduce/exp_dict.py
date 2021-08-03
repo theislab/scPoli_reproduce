@@ -58,7 +58,7 @@ EXPERIMENT_INFO = {
     },
     'lung': {
         'file_name': 'lung.h5ad',
-        'condition_key': 'condition',
+        'condition_key': 'study',
         'cell_type_key': ['cell_type'],
         'reference': [
             'Dropseq_transplant',

@@ -1,6 +1,6 @@
 seml:
   executable: hyperopt/hyperparam_tuning_seml.py
-  name: hyperparam_tuning
+  name: hyperbolic_tuning
   output_dir: hyperopt/logs
   project_root_dir: /storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce
   conda_environment: lataq_cuda
@@ -33,7 +33,7 @@ grid:
   model:
     type: choice
     options:
-      - embedcvae
+      #- embedcvae
       - tranvae
 #random:
 #  samples: 100
@@ -49,10 +49,9 @@ grid:
       - 1.0
 
   hidden_layers:
-    type: uniform
-    min: 1
-    max: 4
-    num: 4
+    type: choice
+    options:
+        - 2
     
   eta:  #weight for landmark loss (both labeled and unlabeled)
     type: choice
@@ -65,11 +64,13 @@ grid:
   alpha_epoch_anneal:
     type: choice
     options:
-      - 1e2
-      - 1e4
+      #- 1e2
+      #- 1e4
       - 1e6
   
   loss_metric: 
     type: choice
     options:
+      - hyperbolic
+      - hyperbolic_log1p
       - dist

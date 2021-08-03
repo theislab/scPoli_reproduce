@@ -9,7 +9,7 @@ from lataq.metrics.metrics import metrics
 from scarches.dataset.trvae.data_handling import remove_sparsity
 from lataq.models import EMBEDCVAE, TRANVAE
 from lataq_reproduce.utils import label_encoder
-from exp_dict import EXPERIMENT_INFO
+from lataq_reproduce.exp_dict import EXPERIMENT_INFO
 from shutil import rmtree
 np.random.seed(420)
 
@@ -75,6 +75,12 @@ def run(
 
     EPOCHS = n_epochs
     PRE_EPOCHS = n_pre_epochs
+    hyperbolic_log1p = False
+    
+    if loss_metric == 'hyperbolic_log1p':
+        loss_metric = 'hyperbolic'
+        hyperbolic_log1p=True
+
     if model == 'embedcvae':
         tranvae = EMBEDCVAE(
             adata=source_adata,
@@ -102,6 +108,7 @@ def run(
         clustering_res=clustering_res,
         labeled_loss_metric=loss_metric,
         unlabeled_loss_metric=loss_metric,
+        hyperbolic_log1p=hyperbolic_log1p,
         eta=eta,
     )
     tranvae.save(REF_PATH, overwrite=True)
@@ -173,8 +180,6 @@ def run(
     labels, _ = label_encoder(latent_adata, condition_key=cell_type_key[0])
     latent_adata.obs[condition_key] = conditions.squeeze(axis=1)
     latent_adata.obs[cell_type_key[0]] = labels.squeeze(axis=1)
-    ebm = entropy_batch_mixing(latent_adata, condition_key, n_neighbors=15)
-    knn = knn_purity(latent_adata, cell_type_key[0], n_neighbors=15)
 
     scores = metrics(
         adata, 
@@ -187,7 +192,7 @@ def run(
         pcr_=True,
         graph_conn_=True,
         isolated_labels_=False,
-        hvg_score_=True,
+        hvg_score_=False,
         ebm_=True,
         knn_=True,
     )
