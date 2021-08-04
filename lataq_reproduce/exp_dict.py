@@ -44,7 +44,7 @@ EXPERIMENT_INFO = {
         ],
     },
     'scvelo': {
-        'file_name': 'benchmark_scvelo_shrinked.h5ad',
+        'file_name': 'scvelo.h5ad',
         'condition_key': 'study',
         'cell_type_key': ['cell_type'],
         'reference': [
