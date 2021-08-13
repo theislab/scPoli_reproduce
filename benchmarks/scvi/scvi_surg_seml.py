@@ -4,10 +4,11 @@ import seml
 import scanpy as sc
 import numpy as np
 import pandas as pd
-import scvi
+import scarches as sca
 import matplotlib.pyplot as plt
 from scarches.dataset.trvae.data_handling import remove_sparsity
 from lataq_reproduce.exp_dict import EXPERIMENT_INFO
+from lataq_reproduce.utils import label_encoder
 from lataq.metrics.metrics import metrics
 import time
 
@@ -66,16 +67,18 @@ def run(
     target_adata = adata[adata.obs.study.isin(query)].copy()
     logging.info('Data loaded succesfully')
 
-    scvi.data.setup_anndata(source_adata, batch_key=condition_key)
+    sca.dataset.setup_anndata(source_adata, batch_key=condition_key, label_key=cell_type_key[0])
 
-    vae_ref = scvi.model.SCVI(source_adata, **arches_params)
+    vae_ref = sca.models.SCVI(
+        source_adata, #use default params
+    )
     ref_time = time.time()
     vae_ref.train()
     ref_time = time.time() - ref_time
     vae_ref.save(f'{RES_PATH}/scvi_model', overwrite=True)
     #save ref time
 
-    vae_q = scvi.model.SCVI.load_query_data(
+    vae_q = sca.models.SCVI.load_query_data(
         target_adata,
         f'{RES_PATH}/scvi_model',
     )
@@ -125,8 +128,9 @@ def run(
     )
     plt.close()
 
-    adata_full = target_adata.concatenate(source_adata)
-    adata_full.obs[condition_key].cat.rename_categories(
+    adata_full = target_adata.concatenate(source_adata, batch_key='query')
+    adata_full.obs['query'] = adata_full.obs['query'].astype('category')
+    adata_full.obs['query'].cat.rename_categories(
         ["Query", "Reference"], 
         inplace=True
     )
@@ -134,6 +138,7 @@ def run(
     adata_latent = sc.AnnData(vae_q.get_latent_representation(adata_full))
     adata_latent.obs['celltype'] = adata_full.obs[cell_type_key[0]].tolist()
     adata_latent.obs['batch'] = adata_full.obs[condition_key].tolist()
+    adata_latent.obs['query'] = adata_full.obs['query'].tolist()
     adata_latent.write_h5ad(
         f'{RES_PATH}/adata_latent_full.h5ad'
     )
@@ -155,6 +160,18 @@ def run(
     plt.close()
     sc.pl.umap(
         adata_latent,
+        color=['query'],
+        frameon=False,
+        wspace=0.6,
+        show=False
+    )
+    plt.savefig(
+        f'{RES_PATH}/adata_full_latent_query.png',
+        bbox_inches='tight'
+    )
+    plt.close()
+    sc.pl.umap(
+        adata_latent,
         color=['celltype'],
         frameon=False,
         wspace=0.6,
@@ -169,6 +186,10 @@ def run(
     # adata_latent = sc.AnnData(adata_latent)
     # adata_latent.obs[condition_key] = adata.obs[condition_key].tolist()
     # adata_latent.obs[cell_type_key[0]] = adata.obs[cell_type_key[0]].tolist()
+    conditions, _ = label_encoder(adata, condition_key=condition_key)
+    labels, _ = label_encoder(adata, condition_key=cell_type_key[0])
+    adata.obs['batch'] = conditions.squeeze(axis=1)
+    adata.obs['celltype'] = labels.squeeze(axis=1)
     conditions, _ = label_encoder(adata_latent, condition_key='batch')
     labels, _ = label_encoder(adata_latent, condition_key='celltype')
     adata_latent.obs['batch'] = conditions.squeeze(axis=1)
@@ -179,25 +200,25 @@ def run(
         adata_latent,
         'batch', 
         'celltype',
-        nmi_=True,
+        nmi_=False,
         ari_=False,
         silhouette_=False,
         pcr_=True,
         graph_conn_=True,
-        isolated_labels_=True,
+        isolated_labels_=False,
         hvg_score_=False,
         knn_=True,
         ebm_=True,
     )
     
     scores = scores.T
-    scores = scores[['NMI_cluster/label', 
+    scores = scores[[#'NMI_cluster/label', 
                      #'ARI_cluster/label',
                      #'ASW_label',
                      #'ASW_label/batch',
                      'PCR_batch', 
-                     'isolated_label_F1',
-                     'isolated_label_silhouette',
+                     #'isolated_label_F1',
+                     #'isolated_label_silhouette',
                      'graph_conn',
                      'ebm',
                      'knn',

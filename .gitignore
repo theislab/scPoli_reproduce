@@ -11,4 +11,5 @@ dist/
 tmp/
 hyperopt/logs/
 benchmarks/logs/
+hierarchical/logs/
 results/

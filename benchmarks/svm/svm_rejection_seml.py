@@ -70,7 +70,7 @@ def run(
 
     clf.fit(train_X, train_Y)
 
-    filename = f"{RES_PATH}/classifier.sav"
+    filename = f"{RES_PATH}/{data}_classifier.sav"
     pickle.dump(clf, open(filename, 'wb'))
 
     THRESHOLD = 0

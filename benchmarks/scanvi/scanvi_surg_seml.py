@@ -1,16 +1,6 @@
 import logging
 from sacred import Experiment
 import seml
-import scanpy as sc
-import numpy as np
-import pandas as pd
-import scvi
-import matplotlib.pyplot as plt
-from sklearn.metrics import classification_report
-from scarches.dataset.trvae.data_handling import remove_sparsity
-from lataq_reproduce.exp_dict import EXPERIMENT_INFO
-from lataq.metrics.metrics import metrics
-import time
 
 ex = Experiment()
 seml.setup_logger(ex)
@@ -38,6 +28,17 @@ def run(
     logging.info(
         f'Dataset: {data}'
     )
+    import scanpy as sc
+    import numpy as np
+    import pandas as pd
+    import scarches as sca
+    import matplotlib.pyplot as plt
+    from sklearn.metrics import classification_report
+    from scarches.dataset.trvae.data_handling import remove_sparsity
+    from lataq_reproduce.exp_dict import EXPERIMENT_INFO
+    from lataq_reproduce.utils import label_encoder
+    from lataq.metrics.metrics import metrics
+    import time
 
     DATA_DIR = '/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/data'
     RES_PATH = (
@@ -68,13 +69,13 @@ def run(
     target_adata = adata[adata.obs.study.isin(query)].copy()
     logging.info('Data loaded succesfully')
 
-    scvi.data.setup_anndata(source_adata, batch_key=condition_key)
+    sca.dataset.setup_anndata(source_adata, batch_key=condition_key, labels_key=cell_type_key[0])
 
     #TRAINING REFERENCE MODEL
-    vae_ref = scvi.model.SCVI(source_adata, **arches_params)
+    vae_ref = sca.models.SCVI(source_adata)
     ref_time = time.time()
     vae_ref.train()
-    vae_ref_scan = scvi.model.SCANVI.from_scvi_model(
+    vae_ref_scan = sca.models.SCANVI.from_scvi_model(
         vae_ref,
         unlabeled_category="Unknown",
     )
@@ -84,7 +85,7 @@ def run(
     #save ref time
 
     #TRAINING QUERY MODEL
-    vae_q = scvi.model.SCANVI.load_query_data(
+    vae_q = sca.models.SCANVI.load_query_data(
         target_adata,
         f'{RES_PATH}/scanvi_model',
     )
@@ -102,9 +103,7 @@ def run(
     # EVAL UNLABELED
     preds = vae_q.predict()
     full_probs = vae_q.predict(soft=True)
-    probs = []
-    for cell_prob in full_probs:
-        probs.append(max(cell_prob))
+    probs = full_probs.max(axis=1)
     probs = np.array(probs)
     checks = np.array(len(target_adata) * ['incorrect'])
     checks[preds == target_adata.obs[cell_type_key[0]]] = 'correct'
@@ -128,7 +127,6 @@ def run(
     ax.set_ylabel('Observed values')
     ax.violinplot(data)
     labels = ['Correct', 'Incorrect']
-    set_axis_style(ax, labels)
     plt.savefig(
         f'{RES_PATH}/query_uncertainty.png',
         bbox_inches='tight'
@@ -196,13 +194,15 @@ def run(
     plt.close()
 
     # EVAL FULL
-    adata_full = target_adata.concatenate(source_adata)
-    adata_full.obs[condition_key].cat.rename_categories(["Query", "Reference"], inplace=True)
+    adata_full = target_adata.concatenate(source_adata, batch_key='query')
+    adata_full.obs['query'] = adata_full.obs['query'].astype('category')
+    adata_full.obs['query'].cat.rename_categories(
+        ["Query", "Reference"], 
+        inplace=True
+    )
     preds = vae_q.predict(adata_full)
     full_probs = vae_q.predict(adata_full, soft=True)
-    probs = []
-    for cell_prob in full_probs:
-        probs.append(max(cell_prob))
+    probs = full_probs.max(axis=1)
     probs = np.array(probs)
     checks = np.array(len(adata_full) * ['incorrect'])
     checks[preds == adata_full.obs[cell_type_key[0]]] = 'correct'
@@ -211,18 +211,19 @@ def run(
         classification_report(
             y_true=adata_full.obs[cell_type_key[0]],
             y_pred=preds,
+            output_dict=True
         )
     ).transpose().add_prefix('full_')
 
     correct_probs = probs[preds == adata_full.obs[cell_type_key[0]]]
     incorrect_probs = probs[preds != adata_full.obs[cell_type_key[0]]]
     data = [correct_probs, incorrect_probs]
+
     fig, ax = plt.subplots()
     ax.set_title('Default violin plot')
     ax.set_ylabel('Observed values')
     ax.violinplot(data)
     labels = ['Correct', 'Incorrect']
-    set_axis_style(ax, labels)
     plt.savefig(
         f'{RES_PATH}/full_uncertainty.png',
         bbox_inches='tight'
@@ -233,6 +234,7 @@ def run(
     adata_latent.obs['batch'] = adata_full.obs[condition_key].tolist()
     adata_latent.obs['predictions'] = preds.tolist()
     adata_latent.obs['checking'] = checks.tolist()
+    adata_latent.obs['query'] = adata_full.obs['query'].tolist()
     adata_latent.write_h5ad(f'{RES_PATH}/adata_latent_full.h5ad')
 
     sc.pp.neighbors(adata_latent)
@@ -247,6 +249,18 @@ def run(
     )
     plt.savefig(
         f'{RES_PATH}/full_umap_batch.png',
+        bbox_inches='tight'
+    )
+    plt.close()
+    sc.pl.umap(
+        adata_latent,
+        color=['query'],
+        frameon=False,
+        wspace=0.6,
+        show=False
+    )
+    plt.savefig(
+        f'{RES_PATH}/full_umap_query.png',
         bbox_inches='tight'
     )
     plt.close()
@@ -287,6 +301,10 @@ def run(
     )
     plt.close()
 
+    conditions, _ = label_encoder(adata, condition_key=condition_key)
+    labels, _ = label_encoder(adata, condition_key=cell_type_key[0])
+    adata.obs['batch'] = conditions.squeeze(axis=1)
+    adata.obs['celltype'] = labels.squeeze(axis=1)
     conditions, _ = label_encoder(adata_latent, condition_key='batch')
     labels, _ = label_encoder(adata_latent, condition_key='celltype')
     adata_latent.obs['batch'] = conditions.squeeze(axis=1)
@@ -297,25 +315,25 @@ def run(
         adata_latent, 
         'batch', 
         'celltype',
-        nmi_=True,
+        nmi_=False,
         ari_=False,
         silhouette_=False,
         pcr_=True,
         graph_conn_=True,
-        isolated_labels_=True,
+        isolated_labels_=False,
         hvg_score_=False,
         knn_=True,
         ebm_=True,
     )
     
     scores = scores.T
-    scores = scores[['NMI_cluster/label', 
+    scores = scores[[#'NMI_cluster/label', 
                      #'ARI_cluster/label',
                      #'ASW_label',
                      #'ASW_label/batch',
                      'PCR_batch', 
-                     'isolated_label_F1',
-                     'isolated_label_silhouette',
+                     #'isolated_label_F1',
+                     #'isolated_label_silhouette',
                      'graph_conn',
                      'ebm',
                      'knn',
