@@ -19,8 +19,6 @@ def config():
         ex.observers.append(
             seml.create_mongodb_observer(db_collection, overwrite=overwrite)
         )
-experiment = "brain"
-test_nr = 2
 
 
 @ex.automain
@@ -35,9 +33,9 @@ def run(
     import torch
     import os
     from anndata import AnnData
-    from args_parser import get_parser
-    from model.mars import MARS
-    from model.experiment_dataset import ExperimentDataset
+    from benchmarks.mars.args_parser import get_parser
+    from benchmarks.mars.model.mars import MARS
+    from benchmarks.mars.model.experiment_dataset import ExperimentDataset
     import warnings
 
     warnings.filterwarnings('ignore')
