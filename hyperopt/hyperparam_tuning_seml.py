@@ -10,6 +10,7 @@ from scarches.dataset.trvae.data_handling import remove_sparsity
 from lataq.models import EMBEDCVAE, TRANVAE
 from lataq_reproduce.utils import label_encoder
 from lataq_reproduce.exp_dict import EXPERIMENT_INFO
+import matplotlib.pyplot as plt
 from shutil import rmtree
 np.random.seed(420)
 
@@ -50,6 +51,7 @@ def run(
 
     DATA_DIR = '/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/data'
     REF_PATH = f'/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/tmp/ref_model_embedcvae_{overwrite}'
+    RES_PATH = f'/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/results/hyperopt'
     EXP_PARAMS = EXPERIMENT_INFO[data]
     FILE_NAME = EXP_PARAMS['file_name']
     adata = sc.read(f'{DATA_DIR}/{FILE_NAME}')
@@ -75,11 +77,11 @@ def run(
 
     EPOCHS = n_epochs
     PRE_EPOCHS = n_pre_epochs
-    hyperbolic_log1p = False
+    #hyperbolic_log1p = False
     
-    if loss_metric == 'hyperbolic_log1p':
-        loss_metric = 'hyperbolic'
-        hyperbolic_log1p=True
+    #if loss_metric == 'hyperbolic_log1p':
+    #    loss_metric = 'hyperbolic'
+    #    hyperbolic_log1p=True
 
     if model == 'embedcvae':
         tranvae = EMBEDCVAE(
@@ -106,9 +108,9 @@ def run(
         alpha_epoch_anneal=alpha_epoch_anneal,
         pretraining_epochs=PRE_EPOCHS,
         clustering_res=clustering_res,
-        labeled_loss_metric=loss_metric,
-        unlabeled_loss_metric=loss_metric,
-        hyperbolic_log1p=hyperbolic_log1p,
+        #labeled_loss_metric=loss_metric,
+        #unlabeled_loss_metric=loss_metric,
+        #hyperbolic_log1p=hyperbolic_log1p,
         eta=eta,
     )
     tranvae.save(REF_PATH, overwrite=True)
@@ -132,9 +134,10 @@ def run(
             pretraining_epochs=PRE_EPOCHS,
             clustering_res=clustering_res,
             eta=eta,
-            labeled_loss_metric=loss_metric,
-            unlabeled_loss_metric=loss_metric
+            #labeled_loss_metric=loss_metric,
+            #unlabeled_loss_metric=loss_metric
         )
+    
     logging.info('Computing metrics')
     results_dict = tranvae_query.classify(
             adata.X, 
@@ -181,6 +184,30 @@ def run(
     latent_adata.obs[condition_key] = conditions.squeeze(axis=1)
     latent_adata.obs[cell_type_key[0]] = labels.squeeze(axis=1)
 
+    sc.pp.neighbors(latent_adata)
+    sc.tl.umap(latent_adata)
+    sc.pl.umap(
+        latent_adata,
+        color=condition_key,
+        show=False,
+        frameon=False
+    )
+    plt.savefig(
+        f'{RES_PATH}/condition_umap_{model}_{data}_{loss_metric}_{latent_dim}_{hidden_layers}.png',
+        bbox_inches='tight'
+    )
+    plt.close()
+    sc.pl.umap(
+        latent_adata,
+        color=cell_type_key[0],
+        show=False,
+        frameon=False
+    )
+    plt.savefig(
+        f'{RES_PATH}/ct_umap_{model}_{data}_{loss_metric}_{latent_dim}_{hidden_layers}.png',
+        bbox_inches='tight'
+    )
+    plt.close()
     scores = metrics(
         adata, 
         latent_adata, 
@@ -189,8 +216,8 @@ def run(
         nmi_=False,
         ari_=False,
         silhouette_=False,
-        pcr_=False,
-        graph_conn_=False,
+        pcr_=True,
+        graph_conn_=True,
         isolated_labels_=False,
         hvg_score_=False,
         ebm_=True,
@@ -198,14 +225,8 @@ def run(
     )
     logging.info('Completed integration metrics')
     scores = scores.T
-    scores = scores[[#'NMI_cluster/label', 
-                     #'ARI_cluster/label', 
-                     #'ASW_label', 
-                     #'ASW_label/batch',
-                     #'PCR_batch', 
-                     #'isolated_label_F1', 
-                     #'isolated_label_silhouette', 
-                     #'graph_conn',
+    scores = scores[['PCR_batch', 
+                     'graph_conn',
                      'ebm',
                      'knn',
                     ]]

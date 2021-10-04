@@ -50,9 +50,9 @@ grid:
 
   hidden_layers:
     type: uniform
-    min: 1
+    min: 2
     max: 4
-    num: 4
+    num: 3
     
   eta:  #weight for landmark loss (both labeled and unlabeled)
     type: choice
@@ -65,11 +65,11 @@ grid:
   alpha_epoch_anneal:
     type: choice
     options:
-      - 1e2
-      - 1e4
+      - 1e3
       - 1e6
   
   loss_metric: 
     type: choice
     options:
       - dist
+      - gaussian

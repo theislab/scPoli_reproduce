@@ -47,7 +47,7 @@ def run(
     runs = runs+1
     DATA_DIR = '/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/data'
     REF_PATH = f'/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/tmp/ref_model_embedcvae_{overwrite}'
-    FILE_NAME  = 'adata_lung_subsampled.h5ad'
+    FILE_NAME  = 'adata_lung.h5ad'
     adata = sc.read(f'{DATA_DIR}/{FILE_NAME}')
     condition_key = 'study'
     cell_type_key = [f'ann_level_{i}' for i in ann_levels]

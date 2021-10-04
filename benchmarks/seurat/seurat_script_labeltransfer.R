@@ -54,7 +54,7 @@ if (data == 'pancreas') {
     query <- c(
         'Freytag'
     )
-    batch_key <- "condition"
+    batch_key <- "study"
     ct_key <- "cell_type"
 } else if (data == 'brain') {
     reference <- c(
@@ -111,4 +111,4 @@ if (data == 'pancreas') {
 }
 batches <- c(reference, query)
 
-project_only_seurat(DATA_DIR, batch_key, query)
+project_only_seurat(DATA_DIR, batch_key, query, ct_key)

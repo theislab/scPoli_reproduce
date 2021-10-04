@@ -12,4 +12,4 @@
 echo $SLURM_NODENAME
 source /home/icb/carlo.dedonno/anaconda3/bin/activate lataq_r
 
-sh /storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/benchmarks/seurat/seurat_brain.sh
+sh /storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/benchmarks/seurat/seurat_bash_brain.sh

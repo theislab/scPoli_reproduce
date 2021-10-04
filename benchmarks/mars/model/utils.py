@@ -6,7 +6,7 @@ Created on Mar 22, 2019
 import torch
 from torch.utils.data import DataLoader
 
-from model.epoch_sampler import EpochSampler
+from .epoch_sampler import EpochSampler
 
 
 def init_labeled_loader(data, val_split = 0.8):

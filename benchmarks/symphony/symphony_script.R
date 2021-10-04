@@ -48,7 +48,7 @@ if (data == 'pancreas') {
     query <- c(
         'Freytag'
     )
-    batch_key <- "condition"
+    batch_key <- "study"
     ct_key <- "cell_type"
 } else if (data == 'brain') {
     reference <- c(

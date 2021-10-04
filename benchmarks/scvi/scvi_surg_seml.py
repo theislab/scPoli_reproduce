@@ -67,7 +67,7 @@ def run(
     target_adata = adata[adata.obs.study.isin(query)].copy()
     logging.info('Data loaded succesfully')
 
-    sca.dataset.setup_anndata(source_adata, batch_key=condition_key, label_key=cell_type_key[0])
+    sca.dataset.setup_anndata(source_adata, batch_key=condition_key, labels_key=cell_type_key[0])
 
     vae_ref = sca.models.SCVI(
         source_adata, #use default params

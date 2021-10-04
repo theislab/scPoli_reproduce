@@ -87,12 +87,12 @@ def run(
     cell_type_key = EXP_PARAMS['cell_type_key']
     reference = EXP_PARAMS['reference']
     query = EXP_PARAMS['query']
-
     adata = remove_sparsity(adata)
+    #adata_old = adata.copy()
     # Create Int Mapping for celltypes
     adata, celltype_id_map = celltype_to_numeric(adata, cell_type_key[0])
     cell_type_name_map = {v: k for k, v in celltype_id_map.items()}
-
+    
     # Preprocess data
     sc.pp.normalize_per_cell(adata, counts_per_cell_after=1e4)
     sc.pp.log1p(adata)
@@ -102,8 +102,10 @@ def run(
     annotated = []
     labels = []
     batches = []
+    labeled_adatas = []
     for batch in reference:
-        labeled_adata = adata[adata.obs.study.isin([batch])].copy()
+        labeled_adata = adata[adata.obs[condition_key].isin([batch])].copy()
+        labeled_adatas.append(labeled_adata)
         y_labeled = np.array(labeled_adata.obs['truth_labels'], dtype=np.int64)
         annotated.append(ExperimentDataset(labeled_adata.X,
                                            labeled_adata.obs_names,
@@ -113,11 +115,13 @@ def run(
                                            ))
         labels += labeled_adata.obs[cell_type_key[0]].tolist()
         batches += labeled_adata.obs[condition_key].tolist()
-
+    labeled_adata_full = labeled_adatas[0].concatenate(labeled_adatas[1:])
+    
     # Make Unlabeled Datasets for Mars
-    unlabeled_adata = adata[adata.obs.study.isin(query)].copy()
+
+    unlabeled_adata = adata[adata.obs[condition_key].isin(query)].copy()
     y_unlabeled = np.array(unlabeled_adata.obs['truth_labels'], dtype=np.int64)
-    unannnotated = ExperimentDataset(
+    unannotated = ExperimentDataset(
         unlabeled_adata.X,
         unlabeled_adata.obs_names,
         unlabeled_adata.var_names,
@@ -126,8 +130,8 @@ def run(
     )
     labels += unlabeled_adata.obs[cell_type_key[0]].tolist()
     batches += unlabeled_adata.obs[condition_key].tolist()
-    n_clusters = len(np.unique(unannnotated.y))
-
+    n_clusters = len(np.unique(unannotated.y))
+    adata_full = labeled_adata_full.concatenate(unlabeled_adata)
     # Make pretrain Dataset
     pretrain = ExperimentDataset(
         adata.X,
@@ -142,7 +146,7 @@ def run(
         n_clusters,
         params,
         annotated,
-        unannnotated,
+        unannotated,
         pretrain,
         hid_dim_1=1000,
         hid_dim_2=100
@@ -151,7 +155,8 @@ def run(
     adata, landmarks, _ = mars.train(evaluation_mode=True)
     ref_time = time.time() - ref_time
     # save ref time
-
+    adata.obs[condition_key] = adata_full.obs[condition_key].values
+    adata.obs[cell_type_key[0]] = adata_full.obs[cell_type_key[0]].values
 
     # TODO: CHECK FROM HERE....
     names = mars.name_cell_types(adata, landmarks, cell_type_name_map)

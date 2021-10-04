@@ -19,7 +19,7 @@ EXPERIMENT_INFO = {
     },
     'pbmc': {
         'file_name': 'pbmc.h5ad',
-        'condition_key': 'condition',
+        'condition_key': 'study',
         'cell_type_key': ['cell_type'],
         'reference': [
             "Oetjen", 

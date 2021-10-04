@@ -4,31 +4,31 @@ PC regression...
 Graph connectivity...
 Entropy batch mixing...
 Calculating EBM with n_cat = 9
-EBM: 0.6197364794528765
+EBM: 0.6181647869242557
 KNN purity
-KNN-P: 0.8311141845644131
+KNN-P: 0.8322203711435577
 PC regression...
 Graph connectivity...
 Entropy batch mixing...
 Calculating EBM with n_cat = 9
-EBM: 0.5208532096314568
+EBM: 0.5059136674853567
 KNN purity
-KNN-P: 0.8663417231041118
+KNN-P: 0.8743554849131631
 pbmc
 PC regression...
 Graph connectivity...
 Entropy batch mixing...
-Calculating EBM with n_cat = 9
-EBM: 0.600891232699789
+Calculating EBM with n_cat = 4
+EBM: 0.5474705424754955
 KNN purity
-KNN-P: 0.8059959030365703
+KNN-P: 0.8207701290959177
 PC regression...
 Graph connectivity...
 Entropy batch mixing...
-Calculating EBM with n_cat = 9
-EBM: 0.5757859204767279
+Calculating EBM with n_cat = 4
+EBM: 0.4763165117240382
 KNN purity
-KNN-P: 0.7765404546968161
+KNN-P: 0.8481638992793852
 scvelo
 PC regression...
 Variance contribution increased after integration!
@@ -36,7 +36,7 @@ Setting PCR comparison score to 0.
 Graph connectivity...
 Entropy batch mixing...
 Calculating EBM with n_cat = 4
-EBM: 0.5873949193829688
+EBM: 0.5827662716508759
 KNN purity
 KNN-P: 0.713175807226616
 PC regression...
@@ -45,9 +45,9 @@ Setting PCR comparison score to 0.
 Graph connectivity...
 Entropy batch mixing...
 Calculating EBM with n_cat = 4
-EBM: 0.5793974790375596
+EBM: 0.5735773371441323
 KNN purity
-KNN-P: 0.7038599222513757
+KNN-P: 0.6940403170472149
 lung
 PC regression...
 Variance contribution increased after integration!
@@ -55,18 +55,18 @@ Setting PCR comparison score to 0.
 Graph connectivity...
 Entropy batch mixing...
 Calculating EBM with n_cat = 3
-EBM: 0.2198148436071067
+EBM: 0.22184119930906973
 KNN purity
-KNN-P: 0.8341258079645855
+KNN-P: 0.8342979232609741
 PC regression...
 Variance contribution increased after integration!
 Setting PCR comparison score to 0.
 Graph connectivity...
 Entropy batch mixing...
 Calculating EBM with n_cat = 3
-EBM: 0.14625355063832643
+EBM: 0.15572678963668998
 KNN purity
-KNN-P: 0.8179323121855794
+KNN-P: 0.8262963191440703
 tumor
 PC regression...
 Variance contribution increased after integration!
@@ -74,30 +74,30 @@ Setting PCR comparison score to 0.
 Graph connectivity...
 Entropy batch mixing...
 Calculating EBM with n_cat = 13
-EBM: 0.3595974513448707
+EBM: 0.3593789534280382
 KNN purity
-KNN-P: 0.587462986302041
+KNN-P: 0.588395621347291
 PC regression...
 Variance contribution increased after integration!
 Setting PCR comparison score to 0.
 Graph connectivity...
 Entropy batch mixing...
 Calculating EBM with n_cat = 13
-EBM: 0.37707068103189434
+EBM: 0.3717910125000983
 KNN purity
-KNN-P: 0.588908375956667
+KNN-P: 0.5929703183411905
 brain
 PC regression...
 Graph connectivity...
 Entropy batch mixing...
 Calculating EBM with n_cat = 4
-EBM: 0.2758648696636422
+EBM: 0.2721899350275643
 KNN purity
-KNN-P: 0.9011776144506396
+KNN-P: 0.9007813334362715
 PC regression...
 Graph connectivity...
 Entropy batch mixing...
 Calculating EBM with n_cat = 4
-EBM: 0.1788218839752002
+EBM: 0.1682136458231129
 KNN purity
-KNN-P: 0.9170277887967287
+KNN-P: 0.9157090461101027

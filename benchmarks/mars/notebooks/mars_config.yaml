@@ -1,0 +1,26 @@
+seml:
+  executable: benchmarks/mars/notebooks/mars_test_adapted.py
+  name: mars
+  output_dir: benchmarks/logs
+  project_root_dir: /storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce
+  conda_environment: mars
+slurm:
+  experiments_per_job: 1
+  sbatch_options_template: GPU
+  sbatch_options:
+    mem: 25G          # memory
+    cpus-per-task: 2  # num cores
+    time: 0-24:00     # max time, D-HH:MM
+  max_jobs_per_batch: 8
+###### BEGIN PARAMETER CONFIGURATION ######
+grid:
+  data: 
+    type: choice
+    options:
+      - pancreas
+      - pbmc
+      - brain
+      - scvelo
+      - tumor
+      - lung
+      #- lung_h

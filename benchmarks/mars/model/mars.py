@@ -13,11 +13,11 @@ import scanpy.api as sc
 from collections import OrderedDict
 from collections import defaultdict
 
-from model.loss import loss_task, loss_test, reconstruction_loss
-from model.net import FullNet
-from model.landmarks import compute_landmarks_tr, init_landmarks
-from model.utils import init_data_loaders, euclidean_dist
-from model.metrics import compute_scores
+from .loss import loss_task, loss_test, reconstruction_loss
+from .net import FullNet
+from .landmarks import compute_landmarks_tr, init_landmarks
+from .utils import init_data_loaders, euclidean_dist
+from .metrics import compute_scores
 
 class MARS:
     
