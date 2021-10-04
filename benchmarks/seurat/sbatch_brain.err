@@ -1,1 +1,10 @@
 Attaching SeuratObject
+Computing 2000 integration features
+Scaling features for provided objects
+Finding all pairwise anchors
+Running CCA
+Merging objects
+Finding neighborhoods
+Finding anchors
+	Found 126572 anchors
+Filtering anchors

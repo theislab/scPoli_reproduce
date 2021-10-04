@@ -1,3 +1,6 @@
 
 [1] "tumor"
 [1] "Reading data."
+[1] "Integrating reference:"
+ [1] "breast"     "colorectal" "liver1"     "liver2"     "lung1"     
+ [6] "lung2"      "multiple"   "ovary"      "pancreas"   "skin"      

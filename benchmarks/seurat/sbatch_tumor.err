@@ -1,1 +1,73 @@
 Attaching SeuratObject
+Computing 2000 integration features
+Scaling features for provided objects
+Finding all pairwise anchors
+Running CCA
+Merging objects
+Finding neighborhoods
+Finding anchors
+	Found 50606 anchors
+Filtering anchors
+	Retained 10566 anchors
+Running CCA
+Merging objects
+Finding neighborhoods
+Finding anchors
+	Found 18003 anchors
+Filtering anchors
+	Retained 6894 anchors
+Running CCA
+Merging objects
+Finding neighborhoods
+Finding anchors
+	Found 18178 anchors
+Filtering anchors
+	Retained 9299 anchors
+Running CCA
+Merging objects
+Finding neighborhoods
+Finding anchors
+	Found 41767 anchors
+Filtering anchors
+	Retained 11298 anchors
+Running CCA
+Merging objects
+Finding neighborhoods
+Finding anchors
+	Found 41944 anchors
+Filtering anchors
+	Retained 14094 anchors
+Running CCA
+Merging objects
+Finding neighborhoods
+Finding anchors
+	Found 15734 anchors
+Filtering anchors
+	Retained 4761 anchors
+Running CCA
+Merging objects
+Finding neighborhoods
+Finding anchors
+	Found 46931 anchors
+Filtering anchors
+	Retained 7843 anchors
+Running CCA
+Merging objects
+Finding neighborhoods
+Finding anchors
+	Found 45817 anchors
+Filtering anchors
+	Retained 8263 anchors
+Running CCA
+Merging objects
+Finding neighborhoods
+Finding anchors
+	Found 17656 anchors
+Filtering anchors
+	Retained 2071 anchors
+Running CCA
+Merging objects
+Finding neighborhoods
+Finding anchors
+	Found 37416 anchors
+Filtering anchors

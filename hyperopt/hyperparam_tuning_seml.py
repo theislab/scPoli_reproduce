@@ -66,7 +66,7 @@ def run(
     logging.info('Data loaded succesfully')
 
     early_stopping_kwargs = {
-        "early_stopping_metric": "val_classifier_loss",
+        "early_stopping_metric": "val_landmark_loss",
         "mode": "min",
         "threshold": 0,
         "patience": 20,
