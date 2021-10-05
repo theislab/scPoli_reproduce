@@ -8,10 +8,11 @@ slurm:
   experiments_per_job: 1
   sbatch_options_template: GPU
   sbatch_options:
-    mem: 25G          # memory
-    cpus-per-task: 2  # num cores
-    time: 0-12:00     # max time, D-HH:MM
-  max_jobs_per_batch: 8
+    mem: 50G          # memory
+    cpus-per-task: 8  # num cores
+    time: 0-24:00     # max time, D-HH:MM
+    nice: 100000
+  max_jobs_per_batch: 6
 
 ###### BEGIN PARAMETER CONFIGURATION ######
 
@@ -60,7 +61,6 @@ grid:
       - 1
       - 10
       - 100
-      - 1000
 
   alpha_epoch_anneal:
     type: choice
