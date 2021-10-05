@@ -1,5 +1,6 @@
 import scanpy as sc
 import pandas as pd
+import numpy as np
 from sklearn.metrics import classification_report
 from lataq.metrics.metrics import metrics
 from lataq_reproduce.exp_dict import EXPERIMENT_INFO
