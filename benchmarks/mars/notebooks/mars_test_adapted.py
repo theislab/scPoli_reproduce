@@ -280,8 +280,8 @@ def run(
 
     results = {
         'reference_time': ref_time,
-        'classification_report': report,
-        'classification_report_query': report_full,
+        'classification_report': report_full,
+        'classification_report_query': report,
         'integration_scores': scores
     }
     return results

@@ -9,7 +9,7 @@ slurm:
   sbatch_options_template: GPU
   sbatch_options:
     mem: 50G          # memory
-    cpus-per-task: 8  # num cores
+    cpus-per-task: 6  # num cores
     time: 0-24:00     # max time, D-HH:MM
     nice: 100000
   max_jobs_per_batch: 6
