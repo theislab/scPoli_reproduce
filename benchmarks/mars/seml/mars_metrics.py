@@ -42,14 +42,32 @@ def run(
     adata = sc.read(f'{RES_PATH}/adata_original.h5ad')
     adata_latent = sc.read(f'{RES_PATH}/adata_latent.h5ad')
 
-    scores = metrics_fast(
-        adata,
-        adata_latent,
-        'batch',
-        'celltype'
+    scores = metrics(
+        adata, 
+        adata_latent, 
+        'batch', 
+        'celltype',
+        isolated_labels_asw_=True,
+        silhouette_=True,
+        graph_conn_=True,
+        pcr_=True,
+        isolated_labels_f1=True,
+        nmi_=True,
+        ari_=True
     )
-
+    
+    scores = scores.T
+    scores = scores[[
+        'NMI_cluster/label', 
+        'ARI_cluster/label',
+        'ASW_label',
+        'ASW_label/batch',
+        'PCR_batch', 
+        'isolated_label_F1',
+        'isolated_label_silhouette',
+        'graph_conn',
+    ]]
     results = {
-        'integration_scores': scores.T
+        'integration_scores': scores
     }
     return results
