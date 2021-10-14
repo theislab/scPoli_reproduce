@@ -5,7 +5,7 @@ from sacred import Experiment
 import seml
 
 import scanpy as sc
-from scIB.metrics import metrics_fast
+from scIB.metrics import metrics
 
 ex = Experiment()
 seml.setup_logger(ex)
@@ -51,7 +51,7 @@ def run(
         silhouette_=True,
         graph_conn_=True,
         pcr_=True,
-        isolated_labels_f1=True,
+        isolated_labels_f1_=True,
         nmi_=True,
         ari_=True
     )

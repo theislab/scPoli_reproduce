@@ -21,7 +21,7 @@ for d in ['pancreas', 'pbmc', 'scvelo', 'lung', 'tumor', 'brain']:
     )
     scores = metrics(
         adata, 
-        adata_latent, 
+        adata_symphony, 
         'batch', 
         'celltype',
         isolated_labels_asw_=True,
@@ -77,28 +77,13 @@ for d in ['pancreas', 'pbmc', 'scvelo', 'lung', 'tumor', 'brain']:
         scores = metrics(
             adata, 
             adata_seurat, 
-            condition_key, 
-            cell_type_key,
-            nmi_=False,
-            ari_=False,
-            silhouette_=False,
-            pcr_=True,
-            graph_conn_=True,
-            isolated_labels_=False,
-            hvg_score_=False,
-            ebm_=True,
-            knn_=True,
-        )
-        scores = metrics(
-            adata, 
-            adata_latent, 
             'batch', 
             'celltype',
             isolated_labels_asw_=True,
             silhouette_=True,
             graph_conn_=True,
             pcr_=True,
-            isolated_labels_f1=True,
+            isolated_labels_f1_=True,
             nmi_=True,
             ari_=True
         )

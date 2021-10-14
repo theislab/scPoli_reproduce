@@ -329,7 +329,7 @@ def run(
         silhouette_=True,
         graph_conn_=True,
         pcr_=True,
-        isolated_labels_f1=True,
+        isolated_labels_f1_=True,
         nmi_=True,
         ari_=True
     )

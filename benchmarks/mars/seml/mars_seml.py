@@ -22,7 +22,6 @@ import scarches as sca
 import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report
 from scarches.dataset.trvae.data_handling import remove_sparsity
-from scIB.metrics import metrics_fast
 
 from lataq_reproduce.exp_dict import EXPERIMENT_INFO
 from lataq_reproduce.utils import label_encoder
