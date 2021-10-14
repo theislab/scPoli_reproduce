@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/benchmarks/seurat/seurat_symphony_scores.py", line 52, in <module>
-    'classification_report': np.nan,
-NameError: name 'np' is not defined
