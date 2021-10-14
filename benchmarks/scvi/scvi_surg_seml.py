@@ -1,16 +1,18 @@
 import logging
 from sacred import Experiment
 import seml
+
+import time
 import scanpy as sc
 import numpy as np
-import pandas as pd
 import scarches as sca
 import matplotlib.pyplot as plt
 from scarches.dataset.trvae.data_handling import remove_sparsity
+from scIB.metrics import metrics_fast
+
 from lataq_reproduce.exp_dict import EXPERIMENT_INFO
 from lataq_reproduce.utils import label_encoder
-from lataq.metrics.metrics import metrics
-import time
+#from lataq.metrics.metrics import metrics
 
 ex = Experiment()
 seml.setup_logger(ex)
@@ -27,7 +29,6 @@ def config():
         ex.observers.append(
             seml.create_mongodb_observer(db_collection, overwrite=overwrite)
         )
-
 
 @ex.automain
 def run(
@@ -195,34 +196,25 @@ def run(
     adata_latent.obs['batch'] = conditions.squeeze(axis=1)
     adata_latent.obs['celltype'] = labels.squeeze(axis=1)
 
-    scores = metrics(
+    scores = metrics_fast(
         adata, 
         adata_latent,
         'batch', 
         'celltype',
-        nmi_=False,
-        ari_=False,
-        silhouette_=False,
-        pcr_=True,
-        graph_conn_=True,
-        isolated_labels_=False,
-        hvg_score_=False,
-        knn_=True,
-        ebm_=True,
     )
     
     scores = scores.T
-    scores = scores[[#'NMI_cluster/label', 
-                     #'ARI_cluster/label',
-                     #'ASW_label',
-                     #'ASW_label/batch',
-                     'PCR_batch', 
-                     #'isolated_label_F1',
-                     #'isolated_label_silhouette',
-                     'graph_conn',
-                     'ebm',
-                     'knn',
-                    ]]
+    # scores = scores[[#'NMI_cluster/label', 
+    #                  #'ARI_cluster/label',
+    #                  #'ASW_label',
+    #                  #'ASW_label/batch',
+    #                  'PCR_batch', 
+    #                  #'isolated_label_F1',
+    #                  #'isolated_label_silhouette',
+    #                  'graph_conn',
+    #                  'ebm',
+    #                  'knn',
+    #                 ]]
 
     results = {
         'reference_time': ref_time,

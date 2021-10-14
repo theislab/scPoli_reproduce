@@ -2,6 +2,7 @@ import scanpy as sc
 import pandas as pd
 import numpy as np
 from sklearn.metrics import classification_report
+from scIB.metrics import metrics_fast
 from lataq.metrics.metrics import metrics
 from lataq_reproduce.exp_dict import EXPERIMENT_INFO
 
@@ -19,33 +20,24 @@ for d in ['pancreas', 'pbmc', 'scvelo', 'lung', 'tumor', 'brain']:
         obs=adata.obs,
         #var=adata.var
     )
-    scores = metrics(
+    scores = metrics_fast(
         adata, 
         adata_symphony, 
         condition_key, 
         cell_type_key,
-        nmi_=False,
-        ari_=False,
-        silhouette_=False,
-        pcr_=True,
-        graph_conn_=True,
-        isolated_labels_=False,
-        hvg_score_=False,
-        ebm_=True,
-        knn_=True,
     )
     scores = scores.T
-    scores = scores[[#'NMI_cluster/label', 
-                     #'ARI_cluster/label',
-                     #'ASW_label',
-                     #'ASW_label/batch',
-                     'PCR_batch', 
-                     #'isolated_label_F1',
-                     #'isolated_label_silhouette',
-                     'graph_conn',
-                     'ebm',
-                     'knn',
-                    ]]
+    # scores = scores[[#'NMI_cluster/label', 
+    #                  #'ARI_cluster/label',
+    #                  #'ASW_label',
+    #                  #'ASW_label/batch',
+    #                  'PCR_batch', 
+    #                  #'isolated_label_F1',
+    #                  #'isolated_label_silhouette',
+    #                  'graph_conn',
+    #                  'ebm',
+    #                  'knn',
+    #                 ]]
     results_dict = {
         'data': d,
         'method': 'symphony',
