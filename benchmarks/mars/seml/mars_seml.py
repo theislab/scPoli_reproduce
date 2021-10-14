@@ -195,7 +195,7 @@ def run(
             y_pred=np.array(predictions),
             output_dict=True
         )
-    ).transpose().add_prefix('full_')
+    ).transpose()
 
     adata_latent = AnnData(adata.obsm['MARS_embedding'])
     adata_latent.obs['celltype'] = labels_after
@@ -252,14 +252,16 @@ def run(
     adata_latent.obs['batch'] = conditions.squeeze(axis=1)
     adata_latent.obs['celltype'] = labels.squeeze(axis=1)
 
-    scores = metrics_fast(
-        adata,
-        adata_latent,
-        'batch',
-        'celltype',
-    )
+    adata_latent.write(f'{RES_PATH}/adata_latent.h5ad')
+    adata.write(f'{RES_PATH}/adata_original.h5ad')
+    # scores = metrics_fast(
+    #     adata,
+    #     adata_latent,
+    #     'batch',
+    #     'celltype',
+    # )
 
-    scores = scores.T
+    # scores = scores.T
     # scores = scores[[  # 'NMI_cluster/label',
     #     # 'ARI_cluster/label',
     #     # 'ASW_label',
@@ -276,6 +278,6 @@ def run(
         'reference_time': ref_time,
         'classification_report': report_full,
         'classification_report_query': report,
-        'integration_scores': scores
+        'integration_scores': np.nan
     }
     return results
