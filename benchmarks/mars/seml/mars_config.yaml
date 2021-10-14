@@ -1,5 +1,5 @@
 seml:
-  executable: benchmarks/mars/notebooks/mars_test_adapted.py
+  executable: benchmarks/mars/seml/mars_test_adapted.py
   name: mars
   output_dir: benchmarks/logs
   project_root_dir: /storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce
