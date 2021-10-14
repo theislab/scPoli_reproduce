@@ -1,16 +1,19 @@
 import logging
-from sacred import Experiment
 import seml
+from sacred import Experiment
+
 import pandas as pd
 import scanpy as sc
 import numpy as np
 from sklearn.metrics import classification_report
-from lataq.metrics.metrics import metrics
+import matplotlib.pyplot as plt
 from scarches.dataset.trvae.data_handling import remove_sparsity
+from scIB import 
+from lataq.metrics.metrics import metrics
 from lataq.models import EMBEDCVAE, TRANVAE
 from lataq_reproduce.utils import label_encoder
 from lataq_reproduce.exp_dict import EXPERIMENT_INFO
-import matplotlib.pyplot as plt
+
 from shutil import rmtree
 np.random.seed(420)
 

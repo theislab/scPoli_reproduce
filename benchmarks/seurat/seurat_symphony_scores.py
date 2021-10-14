@@ -75,7 +75,7 @@ for d in ['pancreas', 'pbmc', 'scvelo', 'lung', 'tumor', 'brain']:
                 y_pred=adata.obs['pred_label'],
                 output_dict=True
             )
-        ).transpose().add_prefix('full_')
+        ).transpose()
         scores = metrics(
             adata, 
             adata_seurat, 
@@ -105,7 +105,7 @@ for d in ['pancreas', 'pbmc', 'scvelo', 'lung', 'tumor', 'brain']:
                         ]]
         results_dict = {
             'data': d,
-            'method': 'symphony',
+            'method': 'seurat',
             'integration_scores': scores,
             'classification_report': report_full,
             'classification_report_query': report,
