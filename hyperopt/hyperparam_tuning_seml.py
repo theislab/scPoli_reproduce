@@ -5,11 +5,12 @@ from sacred import Experiment
 import pandas as pd
 import scanpy as sc
 import numpy as np
-from sklearn.metrics import classification_report
 import matplotlib.pyplot as plt
+from sklearn.metrics import classification_report
 from scarches.dataset.trvae.data_handling import remove_sparsity
-from scIB import 
-from lataq.metrics.metrics import metrics
+from scIB.metrics import metrics_fast
+
+#from lataq.metrics.metrics import metrics
 from lataq.models import EMBEDCVAE, TRANVAE
 from lataq_reproduce.utils import label_encoder
 from lataq_reproduce.exp_dict import EXPERIMENT_INFO
@@ -211,28 +212,19 @@ def run(
         bbox_inches='tight'
     )
     plt.close()
-    scores = metrics(
+    scores = metrics_fast(
         adata, 
         latent_adata, 
         condition_key, 
         cell_type_key[0],
-        nmi_=False,
-        ari_=False,
-        silhouette_=False,
-        pcr_=True,
-        graph_conn_=True,
-        isolated_labels_=False,
-        hvg_score_=False,
-        ebm_=True,
-        knn_=True,
     )
     logging.info('Completed integration metrics')
     scores = scores.T
-    scores = scores[['PCR_batch', 
-                     'graph_conn',
-                     'ebm',
-                     'knn',
-                    ]]
+    # scores = scores[['PCR_batch', 
+    #                  'graph_conn',
+    #                  'ebm',
+    #                  'knn',
+    #                 ]]
 
     results = {
         'classification_report': classification_df,
