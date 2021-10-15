@@ -1,31 +1,42 @@
-import scanpy as sc
-import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
+import pandas as pd
+import scanpy as sc
+import seaborn as sns
 from scipy import sparse
 
 
 def remove_sparsity(adata):
     """
-        If ``adata.X`` is a sparse matrix, this will convert it in to normal matrix.
-        Parameters
-        ----------
-        adata: :class:`~anndata.AnnData`
-            Annotated data matrix.
-        Returns
-        -------
-        adata: :class:`~anndata.AnnData`
-            Annotated dataset.
+    If ``adata.X`` is a sparse matrix, this will convert it in to normal matrix.
+    Parameters
+    ----------
+    adata: :class:`~anndata.AnnData`
+        Annotated data matrix.
+    Returns
+    -------
+    adata: :class:`~anndata.AnnData`
+        Annotated dataset.
     """
     if sparse.issparse(adata.X):
-        new_adata = sc.AnnData(X=adata.X.A, obs=adata.obs.copy(deep=True), var=adata.var.copy(deep=True))
+        new_adata = sc.AnnData(
+            X=adata.X.A, obs=adata.obs.copy(deep=True), var=adata.var.copy(deep=True)
+        )
         return new_adata
 
     return adata
 
 
-def opt_louvain(adata, label_key, cluster_key, function=None, resolutions=None,
-                inplace=True, plot=False, verbose=True, **kwargs):
+def opt_louvain(
+    adata,
+    label_key,
+    cluster_key,
+    function=None,
+    resolutions=None,
+    inplace=True,
+    plot=False,
+    verbose=True,
+    **kwargs,
+):
     """
     params:
         label_key: name of column in adata.obs containing biological labels to be
@@ -56,10 +67,10 @@ def opt_louvain(adata, label_key, cluster_key, function=None, resolutions=None,
 
     # maren's edit - recompute neighbors if not existing
     try:
-        adata.uns['neighbors']
+        adata.uns["neighbors"]
     except KeyError:
         if verbose:
-            print('computing neigbours for opt_cluster')
+            print("computing neigbours for opt_cluster")
         sc.pp.neighbors(adata)
 
     for res in resolutions:
@@ -73,14 +84,18 @@ def opt_louvain(adata, label_key, cluster_key, function=None, resolutions=None,
         del adata.obs[cluster_key]
 
     if verbose:
-        print(f'optimised clustering against {label_key}')
-        print(f'optimal cluster resolution: {res_max}')
-        print(f'optimal score: {score_max}')
+        print(f"optimised clustering against {label_key}")
+        print(f"optimal cluster resolution: {res_max}")
+        print(f"optimal score: {score_max}")
 
-    score_all = pd.DataFrame(zip(resolutions, score_all), columns=('resolution', 'score'))
+    score_all = pd.DataFrame(
+        zip(resolutions, score_all), columns=("resolution", "score")
+    )
     if plot:
         # score vs. resolution profile
-        sns.lineplot(data=score_all, x='resolution', y='score').set_title('Optimal cluster resolution profile')
+        sns.lineplot(data=score_all, x="resolution", y="score").set_title(
+            "Optimal cluster resolution profile"
+        )
         plt.show()
 
     if inplace:

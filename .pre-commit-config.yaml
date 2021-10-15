@@ -1,0 +1,27 @@
+fail_fast: false
+default_language_version:
+    python: python3
+default_stages:
+-   commit
+-   push
+minimum_pre_commit_version: 2.10.1
+repos:
+-   repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
+    -   id: black
+        exclude: ^benchmarks/mars/
+        additional_dependencies: [toml]
+-   repo: https://github.com/timothycrosley/isort
+    rev: 5.7.0
+    hooks:
+    -   id: isort
+        exclude: ^benchmarks/mars/
+        additional_dependencies: [toml]
+        args: [--order-by-type]
+-   repo: https://github.com/myint/autoflake
+    rev: v1.4
+    hooks:
+    -   id: autoflake
+        exclude: ^benchmarks/mars/
+        args: [--in-place, --remove-all-unused-imports, --remove-unused-variable, --ignore-init-module-imports]
