@@ -10,7 +10,7 @@ slurm:
   sbatch_options:
     mem: 25G          # memory
     cpus-per-task: 2  # num cores
-    time: 0-06:00     # max time, D-HH:MM
+    time: 0-24:00     # max time, D-HH:MM
   max_jobs_per_batch: 8
 ###### BEGIN PARAMETER CONFIGURATION ######
 grid:
