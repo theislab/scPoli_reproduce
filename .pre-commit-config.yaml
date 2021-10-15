@@ -10,13 +10,14 @@ repos:
     rev: 20.8b1
     hooks:
     -   id: black
+        exclude: benchmarks/mars/
         additional_dependencies: [toml]
 -   repo: https://github.com/timothycrosley/isort
     rev: 5.7.0
     hooks:
     -   id: isort
         additional_dependencies: [toml]
-        args: [--order-by-type]
+        args: [--order-by-type, --skip=__init__.py]
 -   repo: https://github.com/myint/autoflake
     rev: v1.4
     hooks:
