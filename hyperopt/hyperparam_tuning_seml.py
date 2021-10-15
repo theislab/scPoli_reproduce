@@ -10,64 +10,71 @@ from sklearn.metrics import classification_report
 from scarches.dataset.trvae.data_handling import remove_sparsity
 from scIB.metrics import metrics_fast
 
-#from lataq.metrics.metrics import metrics
+# from lataq.metrics.metrics import metrics
 from lataq.models import EMBEDCVAE, TRANVAE
 from lataq_reproduce.utils import label_encoder
 from lataq_reproduce.exp_dict import EXPERIMENT_INFO
 
 from shutil import rmtree
+
 np.random.seed(420)
 
 ex = Experiment()
 seml.setup_logger(ex)
 
+
 @ex.post_run_hook
 def collect_stats(_run):
     seml.collect_exp_stats(_run)
 
+
 @ex.config
 def config():
-    overwrite=None
-    db_collection=None
+    overwrite = None
+    db_collection = None
     if db_collection is not None:
-        ex.observers.append(seml.create_mongodb_observer(db_collection, overwrite=overwrite))
+        ex.observers.append(
+            seml.create_mongodb_observer(db_collection, overwrite=overwrite)
+        )
 
 
 @ex.automain
 def run(
-        data: str,
-        model: str,
-        latent_dim: int,
-        loss_metric: str,
-        clustering_res: float,
-        hidden_layers: int,
-        n_epochs: int,
-        n_pre_epochs: int,
-        alpha_epoch_anneal: int,
-        eta: float,
-        overwrite: int,
-    ):
-    logging.info('Received the following configuration:')
+    data: str,
+    model: str,
+    latent_dim: int,
+    loss_metric: str,
+    clustering_res: float,
+    hidden_layers: int,
+    n_epochs: int,
+    n_pre_epochs: int,
+    alpha_epoch_anneal: int,
+    eta: float,
+    overwrite: int,
+):
+    logging.info("Received the following configuration:")
     logging.info(
-        f'Dataset: {data}, latent_dim: {latent_dim}, loss metric: {loss_metric},'
-        f'clustering res: {clustering_res}, hidden layers: {hidden_layers}'
+        f"Dataset: {data}, latent_dim: {latent_dim}, loss metric: {loss_metric},"
+        f"clustering res: {clustering_res}, hidden layers: {hidden_layers}"
     )
 
-    DATA_DIR = '/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/data'
-    REF_PATH = f'/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/tmp/ref_model_embedcvae_{overwrite}'
-    RES_PATH = f'/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/results/hyperopt'
+    DATA_DIR = "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/data"
+    REF_PATH = f"/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/tmp/ref_model_embedcvae_{overwrite}"
+    RES_PATH = (
+        f"/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/results/hyperopt"
+    )
     EXP_PARAMS = EXPERIMENT_INFO[data]
-    FILE_NAME = EXP_PARAMS['file_name']
-    adata = sc.read(f'{DATA_DIR}/{FILE_NAME}')
-    condition_key = EXP_PARAMS['condition_key']
-    cell_type_key = EXP_PARAMS['cell_type_key']
-    reference = EXP_PARAMS['reference']
-    query = EXP_PARAMS['query']
+    FILE_NAME = EXP_PARAMS["file_name"]
+    adata = sc.read(f"{DATA_DIR}/{FILE_NAME}")
+    condition_key = EXP_PARAMS["condition_key"]
+    cell_type_key = EXP_PARAMS["cell_type_key"]
+    reference = EXP_PARAMS["reference"]
+    query = EXP_PARAMS["query"]
 
     adata = remove_sparsity(adata)
     source_adata = adata[adata.obs.study.isin(reference)].copy()
     target_adata = adata[adata.obs.study.isin(query)].copy()
-    logging.info('Data loaded succesfully')
+    logging.info("Data loaded succesfully")
 
     early_stopping_kwargs = {
         "early_stopping_metric": "val_landmark_loss",
@@ -81,105 +88,96 @@ def run(
 
     EPOCHS = n_epochs
     PRE_EPOCHS = n_pre_epochs
-    #hyperbolic_log1p = False
-    
-    #if loss_metric == 'hyperbolic_log1p':
+    # hyperbolic_log1p = False
+
+    # if loss_metric == 'hyperbolic_log1p':
     #    loss_metric = 'hyperbolic'
     #    hyperbolic_log1p=True
 
-    if model == 'embedcvae':
+    if model == "embedcvae":
         tranvae = EMBEDCVAE(
             adata=source_adata,
             condition_key=condition_key,
             cell_type_keys=cell_type_key,
-            hidden_layer_sizes=[128]*int(hidden_layers),
+            hidden_layer_sizes=[128] * int(hidden_layers),
             latent_dim=int(latent_dim),
             use_mmd=False,
         )
-    elif model == 'tranvae':
+    elif model == "tranvae":
         tranvae = TRANVAE(
             adata=source_adata,
             condition_key=condition_key,
             cell_type_keys=cell_type_key,
-            hidden_layer_sizes=[128]*int(hidden_layers),
+            hidden_layer_sizes=[128] * int(hidden_layers),
             latent_dim=int(latent_dim),
             use_mmd=False,
         )
-    logging.info('Model instantiated')
+    logging.info("Model instantiated")
     tranvae.train(
         n_epochs=EPOCHS,
         early_stopping_kwargs=early_stopping_kwargs,
         alpha_epoch_anneal=alpha_epoch_anneal,
         pretraining_epochs=PRE_EPOCHS,
         clustering_res=clustering_res,
-        #labeled_loss_metric=loss_metric,
-        #unlabeled_loss_metric=loss_metric,
-        #hyperbolic_log1p=hyperbolic_log1p,
+        # labeled_loss_metric=loss_metric,
+        # unlabeled_loss_metric=loss_metric,
+        # hyperbolic_log1p=hyperbolic_log1p,
         eta=eta,
     )
     tranvae.save(REF_PATH, overwrite=True)
-    logging.info('Model trained and saved, initiate surgery')
-    if model == 'embedcvae':
+    logging.info("Model trained and saved, initiate surgery")
+    if model == "embedcvae":
         tranvae_query = EMBEDCVAE.load_query_data(
             adata=target_adata,
             reference_model=REF_PATH,
             labeled_indices=[],
         )
-    elif model == 'tranvae':
+    elif model == "tranvae":
         tranvae_query = TRANVAE.load_query_data(
             adata=target_adata,
             reference_model=REF_PATH,
             labeled_indices=[],
         )
     tranvae_query.train(
-            n_epochs=EPOCHS,
-            early_stopping_kwargs=early_stopping_kwargs,
-            alpha_epoch_anneal=alpha_epoch_anneal,
-            pretraining_epochs=PRE_EPOCHS,
-            clustering_res=clustering_res,
-            eta=eta,
-            #labeled_loss_metric=loss_metric,
-            #unlabeled_loss_metric=loss_metric
-        )
-    
-    logging.info('Computing metrics')
+        n_epochs=EPOCHS,
+        early_stopping_kwargs=early_stopping_kwargs,
+        alpha_epoch_anneal=alpha_epoch_anneal,
+        pretraining_epochs=PRE_EPOCHS,
+        clustering_res=clustering_res,
+        eta=eta,
+        # labeled_loss_metric=loss_metric,
+        # unlabeled_loss_metric=loss_metric
+    )
+
+    logging.info("Computing metrics")
     results_dict = tranvae_query.classify(
-            adata.X, 
-            adata.obs[condition_key], 
-            metric=loss_metric
-        )
+        adata.X, adata.obs[condition_key], metric=loss_metric
+    )
     for i in range(len(cell_type_key)):
-        preds = results_dict[cell_type_key[i]]['preds']
-        probs = results_dict[cell_type_key[i]]['probs']
+        preds = results_dict[cell_type_key[i]]["preds"]
+        probs = results_dict[cell_type_key[i]]["probs"]
         classification_df = pd.DataFrame(
             classification_report(
-                y_true=adata.obs[cell_type_key[i]], 
-                y_pred=preds,
-                output_dict=True
-            )
-        ).transpose()
-        
-    results_dict_query = tranvae_query.classify(
-            target_adata.X, 
-            target_adata.obs[condition_key], 
-            metric=loss_metric
-        )
-    for i in range(len(cell_type_key)):
-        preds = results_dict_query[cell_type_key[i]]['preds']
-        probs = results_dict_query[cell_type_key[i]]['probs']
-        classification_df_query = pd.DataFrame(
-            classification_report(
-                y_true=target_adata.obs[cell_type_key[i]], 
-                y_pred=preds,
-                output_dict=True
+                y_true=adata.obs[cell_type_key[i]], y_pred=preds, output_dict=True
             )
         ).transpose()
 
-    logging.info('Compute integration metrics')
-    latent_adata = tranvae_query.get_latent(
-        x = adata.X,
-        c = adata.obs[condition_key]
+    results_dict_query = tranvae_query.classify(
+        target_adata.X, target_adata.obs[condition_key], metric=loss_metric
     )
+    for i in range(len(cell_type_key)):
+        preds = results_dict_query[cell_type_key[i]]["preds"]
+        probs = results_dict_query[cell_type_key[i]]["probs"]
+        classification_df_query = pd.DataFrame(
+            classification_report(
+                y_true=target_adata.obs[cell_type_key[i]],
+                y_pred=preds,
+                output_dict=True,
+            )
+        ).transpose()
+
+    logging.info("Compute integration metrics")
+    latent_adata = tranvae_query.get_latent(x=adata.X, c=adata.obs[condition_key])
     latent_adata = sc.AnnData(latent_adata)
     latent_adata.obs[condition_key] = adata.obs[condition_key].tolist()
     latent_adata.obs[cell_type_key[0]] = adata.obs[cell_type_key[0]].tolist()
@@ -190,46 +188,36 @@ def run(
 
     sc.pp.neighbors(latent_adata)
     sc.tl.umap(latent_adata)
-    sc.pl.umap(
-        latent_adata,
-        color=condition_key,
-        show=False,
-        frameon=False
-    )
+    sc.pl.umap(latent_adata, color=condition_key, show=False, frameon=False)
     plt.savefig(
-        f'{RES_PATH}/condition_umap_{model}_{data}_{loss_metric}_{latent_dim}_{hidden_layers}.png',
-        bbox_inches='tight'
+        f"{RES_PATH}/condition_umap_{model}_{data}_{loss_metric}_{latent_dim}_{hidden_layers}.png",
+        bbox_inches="tight",
     )
     plt.close()
-    sc.pl.umap(
-        latent_adata,
-        color=cell_type_key[0],
-        show=False,
-        frameon=False
-    )
+    sc.pl.umap(latent_adata, color=cell_type_key[0], show=False, frameon=False)
     plt.savefig(
-        f'{RES_PATH}/ct_umap_{model}_{data}_{loss_metric}_{latent_dim}_{hidden_layers}.png',
-        bbox_inches='tight'
+        f"{RES_PATH}/ct_umap_{model}_{data}_{loss_metric}_{latent_dim}_{hidden_layers}.png",
+        bbox_inches="tight",
     )
     plt.close()
     scores = metrics_fast(
-        adata, 
-        latent_adata, 
-        condition_key, 
+        adata,
+        latent_adata,
+        condition_key,
         cell_type_key[0],
     )
-    logging.info('Completed integration metrics')
+    logging.info("Completed integration metrics")
     scores = scores.T
-    # scores = scores[['PCR_batch', 
+    # scores = scores[['PCR_batch',
     #                  'graph_conn',
     #                  'ebm',
     #                  'knn',
     #                 ]]
 
     results = {
-        'classification_report': classification_df,
-        'classification_report_query': classification_df_query,
-        'integration_scores': scores
+        "classification_report": classification_df,
+        "classification_report_query": classification_df_query,
+        "integration_scores": scores,
     }
 
     rmtree(REF_PATH)
