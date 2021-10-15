@@ -13,3 +13,5 @@ hyperopt/logs/
 benchmarks/logs/
 hierarchical/logs/
 results/
+notebooks/tmp/
+notebooks/trained_model/
