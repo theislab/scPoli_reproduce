@@ -1,28 +1,28 @@
 # Maybe needs some tweaks. I ran it directly in their repo, since it was not installable. Also may update the datasets to match the other scripts
 
 import logging
-from sacred import Experiment
-import seml
+import warnings
 
+import seml
 # MARS imports
 import torch
-import os
 from anndata import AnnData
+from sacred import Experiment
+
 from benchmarks.mars.args_parser import get_parser
-from benchmarks.mars.model.mars import MARS
 from benchmarks.mars.model.experiment_dataset import ExperimentDataset
-import warnings
+from benchmarks.mars.model.mars import MARS
 
 warnings.filterwarnings("ignore")
 
 import time
-import scanpy as sc
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import scarches as sca
-import matplotlib.pyplot as plt
-from sklearn.metrics import classification_report
+import scanpy as sc
 from scarches.dataset.trvae.data_handling import remove_sparsity
+from sklearn.metrics import classification_report
 
 from lataq_reproduce.exp_dict import EXPERIMENT_INFO
 from lataq_reproduce.utils import label_encoder

@@ -4,12 +4,11 @@ import sys
 module_path = os.path.abspath(os.path.join(".."))
 if module_path not in sys.path:
     sys.path.append(module_path)
-from .utils import entropy_batch_mixing, knn_purity
-import scanpy as sc
-import seaborn as sns
-import scIB as scib
 import pandas as pd
-from matplotlib import pyplot as plt
+import scanpy as sc
+import scIB as scib
+
+from .utils import entropy_batch_mixing, knn_purity
 
 models = ["scanvi"]
 datasets = ["pbmc", "pancreas", "brain"]

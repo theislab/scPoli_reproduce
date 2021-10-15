@@ -1,8 +1,9 @@
-import scanpy as sc
-import pandas as pd
 import numpy as np
-from sklearn.metrics import classification_report
+import pandas as pd
+import scanpy as sc
 from scIB.metrics import metrics
+from sklearn.metrics import classification_report
+
 from lataq_reproduce.exp_dict import EXPERIMENT_INFO
 
 scores_list = []

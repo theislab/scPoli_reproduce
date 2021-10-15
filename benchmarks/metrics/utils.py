@@ -2,14 +2,12 @@ import numpy as np
 import pandas as pd
 import scanpy as sc
 from scipy import sparse
-from scipy.stats import itemfreq, entropy
-from sklearn.metrics import (
-    silhouette_score,
-    normalized_mutual_info_score,
-    silhouette_samples,
-)
+from scipy.stats import entropy, itemfreq
+from sklearn.metrics import (normalized_mutual_info_score, silhouette_samples,
+                             silhouette_score)
 from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import LabelEncoder
+
 from .clustering import opt_louvain
 
 

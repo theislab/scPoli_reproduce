@@ -1,11 +1,11 @@
 import os
-import scanpy as sc
-import numpy as np
-from sklearn.calibration import CalibratedClassifierCV
-from sklearn.svm import LinearSVC
-from sklearn.metrics import classification_report
 import pickle
 
+import numpy as np
+import scanpy as sc
+from sklearn.calibration import CalibratedClassifierCV
+from sklearn.metrics import classification_report
+from sklearn.svm import LinearSVC
 
 # Experiment Params
 Threshold = 0

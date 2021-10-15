@@ -1,7 +1,7 @@
 # coding=utf-8
-import torch.utils.data as data
 import numpy as np
 import torch
+import torch.utils.data as data
 
 """
 Class representing dataset for an single-cell experiment.

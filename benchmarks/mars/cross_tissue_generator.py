@@ -3,12 +3,13 @@
 @author: maria
 """
 
-import scanpy.api as sc
-import numpy as np
-import urllib.request
 import gzip
-import shutil
 import os
+import shutil
+import urllib.request
+
+import numpy as np
+import scanpy.api as sc
 
 
 class CrossTissueBenchmark:

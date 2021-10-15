@@ -1,10 +1,10 @@
 # Maybe needs some tweaks. I ran it directly in their repo, since it was not installable. Also may update the datasets to match the other scripts
 
 import logging
-from sacred import Experiment
-import seml
 
 import scanpy as sc
+import seml
+from sacred import Experiment
 from scIB.metrics import metrics
 
 ex = Experiment()

@@ -1,15 +1,17 @@
 import logging
-from sacred import Experiment
-import seml
-import scanpy as sc
+import pickle
+
 import numpy as np
 import pandas as pd
-from sklearn.calibration import CalibratedClassifierCV
-from sklearn.svm import LinearSVC
-from sklearn.metrics import classification_report
+import scanpy as sc
+import seml
+from sacred import Experiment
 from scarches.dataset.trvae.data_handling import remove_sparsity
+from sklearn.calibration import CalibratedClassifierCV
+from sklearn.metrics import classification_report
+from sklearn.svm import LinearSVC
+
 from lataq_reproduce.exp_dict import EXPERIMENT_INFO
-import pickle
 
 ex = Experiment()
 seml.setup_logger(ex)
@@ -46,7 +48,7 @@ def run(
     FILE_NAME = EXP_PARAMS["file_name"]
 
     adata = sc.read(f"{DATA_DIR}/{FILE_NAME}")
-    condition_key = EXP_PARAMS["condition_key"]
+    EXP_PARAMS["condition_key"]
     cell_type_key = EXP_PARAMS["cell_type_key"]
     reference = EXP_PARAMS["reference"]
     query = EXP_PARAMS["query"]

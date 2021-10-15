@@ -4,20 +4,20 @@ Implementation of MARS model.
 @author: maria
 """
 
-import torch
-import pandas as pd
-import numpy as np
-import anndata
-from scipy.spatial import distance
-import scanpy.api as sc
-from collections import OrderedDict
-from collections import defaultdict
+from collections import OrderedDict, defaultdict
 
-from .loss import loss_task, loss_test, reconstruction_loss
-from .net import FullNet
+import anndata
+import numpy as np
+import pandas as pd
+import scanpy.api as sc
+import torch
+from scipy.spatial import distance
+
 from .landmarks import compute_landmarks_tr, init_landmarks
-from .utils import init_data_loaders, euclidean_dist
+from .loss import loss_task, loss_test, reconstruction_loss
 from .metrics import compute_scores
+from .net import FullNet
+from .utils import euclidean_dist, init_data_loaders
 
 
 class MARS:

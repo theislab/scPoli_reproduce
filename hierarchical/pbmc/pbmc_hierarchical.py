@@ -1,16 +1,17 @@
 import logging
-from sacred import Experiment
-import seml
+from shutil import rmtree
+
+import numpy as np
 import pandas as pd
 import scanpy as sc
-import numpy as np
-from sklearn.metrics import classification_report
+import seml
 from lataq.metrics.metrics import metrics
-from scarches.dataset.trvae.data_handling import remove_sparsity
 from lataq.models import EMBEDCVAE, TRANVAE
+from sacred import Experiment
+from scarches.dataset.trvae.data_handling import remove_sparsity
+from sklearn.metrics import classification_report
+
 from lataq_reproduce.utils import label_encoder
-from lataq_reproduce.exp_dict import EXPERIMENT_INFO
-from shutil import rmtree
 
 np.random.seed(420)
 
@@ -142,7 +143,7 @@ def run(ann_levels, overwrite, runs):
     classification_dfs = {}
     for i in range(len(cell_type_key)):
         preds = results_dict[cell_type_key[i]]["preds"]
-        probs = results_dict[cell_type_key[i]]["probs"]
+        results_dict[cell_type_key[i]]["probs"]
         classification_dfs[f"level_{ann_levels[i]}"] = pd.DataFrame(
             classification_report(
                 y_true=adata.obs[cell_type_key[i]], y_pred=preds, output_dict=True
@@ -155,7 +156,7 @@ def run(ann_levels, overwrite, runs):
     classification_query_dfs = {}
     for i in range(len(cell_type_key)):
         preds = results_dict_query[cell_type_key[i]]["preds"]
-        probs = results_dict_query[cell_type_key[i]]["probs"]
+        results_dict_query[cell_type_key[i]]["probs"]
         classification_query_dfs[f"level_{ann_levels[i]}"] = pd.DataFrame(
             classification_report(
                 y_true=target_adata.obs[cell_type_key[i]],

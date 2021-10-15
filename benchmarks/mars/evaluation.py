@@ -4,9 +4,9 @@ Created on Jan 21, 2020
 @author: maria
 """
 
-import numpy as np
 from collections import defaultdict
 
+import numpy as np
 import sklearn.metrics as metrics
 from sklearn.utils.linear_assignment_ import linear_assignment
 

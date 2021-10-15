@@ -1,16 +1,16 @@
 import logging
-from sacred import Experiment
-import seml
-
 import time
-import scanpy as sc
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import scanpy as sc
 import scarches as sca
-import matplotlib.pyplot as plt
-from sklearn.metrics import classification_report
+import seml
+from sacred import Experiment
 from scarches.dataset.trvae.data_handling import remove_sparsity
 from scIB.metrics import metrics
+from sklearn.metrics import classification_report
 
 from lataq_reproduce.exp_dict import EXPERIMENT_INFO
 from lataq_reproduce.utils import label_encoder

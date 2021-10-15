@@ -1,12 +1,12 @@
 import logging
-from sacred import Experiment
-import seml
-
 import time
-import scanpy as sc
-import numpy as np
-import scarches as sca
+
 import matplotlib.pyplot as plt
+import numpy as np
+import scanpy as sc
+import scarches as sca
+import seml
+from sacred import Experiment
 from scarches.dataset.trvae.data_handling import remove_sparsity
 from scIB.metrics import metrics
 

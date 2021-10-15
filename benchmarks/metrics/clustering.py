@@ -1,7 +1,7 @@
-import scanpy as sc
-import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
+import pandas as pd
+import scanpy as sc
+import seaborn as sns
 from scipy import sparse
 
 

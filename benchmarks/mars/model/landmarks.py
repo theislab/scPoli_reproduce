@@ -6,8 +6,7 @@ Created on Mar 25, 2019
 
 import numpy as np
 import torch
-from sklearn.cluster import k_means_
-from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans, k_means_
 
 
 def compute_landmarks_tr(embeddings, target, prev_landmarks=None, tau=0.2):

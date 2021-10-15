@@ -1,9 +1,10 @@
-from metrics.utils import entropy_batch_mixing, knn_purity
-import scIB as scib
-import scanpy as sc
 import os
-import pandas as pd
+
 import numpy as np
+import pandas as pd
+import scanpy as sc
+import scIB as scib
+from metrics.utils import entropy_batch_mixing, knn_purity
 
 
 def label_encoder(adata, encoder=None, condition_key="condition"):

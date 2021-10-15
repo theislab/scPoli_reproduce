@@ -1,21 +1,20 @@
 import logging
-import seml
-from sacred import Experiment
+from shutil import rmtree
 
+import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 import scanpy as sc
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.metrics import classification_report
-from scarches.dataset.trvae.data_handling import remove_sparsity
-from scIB.metrics import metrics_fast
-
+import seml
 # from lataq.metrics.metrics import metrics
 from lataq.models import EMBEDCVAE, TRANVAE
-from lataq_reproduce.utils import label_encoder
-from lataq_reproduce.exp_dict import EXPERIMENT_INFO
+from sacred import Experiment
+from scarches.dataset.trvae.data_handling import remove_sparsity
+from scIB.metrics import metrics_fast
+from sklearn.metrics import classification_report
 
-from shutil import rmtree
+from lataq_reproduce.exp_dict import EXPERIMENT_INFO
+from lataq_reproduce.utils import label_encoder
 
 np.random.seed(420)
 
@@ -155,7 +154,7 @@ def run(
     )
     for i in range(len(cell_type_key)):
         preds = results_dict[cell_type_key[i]]["preds"]
-        probs = results_dict[cell_type_key[i]]["probs"]
+        results_dict[cell_type_key[i]]["probs"]
         classification_df = pd.DataFrame(
             classification_report(
                 y_true=adata.obs[cell_type_key[i]], y_pred=preds, output_dict=True
@@ -167,7 +166,7 @@ def run(
     )
     for i in range(len(cell_type_key)):
         preds = results_dict_query[cell_type_key[i]]["preds"]
-        probs = results_dict_query[cell_type_key[i]]["probs"]
+        results_dict_query[cell_type_key[i]]["probs"]
         classification_df_query = pd.DataFrame(
             classification_report(
                 y_true=target_adata.obs[cell_type_key[i]],
