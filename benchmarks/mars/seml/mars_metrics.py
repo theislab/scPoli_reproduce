@@ -40,7 +40,11 @@ def run(
     )
 
     adata = sc.read(f'{RES_PATH}/adata_original.h5ad')
+    adata.obs['batch'] = adata.obs['batch'].astype('category')
+    adata.obs['celltype'] = adata.obs['celltype'].astype('category')
     adata_latent = sc.read(f'{RES_PATH}/adata_latent.h5ad')
+    adata_latent.obs['batch'] = adata_latent.obs['batch'].astype('category')
+    adata_latent.obs['celltype'] = adata_latent.obs['celltype'].astype('category')
 
     scores = metrics(
         adata, 
