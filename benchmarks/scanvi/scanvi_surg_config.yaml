@@ -8,7 +8,7 @@ slurm:
   experiments_per_job: 1
   sbatch_options_template: GPU
   sbatch_options:
-    mem: 25G          # memory
+    mem: 50G          # memory
     cpus-per-task: 2  # num cores
     time: 2-00:00     # max time, D-HH:MM
   max_jobs_per_batch: 8

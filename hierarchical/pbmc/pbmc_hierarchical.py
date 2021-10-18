@@ -53,6 +53,7 @@ def run(ann_levels, overwrite, runs):
     REF_PATH = f"/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/tmp/ref_model_embedcvae_{overwrite}"
     FILE_NAME = "pbmc_anndata.h5ad"
     adata = sc.read(f"{DATA_DIR}/{FILE_NAME}")
+    sc.pp.highly_variable_genes(adata, n_top_genes=4000)
     condition_key = "donor"
     cell_type_key = [f"celltype.l{i}" for i in ann_levels]
     query = ["P3", "P6"]
