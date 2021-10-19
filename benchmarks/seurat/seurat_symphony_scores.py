@@ -23,13 +23,13 @@ for d in ["pancreas", "pbmc", "scvelo", "lung", "tumor", "brain"]:
     scores = metrics(
         adata,
         adata_symphony,
-        "batch",
-        "celltype",
+        condition_key,
+        cell_type_key,
         isolated_labels_asw_=True,
         silhouette_=True,
         graph_conn_=True,
         pcr_=True,
-        isolated_labels_f1=True,
+        isolated_labels_f1_=True,
         nmi_=True,
         ari_=True,
     )
@@ -80,8 +80,8 @@ for d in ["pancreas", "pbmc", "scvelo", "lung", "tumor", "brain"]:
         scores = metrics(
             adata,
             adata_seurat,
-            "batch",
-            "celltype",
+            condition_key,
+            cell_type_key,
             isolated_labels_asw_=True,
             silhouette_=True,
             graph_conn_=True,
