@@ -15,11 +15,13 @@ for d in ["pancreas", "pbmc", "scvelo", "lung", "tumor", "brain"]:
     reference = EXPERIMENT_INFO[d]["reference"]
     query = EXPERIMENT_INFO[d]["query"]
     adata = sc.read(f"../../data/{d}.h5ad")
+    sc.pp.pca(adata)
     adata_symphony = sc.AnnData(
         X=adata.obsm["X_symphony"],
         obs=adata.obs,
         # var=adata.var
     )
+    sc.pp.pca(adata_symphony)
     scores = metrics(
         adata,
         adata_symphony,
@@ -62,6 +64,7 @@ for d in ["pancreas", "pbmc", "scvelo", "lung", "tumor", "brain"]:
             obs=adata.obs,
             # var=adata.var
         )
+        sc.pp.pca(adata_seurat)
         report = pd.DataFrame(
             classification_report(
                 y_true=adata[adata.obs[condition_key].isin(query)].obs[cell_type_key],

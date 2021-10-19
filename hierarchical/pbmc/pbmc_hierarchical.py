@@ -5,10 +5,10 @@ import numpy as np
 import pandas as pd
 import scanpy as sc
 import seml
-from scIB.metrics import metrics
 from lataq.models import EMBEDCVAE, TRANVAE
 from sacred import Experiment
 from scarches.dataset.trvae.data_handling import remove_sparsity
+from scIB.metrics import metrics
 from sklearn.metrics import classification_report
 
 from lataq_reproduce.utils import label_encoder
