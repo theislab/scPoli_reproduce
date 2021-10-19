@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import scanpy as sc
 import seml
-from lataq.metrics.metrics import metrics
+from scIB.metrics import metrics
 from lataq.models import EMBEDCVAE, TRANVAE
 from sacred import Experiment
 from scarches.dataset.trvae.data_handling import remove_sparsity
@@ -39,14 +39,14 @@ def run(ann_levels, overwrite, runs):
     logging.info("Received the following configuration:")
 
     model = "tranvae"
-    latent_dim = 50
+    latent_dim = 25
     loss_metric = "dist"
-    clustering_res = 1.5
+    clustering_res = 2
     hidden_layers = 3
     n_epochs = 200
     n_pre_epochs = 150
-    alpha_epoch_anneal = 1e6
-    eta = 10
+    alpha_epoch_anneal = 1e3
+    eta = 1
     runs = runs + 1
 
     DATA_DIR = "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/data"
@@ -56,8 +56,8 @@ def run(ann_levels, overwrite, runs):
     sc.pp.highly_variable_genes(adata, n_top_genes=4000, subset=True)
     condition_key = "donor"
     cell_type_key = [f"celltype.l{i}" for i in ann_levels]
-    query = ["P3", "P6"]
-    reference = ["P1", "P2", "P4", "P5", "P7", "P8"]
+    query = ["P4", "P7"]
+    reference = ["P1", "P2", "P3", "P5", "P6", "P8"]
 
     adata = remove_sparsity(adata)
     source_adata = adata[adata.obs[condition_key].isin(reference)].copy()
@@ -181,29 +181,26 @@ def run(ann_levels, overwrite, runs):
         latent_adata,
         condition_key,
         cell_type_key[0],
-        nmi_=False,
-        ari_=False,
-        silhouette_=False,
-        pcr_=True,
+        isolated_labels_asw_=True,
+        silhouette_=True,
         graph_conn_=True,
-        isolated_labels_=False,
-        hvg_score_=False,
-        ebm_=True,
-        knn_=True,
+        pcr_=True,
+        isolated_labels_f1_=True,
+        nmi_=True,
+        ari_=True,
     )
     logging.info("Completed integration metrics")
     scores = scores.T
     scores = scores[
-        [  #'NMI_cluster/label',
-            #'ARI_cluster/label',
-            #'ASW_label',
-            #'ASW_label/batch',
-            #'PCR_batch',
-            #'isolated_label_F1',
-            #'isolated_label_silhouette',
-            #'graph_conn',
-            "ebm",
-            "knn",
+        [
+            "NMI_cluster/label",
+            "ARI_cluster/label",
+            "ASW_label",
+            "ASW_label/batch",
+            "PCR_batch",
+            "isolated_label_F1",
+            "isolated_label_silhouette",
+            "graph_conn",
         ]
     ]
 

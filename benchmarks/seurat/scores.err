@@ -1,0 +1,15 @@
+During startup - Warning messages:
+1: package ‘methods’ was built under R version 3.6.3 
+2: package ‘datasets’ was built under R version 3.6.3 
+3: package ‘utils’ was built under R version 3.6.3 
+4: package ‘grDevices’ was built under R version 3.6.3 
+5: package ‘graphics’ was built under R version 3.6.3 
+6: package ‘stats’ was built under R version 3.6.3 
+Traceback (most recent call last):
+  File "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/benchmarks/seurat/seurat_symphony_scores.py", line 23, in <module>
+    scores = metrics(
+  File "/home/icb/carlo.dedonno/anaconda3/envs/lataq_cuda/lib/python3.8/site-packages/scIB/metrics/metrics.py", line 232, in metrics
+    asw_label = silhouette(
+  File "/home/icb/carlo.dedonno/anaconda3/envs/lataq_cuda/lib/python3.8/site-packages/scIB/metrics/silhouette.py", line 25, in silhouette
+    raise KeyError(f'{embed} not in obsm')
+KeyError: 'X_pca not in obsm'
