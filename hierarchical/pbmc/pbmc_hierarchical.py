@@ -175,7 +175,7 @@ def run(ann_levels, overwrite, runs):
     labels, _ = label_encoder(latent_adata, condition_key=cell_type_key[0])
     latent_adata.obs[condition_key] = conditions.squeeze(axis=1)
     latent_adata.obs[cell_type_key[0]] = labels.squeeze(axis=1)
-
+    sc.pp.pca(latent_adata)
     scores = metrics(
         adata,
         latent_adata,
