@@ -10,7 +10,7 @@ import seml
 from lataq.models import EMBEDCVAE, TRANVAE
 from sacred import Experiment
 from scarches.dataset.trvae.data_handling import remove_sparsity
-from scIB.metrics import metrics_fast
+from scIB.metrics import metrics
 from sklearn.metrics import classification_report
 
 from lataq_reproduce.exp_dict import EXPERIMENT_INFO
@@ -176,43 +176,60 @@ def run(
         ).transpose()
 
     logging.info("Compute integration metrics")
-    latent_adata = tranvae_query.get_latent(x=adata.X, c=adata.obs[condition_key])
-    latent_adata = sc.AnnData(latent_adata)
-    latent_adata.obs[condition_key] = adata.obs[condition_key].tolist()
-    latent_adata.obs[cell_type_key[0]] = adata.obs[cell_type_key[0]].tolist()
-    conditions, _ = label_encoder(latent_adata, condition_key=condition_key)
-    labels, _ = label_encoder(latent_adata, condition_key=cell_type_key[0])
-    latent_adata.obs[condition_key] = conditions.squeeze(axis=1)
-    latent_adata.obs[cell_type_key[0]] = labels.squeeze(axis=1)
+    adata_latent = tranvae_query.get_latent(x=adata.X, c=adata.obs[condition_key])
+    adata_latent = sc.AnnData(adata_latent)
+    adata_latent.obs[condition_key] = adata.obs[condition_key].tolist()
+    adata_latent.obs[cell_type_key[0]] = adata.obs[cell_type_key[0]].tolist()
+    conditions, _ = label_encoder(adata_latent, condition_key=condition_key)
+    labels, _ = label_encoder(adata_latent, condition_key=cell_type_key[0])
+    adata_latent.obs[condition_key] = conditions.squeeze(axis=1)
+    adata_latent.obs[cell_type_key[0]] = labels.squeeze(axis=1)
 
-    sc.pp.neighbors(latent_adata)
-    sc.tl.umap(latent_adata)
-    sc.pl.umap(latent_adata, color=condition_key, show=False, frameon=False)
+    sc.pp.neighbors(adata_latent)
+    sc.tl.umap(adata_latent)
+    sc.pl.umap(adata_latent, color=condition_key, show=False, frameon=False)
     plt.savefig(
         f"{RES_PATH}/condition_umap_{model}_{data}_{loss_metric}_{latent_dim}_{hidden_layers}.png",
         bbox_inches="tight",
     )
     plt.close()
-    sc.pl.umap(latent_adata, color=cell_type_key[0], show=False, frameon=False)
+    sc.pl.umap(adata_latent, color=cell_type_key[0], show=False, frameon=False)
     plt.savefig(
         f"{RES_PATH}/ct_umap_{model}_{data}_{loss_metric}_{latent_dim}_{hidden_layers}.png",
         bbox_inches="tight",
     )
-    plt.close()
-    scores = metrics_fast(
-        adata,
-        latent_adata,
-        condition_key,
-        cell_type_key[0],
-    )
-    logging.info("Completed integration metrics")
-    scores = scores.T
-    # scores = scores[['PCR_batch',
-    #                  'graph_conn',
-    #                  'ebm',
-    #                  'knn',
-    #                 ]]
+    sc.pp.pca(adata)
+    sc.pp.pca(adata_latent)
 
+    adata_latent.write(f"{RES_PATH}/adata_latent.h5ad")
+    adata.write(f"{RES_PATH}/adata_original.h5ad")
+    scores = metrics(
+        adata,
+        adata_latent,
+        "batch",
+        "celltype",
+        isolated_labels_asw_=True,
+        silhouette_=True,
+        graph_conn_=True,
+        pcr_=True,
+        isolated_labels_f1_=True,
+        nmi_=True,
+        ari_=True,
+    )
+
+    scores = scores.T
+    scores = scores[
+        [
+            "NMI_cluster/label",
+            "ARI_cluster/label",
+            "ASW_label",
+            "ASW_label/batch",
+            "PCR_batch",
+            "isolated_label_F1",
+            "isolated_label_silhouette",
+            "graph_conn",
+        ]
+    ]
     results = {
         "classification_report": classification_df,
         "classification_report_query": classification_df_query,
