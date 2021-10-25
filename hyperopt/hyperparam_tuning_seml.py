@@ -176,14 +176,25 @@ def run(
         ).transpose()
 
     logging.info("Compute integration metrics")
+    conditions, _ = label_encoder(adata, condition_key=condition_key)
+    labels, _ = label_encoder(adata, condition_key=cell_type_key[0])
+    adata.obs["batch"] = conditions.squeeze(axis=1)
+    adata.obs["celltype"] = labels.squeeze(axis=1)
+    adata.obs["batch"] = adata.obs["batch"].astype("category")
+    adata.obs["celltype"] = adata.obs["celltype"].astype("category")
+
     adata_latent = tranvae_query.get_latent(x=adata.X, c=adata.obs[condition_key])
     adata_latent = sc.AnnData(adata_latent)
     adata_latent.obs[condition_key] = adata.obs[condition_key].tolist()
     adata_latent.obs[cell_type_key[0]] = adata.obs[cell_type_key[0]].tolist()
     conditions, _ = label_encoder(adata_latent, condition_key=condition_key)
     labels, _ = label_encoder(adata_latent, condition_key=cell_type_key[0])
-    adata_latent.obs[condition_key] = conditions.squeeze(axis=1)
-    adata_latent.obs[cell_type_key[0]] = labels.squeeze(axis=1)
+    adata_latent.obs["batch"] = conditions.squeeze(axis=1)
+    adata_latent.obs["celltype"] = labels.squeeze(axis=1)
+    adata_latent.obs["batch"] = adata_latent.obs["batch"].astype("category")
+    adata_latent.obs["celltype"] = adata_latent.obs["celltype"].astype("category")
+    sc.pp.pca(adata)
+    sc.pp.pca(adata_latent)
 
     sc.pp.neighbors(adata_latent)
     sc.tl.umap(adata_latent)
@@ -198,11 +209,9 @@ def run(
         f"{RES_PATH}/ct_umap_{model}_{data}_{loss_metric}_{latent_dim}_{hidden_layers}.png",
         bbox_inches="tight",
     )
-    sc.pp.pca(adata)
-    sc.pp.pca(adata_latent)
 
-    adata_latent.write(f"{RES_PATH}/adata_latent.h5ad")
-    adata.write(f"{RES_PATH}/adata_original.h5ad")
+    # adata_latent.write(f"{RES_PATH}/adata_latent.h5ad")
+    # adata.write(f"{RES_PATH}/adata_original.h5ad")
     scores = metrics(
         adata,
         adata_latent,
