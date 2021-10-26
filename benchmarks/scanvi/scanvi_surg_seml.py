@@ -69,8 +69,8 @@ def run(
     query = EXP_PARAMS["query"]
 
     adata = remove_sparsity(adata)
-    source_adata = adata[adata.obs.study.isin(reference)].copy()
-    target_adata = adata[adata.obs.study.isin(query)].copy()
+    source_adata = adata[adata.obs[condition_key].isin(reference)].copy()
+    target_adata = adata[adata.obs[condition_key].isin(query)].copy()
     logging.info("Data loaded succesfully")
 
     sca.dataset.setup_anndata(

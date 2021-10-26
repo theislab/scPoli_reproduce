@@ -48,14 +48,14 @@ def run(
     FILE_NAME = EXP_PARAMS["file_name"]
 
     adata = sc.read(f"{DATA_DIR}/{FILE_NAME}")
-    EXP_PARAMS["condition_key"]
     cell_type_key = EXP_PARAMS["cell_type_key"]
+    condition_key = EXP_PARAMS["condition_key"]
     reference = EXP_PARAMS["reference"]
     query = EXP_PARAMS["query"]
 
     adata = remove_sparsity(adata)
-    source_adata = adata[adata.obs.study.isin(reference)].copy()
-    target_adata = adata[adata.obs.study.isin(query)].copy()
+    source_adata = adata[adata.obs[condition_key].isin(reference)].copy()
+    target_adata = adata[adata.obs[condition_key].isin(query)].copy()
     logging.info("Data loaded succesfully")
 
     train_X = source_adata.X

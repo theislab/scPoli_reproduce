@@ -1,0 +1,37 @@
+seml:
+  executable: uncertainty/uncertainty_seml.py
+  name: uncertainty
+  output_dir: uncertainty/logs
+  project_root_dir: /storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce
+  conda_environment: lataq_cuda
+slurm:
+  experiments_per_job: 1
+  sbatch_options_template: GPU
+  sbatch_options:
+    mem: 25G          # memory
+    cpus-per-task: 6  # num cores
+    time: 2-00:00     # max time, D-HH:MM
+  max_jobs_per_batch: 8
+
+###### BEGIN PARAMETER CONFIGURATION ######
+fixed:
+  n_epochs: 100
+  n_pre_epochs: 80
+
+grid:
+  data: 
+    type: choice
+    options:
+      - pancreas
+  holdout:
+    type: choice
+    options:
+      - inDrop1
+      - inDrop2
+      - inDrop3
+      - inDrop4
+      - fluidigmc1
+      - smartseq2
+      - smarter
+      - celseq
+      - celseq2
