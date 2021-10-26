@@ -138,8 +138,18 @@ def run(
     # generate cosine distances and find min
     cos_dist = cosine_distances(embedding)
     np.fill_diagonal(cos_dist, np.inf)
-    min_dist = np.min(cos_dist, axis=1)
-    distances = pd.DataFrame({"condition": conditions, "dist": min_dist})
+    min_cos_dist = np.min(cos_dist, axis=1)
+
+    eucl_dist = cosine_distances(embedding)
+    np.fill_diagonal(eucl_dist, np.inf)
+    min_eucl_dist = np.min(eucl_dist, axis=1)
+    distances = pd.DataFrame(
+        {
+            "condition": conditions,
+            "cos_dist": min_cos_dist,
+            "eucl_dist": min_eucl_dist,
+        }
+    )
 
     logging.info("Computing metrics")
     results_dict = lataq_query.classify(

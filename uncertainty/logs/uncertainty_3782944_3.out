@@ -1,0 +1,31 @@
+Starting job 3782948
+SLURM assigned me the node(s): gpusrv09
+Experiments are running under the following process IDs:
+Experiment ID: 4	Process ID: 63221
+
+During startup - Warning messages:
+1: package ‘methods’ was built under R version 3.6.3 
+2: package ‘datasets’ was built under R version 3.6.3 
+3: package ‘utils’ was built under R version 3.6.3 
+4: package ‘grDevices’ was built under R version 3.6.3 
+5: package ‘graphics’ was built under R version 3.6.3 
+6: package ‘stats’ was built under R version 3.6.3 
+2021-10-26 15:43:33 (INFO): Running command 'run'
+2021-10-26 15:43:33 (INFO): Started run with ID "4"
+2021-10-26 15:43:41 (INFO): Data loaded succesfully
+2021-10-26 15:43:41 (INFO): Model instantiated
+Embedding dictionary:
+ 	Num conditions: 8
+ 	Embedding dim: 10
+Encoder Architecture:
+	Input Layer in, out and cond: 4000 128 0
+	Hidden Layer 1 in/out: 128 128
+	Hidden Layer 2 in/out: 128 128
+	Mean/Var Layer in/out: 128 25
+Decoder Architecture:
+	First Layer in, out and cond:  25 128 10
+	Hidden Layer 1 in/out: 128 128
+	Hidden Layer 2 in/out: 128 128
+	Output Layer in/out:  128 4000 
+
+ |--------------------| 1.0%  - val_loss: 1251.6101277669 - val_trvae_loss: 1251.6101277669 |--------------------| 2.0%  - val_loss: 1206.7342122396 - val_trvae_loss: 1206.7342122396 |--------------------| 3.0%  - val_loss: 1166.0739949544 - val_trvae_loss: 1166.0739949544 |--------------------| 4.0%  - val_loss: 1161.0977884928 - val_trvae_loss: 1161.0977884928 |█-------------------| 5.0%  - val_loss: 1137.9524434408 - val_trvae_loss: 1137.9524434408 |█-------------------| 6.0%  - val_loss: 1137.0518391927 - val_trvae_loss: 1137.0518391927 |█-------------------| 7.0%  - val_loss: 1128.5376688639 - val_trvae_loss: 1128.5376688639 |█-------------------| 8.0%  - val_loss: 1126.4225972493 - val_trvae_loss: 1126.4225972493 |█-------------------| 9.0%  - val_loss: 1123.0949401855 - val_trvae_loss: 1123.0949401855 |██------------------| 10.0%  - val_loss: 1125.4770711263 - val_trvae_loss: 1125.4770711263 |██------------------| 11.0%  - val_loss: 1115.1457824707 - val_trvae_loss: 1115.1457824707 |██------------------| 12.0%  - val_loss: 1114.8193054199 - val_trvae_loss: 1114.8193054199 |██------------------| 13.0%  - val_loss: 1112.4632466634 - val_trvae_loss: 1112.4632466634 |██------------------| 14.0%  - val_loss: 1102.0186920166 - val_trvae_loss: 1102.0186920166 |███-----------------| 15.0%  - val_loss: 1110.3491414388 - val_trvae_loss: 1110.3491414388 |███-----------------| 16.0%  - val_loss: 1101.8283894857 - val_trvae_loss: 1101.8283894857 |███-----------------| 17.0%  - val_loss: 1098.8055013021 - val_trvae_loss: 1098.8055013021 |███-----------------| 18.0%  - val_loss: 1103.3332417806 - val_trvae_loss: 1103.3332417806 |███-----------------| 19.0%  - val_loss: 1105.5368855794 - val_trvae_loss: 1105.5368855794 |████----------------| 20.0%  - val_loss: 1106.1195678711 - val_trvae_loss: 1106.1195678711 |████----------------| 21.0%  - val_loss: 1105.9348246257 - val_trvae_loss: 1105.9348246257 |████----------------| 22.0%  - val_loss: 1101.5847574870 - val_trvae_loss: 1101.5847574870 |████----------------| 23.0%  - val_loss: 1097.5226949056 - val_trvae_loss: 1097.5226949056 |████----------------| 24.0%  - val_loss: 1091.8387451172 - val_trvae_loss: 1091.8387451172 |█████---------------| 25.0%  - val_loss: 1096.4983927409 - val_trvae_loss: 1096.4983927409 |█████---------------| 26.0%  - val_loss: 1095.2059631348 - val_trvae_loss: 1095.2059631348 |█████---------------| 27.0%  - val_loss: 1100.3053283691 - val_trvae_loss: 1100.3053283691 |█████---------------| 28.0%  - val_loss: 1099.9837137858 - val_trvae_loss: 1099.9837137858 |█████---------------| 29.0%  - val_loss: 1094.0155029297 - val_trvae_loss: 1094.0155029297 |██████--------------| 30.0%  - val_loss: 1087.7691090902 - val_trvae_loss: 1087.7691090902 |██████--------------| 31.0%  - val_loss: 1098.2427062988 - val_trvae_loss: 1098.2427062988 |██████--------------| 32.0%  - val_loss: 1092.5466003418 - val_trvae_loss: 1092.5466003418 |██████--------------| 33.0%  - val_loss: 1091.1139729818 - val_trvae_loss: 1091.1139729818 |██████--------------| 34.0%  - val_loss: 1089.5891825358 - val_trvae_loss: 1089.5891825358 |███████-------------| 35.0%  - val_loss: 1084.8710123698 - val_trvae_loss: 1084.8710123698 |███████-------------| 36.0%  - val_loss: 1088.8560587565 - val_trvae_loss: 1088.8560587565 |███████-------------| 37.0%  - val_loss: 1087.6054382324 - val_trvae_loss: 1087.6054382324 |███████-------------| 38.0%  - val_loss: 1088.2827148438 - val_trvae_loss: 1088.2827148438 |███████-------------| 39.0%  - val_loss: 1092.1022644043 - val_trvae_loss: 1092.1022644043 |████████------------| 40.0%  - val_loss: 1091.2419637044 - val_trvae_loss: 1091.2419637044 |████████------------| 41.0%  - val_loss: 1095.6484680176 - val_trvae_loss: 1095.6484680176 |████████------------| 42.0%  - val_loss: 1091.1875203451 - val_trvae_loss: 1091.1875203451 |████████------------| 43.0%  - val_loss: 1095.6037495931 - val_trvae_loss: 1095.6037495931 |████████------------| 44.0%  - val_loss: 1088.3643086751 - val_trvae_loss: 1088.3643086751 |█████████-----------| 45.0%  - val_loss: 1087.5069580078 - val_trvae_loss: 1087.5069580078 |█████████-----------| 46.0%  - val_loss: 1089.1228535970 - val_trvae_loss: 1089.1228535970 |█████████-----------| 47.0%  - val_loss: 1082.6728261312 - val_trvae_loss: 1082.6728261312 |█████████-----------| 48.0%  - val_loss: 1087.5491231283 - val_trvae_loss: 1087.5491231283 |█████████-----------| 49.0%  - val_loss: 1085.7077433268 - val_trvae_loss: 1085.7077433268 |██████████----------| 50.0%  - val_loss: 1090.9971110026 - val_trvae_loss: 1090.9971110026 |██████████----------| 51.0%  - val_loss: 1088.6926778158 - val_trvae_loss: 1088.6926778158 |██████████----------| 52.0%  - val_loss: 1086.9440714518 - val_trvae_loss: 1086.9440714518 |██████████----------| 53.0%  - val_loss: 1091.5839640299 - val_trvae_loss: 1091.5839640299 |██████████----------| 54.0%  - val_loss: 1083.4976501465 - val_trvae_loss: 1083.4976501465
