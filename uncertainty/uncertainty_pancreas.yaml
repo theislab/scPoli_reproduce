@@ -35,3 +35,8 @@ grid:
       - smarter
       - celseq
       - celseq2
+  runs:
+    type: uniform
+    min: 1
+    max: 5
+    num: 5

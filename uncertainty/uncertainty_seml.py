@@ -46,7 +46,9 @@ def run(
     n_epochs: int,
     n_pre_epochs: int,
     overwrite: int,
+    runs: int,
 ):
+    runs = runs + 1
     DATA_DIR = "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/data"
     REF_PATH = f"/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/tmp/ref_model_embedcvae_{overwrite}"
     RES_PATH = (

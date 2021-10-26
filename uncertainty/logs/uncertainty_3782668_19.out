@@ -1,0 +1,6 @@
+Starting job 3782688
+SLURM assigned me the node(s): gpusrv18
+mkdir: cannot create directory ‘/tmp/11616’: File exists
+Experiments are running under the following process IDs:
+Experiment ID: 20	Process ID: 59733
+
