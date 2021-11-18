@@ -1,0 +1,13 @@
+Starting job 3783074
+SLURM assigned me the node(s): gpusrv09
+gpusrv18
+gpusrv16
+gpusrv14
+gpusrv16
+gpusrv15
+gpusrv13
+gpusrv13
+gpusrv18
+ERROR: Experiment with id 20 not found in the database.
+Experiments are running under the following process IDs:
+

@@ -13,7 +13,7 @@ from scarches.dataset.trvae.data_handling import remove_sparsity
 from scIB.metrics import metrics
 from sklearn.decomposition import KernelPCA
 from sklearn.metrics import classification_report
-from sklearn.metrics.pairwise import cosine_distances
+from sklearn.metrics.pairwise import cosine_distances, euclidean_distances
 
 from lataq_reproduce.exp_dict import EXPERIMENT_INFO
 from lataq_reproduce.utils import label_encoder
@@ -140,7 +140,7 @@ def run(
     np.fill_diagonal(cos_dist, np.inf)
     min_cos_dist = np.min(cos_dist, axis=1)
 
-    eucl_dist = cosine_distances(embedding)
+    eucl_dist = euclidean_distances(embedding)
     np.fill_diagonal(eucl_dist, np.inf)
     min_eucl_dist = np.min(eucl_dist, axis=1)
     distances = pd.DataFrame(

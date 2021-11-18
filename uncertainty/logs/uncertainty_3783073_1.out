@@ -1,0 +1,6 @@
+Starting job 3783100
+SLURM assigned me the node(s): gpusrv15
+Experiments are running under the following process IDs:
+Experiment ID: 2	Process ID: 35512
+
+slurmstepd: error: *** JOB 3783100 ON gpusrv15 CANCELLED AT 2021-10-26T15:59:01 ***
