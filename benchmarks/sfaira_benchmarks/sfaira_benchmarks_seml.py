@@ -136,9 +136,7 @@ def preprocess_data(adata_reference, adata_query, n_genes: int = 4000) -> (annda
         1. Select n_genes highly variable genes
         2. log1p tranform data
     """
-    sc.pp.log1p(adata_reference)
-    sc.pp.log1p(adata_query)
-    highly_variable_genes = sc.pp.highly_variable_genes(adata_reference,
+    highly_variable_genes = sc.pp.highly_variable_genes(sc.pp.log1p(adata_reference, copy=True),
                                                         inplace=False,
                                                         n_top_genes=n_genes)['highly_variable']
     adata_reference = adata_reference[:, highly_variable_genes]
@@ -151,14 +149,16 @@ def evaluate_lataq(source_adata, target_adata, model_type):
     if model_type == 'tranvae':
         tranvae = TRANVAE(
             adata=source_adata,
-            cell_type_keys=source_adata.obs['cell_type'],
+            cell_type_keys=['cell_type'],
+            condition_key='id',
             hidden_layer_sizes=[128, 128, 128],
             use_mmd=False,
         )
     elif model_type == 'embedcvae':
         tranvae = EMBEDCVAE(
             adata=source_adata,
-            cell_type_keys=source_adata.obs['cell_type'],
+            cell_type_keys=['cell_type'],
+            condition_key='id',
             hidden_layer_sizes=[128, 128, 128],
             use_mmd=False,
         )
@@ -174,15 +174,16 @@ def evaluate_lataq(source_adata, target_adata, model_type):
         "lr_patience": 13,
         "lr_factor": 0.1,
     }
-
+    start = time.perf_counter()
     tranvae.train(
         n_epochs=500,
         early_stopping_kwargs=early_stopping_kwargs,
-        alpha_epoch_anneal=1e3,
+        alpha_epoch_anneal=1e3 if model_type == 'tranvae' else 1e6,
         pretraining_epochs=400,
         clustering_res=2,
-        eta=1,
+        eta=10,
     )
+    ref_time = time.perf_counter() - start
 
     if model_type == "embedcvae":
         tranvae_query = EMBEDCVAE.load_query_data(
@@ -201,7 +202,7 @@ def evaluate_lataq(source_adata, target_adata, model_type):
         early_stopping_kwargs=early_stopping_kwargs,
         pretraining_epochs=400,
         clustering_res=2,
-        eta=1,
+        eta=10,
     )
     preds = tranvae_query.classify(target_adata.X)['cell_type']['preds']
     query_time = time.perf_counter() - start
@@ -217,7 +218,7 @@ def evaluate_lataq(source_adata, target_adata, model_type):
     ).transpose()
 
     return {
-        'reference_time': 0.,
+        'reference_time': ref_time,
         'query_time': query_time,
         'classification_report_query': report
     }
