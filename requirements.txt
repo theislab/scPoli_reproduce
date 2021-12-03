@@ -13,3 +13,6 @@ louvain
 tqdm
 requests
 gdown
+sacred
+seml
+sfaira
