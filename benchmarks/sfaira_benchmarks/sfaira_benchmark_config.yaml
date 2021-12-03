@@ -11,7 +11,6 @@ slurm:
     mem: 100G          # memory
     cpus-per-task: 6  # num cores
     time: 2-00:00     # max time, D-HH:MM
-  max_jobs_per_batch: 10
 
 ###### BEGIN PARAMETER CONFIGURATION ######
 
