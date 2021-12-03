@@ -1,5 +1,5 @@
 seml:
-  executable: benchmarks/sfaira/sfaira_benchmarks_seml.py
+  executable: benchmarks/sfaira_benchmarks/sfaira_benchmarks_seml.py
   name: lataq_sfaira_benchmark
   output_dir: /storage/groups/ml01/workspace/felix.fischer.2/lataq_reproducebenchmarks/logs
   project_root_dir: /home/icb/felix.fischer/git/lataq_reproduce
