@@ -1,7 +1,5 @@
 import scanpy as sc
-import scarches as sca
 import anndata
-import sfaira
 import seml
 import os
 import time
@@ -11,7 +9,6 @@ import pandas as pd
 from sklearn.metrics import classification_report
 from scarches.dataset.trvae.data_handling import remove_sparsity
 from sacred import Experiment
-from lataq.models import EMBEDCVAE, TRANVAE
 
 
 ex = Experiment()
@@ -23,62 +20,85 @@ RES_PATH = '/storage/groups/ml01/workspace/felix.fischer.2/lataq_reproduce/resul
 
 
 DATA_SET_SPLITS = {
-    'blood': {
-        'query': ['homosapiens_blood_2019_10x3transcriptionprofiling_szabo_014_10.1038/s41467-019-12464-3'],
-        'reference': [
-            'homosapiens_blood_2019_10x3transcriptionprofiling_szabo_016_10.1038/s41467-019-12464-3',
-            'homosapiens_blood_2019_10x3transcriptionprofiling_szabo_013_10.1038/s41467-019-12464-3',
-            'homosapiens_blood_2019_10x3transcriptionprofiling_szabo_013_10.1038/s41467-019-12464-3',
-            'homosapiens_blood_2019_10x3v3_10xgenomics_001_no_doi_10x_genomics',
-            'homosapiens_blood_2020_citeseq(cellsurfaceproteinprofiling)_haoyuhan_001_10.1016/j.cell.2021.04.048',
-            'homosapiens_blood_2021_citeseq(cellsurfaceproteinprofiling)_nathanaparna_001_10.1038/s41590-021-00933-1'
-        ]
-    },
     'bonemarrow': {
         'query': ['homosapiens_bonemarrow_2019_10x3transcriptionprofiling_szabo_009_10.1038/s41467-019-12464-3'],
-        'reference': ['homosapiens_bonemarrow_2019_10x3transcriptionprofiling_szabo_003_10.1038/s41467-019-12464-3',
-                      'homosapiens_bonemarrow_2019_10x3transcriptionprofiling_szabo_010_10.1038/s41467-019-12464-3',
-                      'homosapiens_bonemarrow_2019_10x3transcriptionprofiling_szabo_004_10.1038/s41467-019-12464-3']
+        'reference': [
+            'homosapiens_bonemarrow_2019_10x3transcriptionprofiling_szabo_003_10.1038/s41467-019-12464-3',
+            'homosapiens_bonemarrow_2019_10x3transcriptionprofiling_szabo_010_10.1038/s41467-019-12464-3',
+            'homosapiens_bonemarrow_2019_10x3transcriptionprofiling_szabo_004_10.1038/s41467-019-12464-3'
+        ]
     },
-    'brain': {'query': ['homosapiens_brain_2017_droncseq_habib_001_10.1038/nmeth.4407'],
-              'reference': ['homosapiens_brain_2019_dropseq_polioudakis_001_10.1016/j.neuron.2019.06.011',
-                            'homosapiens_brain_2019_10x3v2_kanton_001_10.1038/s41586-019-1654-9']},
-    'colon': {'query': ['homosapiens_colon_2019_10x3transcriptionprofiling_wang_001_10.1084/jem.20191130'],
-              'reference': ['homosapiens_colon_2020_None_james_001_10.1038/s41590-020-0602-z']},
-    'ileum': {'query': ['homosapiens_ileum_2019_10x3transcriptionprofiling_wang_002_10.1084/jem.20191130'],
-              'reference': ['homosapiens_ileum_2019_10x3v2_martin_001_10.1016/j.cell.2019.08.008']},
-    'kidney': {'query': ['homosapiens_kidney_2019_droncseq_lake_001_10.1038/s41467-019-10861-2'],
-               'reference': ['homosapiens_kidney_2020_10x3v2_liao_001_10.1038/s41597-019-0351-8',
-                             'homosapiens_kidney_2019_10x3v2_stewart_001_10.1126/science.aat5031']},
-    'liver': {'query': ['homosapiens_liver_2019_celseq2_aizarani_001_10.1038/s41586-019-1373-2'],
-              'reference': ['homosapiens_liver_2019_10x3v2_ramachandran_001_10.1038/s41586-019-1631-3',
-                            'homosapiens_liver_2019_10x3v2_popescu_001_10.1038/s41586-019-1652-y']},
-    'lung': {'query': ['homosapiens_lung_2019_10x3transcriptionprofiling_szabo_002_10.1038/s41467-019-12464-3',
-                       'homosapiens_lung_2019_10x3transcriptionprofiling_szabo_001_10.1038/s41467-019-12464-3'],
-             'reference': ['homosapiens_lung_2019_dropseq_braga_001_10.1038/s41591-019-0468-5',
-                           'homosapiens_lung_2019_10x3transcriptionprofiling_szabo_007_10.1038/s41467-019-12464-3',
-                           'homosapiens_lung_2019_10x3transcriptionprofiling_szabo_008_10.1038/s41467-019-12464-3',
-                           'homosapiens_lung_2020_smartseq2_travaglini_002_10.1038/s41586-020-2922-4',
-                           'homosapiens_lung_2020_10x3v2_lukassen_002_10.15252/embj.20105114',
-                           'homosapiens_lung_2020_10x3v2_lukassen_001_10.15252/embj.20105114',
-                           'homosapiens_lung_2020_10x3v2_miller_001_10.1016/j.devcel.2020.01.033',
-                           'homosapiens_lung_2020_10x3v2_travaglini_001_10.1038/s41586-020-2922-4']},
+    'brain': {
+        'query': ['homosapiens_brain_2017_droncseq_habib_001_10.1038/nmeth.4407'],
+        'reference': [
+            'homosapiens_brain_2019_dropseq_polioudakis_001_10.1016/j.neuron.2019.06.011',
+            'homosapiens_brain_2019_10x3v2_kanton_001_10.1038/s41586-019-1654-9'
+        ]
+    },
+    'ileum': {
+        'query': ['homosapiens_ileum_2019_10x3transcriptionprofiling_wang_002_10.1084/jem.20191130'],
+        'reference': ['homosapiens_ileum_2019_10x3v2_martin_001_10.1016/j.cell.2019.08.008']
+    },
+    'kidney': {
+        'query': [
+            'homosapiens_kidney_2019_droncseq_lake_001_10.1038/s41467-019-10861-2',
+            'homosapiens_kidney_2020_10x3v2_liao_001_10.1038/s41597-019-0351-8'
+        ],
+        'reference': ['homosapiens_kidney_2019_10x3v2_stewart_001_10.1126/science.aat5031']
+    },
+    'liver': {
+        'query': ['homosapiens_liver_2019_celseq2_aizarani_001_10.1038/s41586-019-1373-2'],
+        'reference': [
+            'homosapiens_liver_2019_10x3v2_ramachandran_001_10.1038/s41586-019-1631-3',
+            'homosapiens_liver_2019_10x3v2_popescu_001_10.1038/s41586-019-1652-y'
+        ]
+    },
+    'lung': {
+        'query': [
+            'homosapiens_lung_2019_10x3transcriptionprofiling_szabo_002_10.1038/s41467-019-12464-3',
+            'homosapiens_lung_2019_10x3transcriptionprofiling_szabo_001_10.1038/s41467-019-12464-3',
+            'homosapiens_lung_2019_dropseq_braga_001_10.1038/s41591-019-0468-5'
+        ],
+        'reference': [
+            'homosapiens_lung_2019_10x3transcriptionprofiling_szabo_007_10.1038/s41467-019-12464-3',
+            'homosapiens_lung_2019_10x3transcriptionprofiling_szabo_008_10.1038/s41467-019-12464-3',
+            'homosapiens_lung_2020_smartseq2_travaglini_002_10.1038/s41586-020-2922-4',
+            'homosapiens_lung_2020_10x3v2_lukassen_002_10.15252/embj.20105114',
+            'homosapiens_lung_2020_10x3v2_lukassen_001_10.15252/embj.20105114',
+            'homosapiens_lung_2020_10x3v2_miller_001_10.1016/j.devcel.2020.01.033',
+            'homosapiens_lung_2020_10x3v2_travaglini_001_10.1038/s41586-020-2922-4'
+        ]
+    },
     'lungparenchyma': {
         'query': ['homosapiens_lungparenchyma_2019_10x3transcriptionprofiling_braga_001_10.1038/s41591-019-0468-5'],
-        'reference': ['homosapiens_lungparenchyma_2019_10x3v2_madissoon_001_10.1186/s13059-019-1906-x',
-                      'homosapiens_lungparenchyma_2020_None_habermann_001_10.1126/sciadv.aba1972']},
+        'reference': [
+            'homosapiens_lungparenchyma_2019_10x3v2_madissoon_001_10.1186/s13059-019-1906-x',
+            'homosapiens_lungparenchyma_2020_None_habermann_001_10.1126/sciadv.aba1972'
+        ]
+    },
     'lymphnode': {
         'query': ['homosapiens_lymphnode_2019_10x3transcriptionprofiling_szabo_011_10.1038/s41467-019-12464-3'],
-        'reference': ['homosapiens_lymphnode_2019_10x3transcriptionprofiling_szabo_006_10.1038/s41467-019-12464-3',
-                      'homosapiens_lymphnode_2019_10x3transcriptionprofiling_szabo_005_10.1038/s41467-019-12464-3',
-                      'homosapiens_lymphnode_2019_10x3transcriptionprofiling_szabo_012_10.1038/s41467-019-12464-3']},
-    'pancreas': {'query': ['homosapiens_pancreas_2016_smartseq2_segerstolpe_001_10.1016/j.cmet.2016.08.020'],
-                 'reference': ['homosapiens_pancreas_2016_indrop_baron_001_10.1016/j.cels.2016.08.011']},
-    'placenta': {'query': ['homosapiens_placenta_2018_10x3v2_ventotormo_001_10.1038/s41586-018-0698-6'],
-                 'reference': ['homosapiens_placenta_2018_smartseq2_ventotormo_002_10.1038/s41586-018-0698-6']},
-    'retina': {'query': ['homosapiens_retina_2019_10x3v3_voigt_001_10.1073/pnas.1914143116'],
-               'reference': ['homosapiens_retina_2019_10x3v3_menon_001_10.1038/s41467-019-12780-8',
-                             'homosapiens_retina_2019_10x3v2_lukowski_001_10.15252/embj.2018100811']}
+        'reference': [
+            'homosapiens_lymphnode_2019_10x3transcriptionprofiling_szabo_006_10.1038/s41467-019-12464-3',
+            'homosapiens_lymphnode_2019_10x3transcriptionprofiling_szabo_005_10.1038/s41467-019-12464-3',
+            'homosapiens_lymphnode_2019_10x3transcriptionprofiling_szabo_012_10.1038/s41467-019-12464-3'
+        ]
+    },
+    'pancreas': {
+        'query': ['homosapiens_pancreas_2016_smartseq2_segerstolpe_001_10.1016/j.cmet.2016.08.020'],
+        'reference': ['homosapiens_pancreas_2016_indrop_baron_001_10.1016/j.cels.2016.08.011']
+    },
+    'placenta': {
+        'query': ['homosapiens_placenta_2018_10x3v2_ventotormo_001_10.1038/s41586-018-0698-6'],
+        'reference': ['homosapiens_placenta_2018_smartseq2_ventotormo_002_10.1038/s41586-018-0698-6']
+    },
+    'retina': {
+        'query': [
+            'homosapiens_retina_2019_10x3v3_voigt_001_10.1073/pnas.1914143116',
+            'homosapiens_retina_2019_10x3v3_menon_001_10.1038/s41467-019-12780-8'
+        ],
+        'reference': ['homosapiens_retina_2019_10x3v2_lukowski_001_10.15252/embj.2018100811']
+    }
 }
 
 
@@ -101,6 +121,7 @@ def create_anndata_objects(tissue: str) -> (anndata.AnnData, anndata.AnnData):
     """
     Create anndata.AnnData objects for reference and query data set.
     """
+    import sfaira
     # create reference data set
     data_store_reference = sfaira.data.load_store(SFAIRA_DATA_PATH, store_format='h5ad')
     data_store_reference = data_store_reference.stores['Homo sapiens']
@@ -146,6 +167,8 @@ def preprocess_data(adata_reference, adata_query, n_genes: int = 4000) -> (annda
 
 
 def evaluate_lataq(source_adata, target_adata, model_type):
+    from lataq.models import EMBEDCVAE, TRANVAE
+
     if model_type == 'tranvae':
         tranvae = TRANVAE(
             adata=source_adata,
@@ -225,6 +248,8 @@ def evaluate_lataq(source_adata, target_adata, model_type):
 
 
 def evaluate_sfaira_mlp(target_adata, tissue: str):
+    import sfaira
+
     ui = sfaira.ui.UserInterface(sfaira_repo=True)
     ui.zoo_celltype.model_id = sorted([
         model for model in ui.zoo_celltype.available_model_ids if model.startswith(f'celltype_human-{tissue}-mlp')
@@ -257,8 +282,9 @@ def evaluate_sfaira_mlp(target_adata, tissue: str):
 
 
 def evaluate_scanvi(source_adata, target_adata):
-    sca.dataset.setup_anndata(source_adata, labels_key='cell_type')
+    import scarches as sca
 
+    sca.dataset.setup_anndata(source_adata, labels_key='cell_type')
     # TRAINING REFERENCE MODEL
     vae_ref = sca.models.SCVI(source_adata)
     ref_time = time.perf_counter()

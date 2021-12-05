@@ -1,16 +1,17 @@
 seml:
   executable: benchmarks/sfaira_benchmarks/sfaira_benchmarks_seml.py
   name: lataq_sfaira_benchmark
-  output_dir: /storage/groups/ml01/workspace/felix.fischer.2/lataq_reproducebenchmarks/logs
-  project_root_dir: /home/icb/felix.fischer/git/lataq_reproduce
+  output_dir: /storage/groups/ml01/workspace/felix.fischer.2/lataq_reproduce/benchmarks/logs
+  project_root_dir: ../..
   conda_environment: lataq_cuda
 slurm:
   experiments_per_job: 1
   sbatch_options_template: GPU
   sbatch_options:
-    mem: 100G          # memory
+    mem: 80G          # memory
     cpus-per-task: 6  # num cores
     time: 2-00:00     # max time, D-HH:MM
+    exclude: supergpu0[5-8]
 
 ###### BEGIN PARAMETER CONFIGURATION ######
 
@@ -18,13 +19,13 @@ grid:
   tissue:
     type: choice
     options:
-      - blood
       - bonemarrow
       - brain
-      - colon
+      - ileum
       - kidney
       - liver
       - lung
+      - lungparenchyma
       - lymphnode
       - pancreas
       - placenta
