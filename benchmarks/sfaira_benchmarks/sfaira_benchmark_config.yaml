@@ -33,7 +33,7 @@ grid:
   model:
     type: choice
     options:
-      - lataq_tranvae
       - lataq_embedcvae
       - scanvi
       - sfaira_mlp
+      - svm

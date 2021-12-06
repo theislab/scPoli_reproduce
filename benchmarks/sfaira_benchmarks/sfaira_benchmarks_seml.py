@@ -210,11 +210,11 @@ def evaluate_lataq(source_adata, target_adata, model_type):
 
     if model_type == "embedcvae":
         tranvae_query = EMBEDCVAE.load_query_data(
-            adata=target_adata, reference_model=tranvae, labeled_indices=[],
+            adata=target_adata, reference_model=tranvae, labeled_indices=[], unknown_ct_names=None
         )
     elif model_type == "tranvae":
         tranvae_query = TRANVAE.load_query_data(
-            adata=target_adata, reference_model=tranvae, labeled_indices=[],
+            adata=target_adata, reference_model=tranvae, labeled_indices=[], unknown_ct_names=None
         )
     else:
         raise ValueError(f'model_type can only be "tranvae" or "embedcvae". You supplied: {model_type}')
@@ -225,9 +225,9 @@ def evaluate_lataq(source_adata, target_adata, model_type):
         early_stopping_kwargs=early_stopping_kwargs,
         pretraining_epochs=400,
         clustering_res=2,
-        eta=10,
+        eta=10
     )
-    preds = tranvae_query.classify(target_adata.X)['cell_type']['preds']
+    preds = tranvae_query.classify(target_adata.X, target_adata.obs['id'])['cell_type']['preds']
     query_time = time.perf_counter() - start
 
     # EVAL UNLABELED
@@ -236,7 +236,7 @@ def evaluate_lataq(source_adata, target_adata, model_type):
             y_true=target_adata.obs['cell_type'],
             y_pred=preds,
             labels=np.array(target_adata.obs['cell_type'].unique().tolist()),
-            output_dict=True,
+            output_dict=True
         )
     ).transpose()
 
@@ -247,10 +247,52 @@ def evaluate_lataq(source_adata, target_adata, model_type):
     }
 
 
+def evaluate_svm(source_adata, target_adata):
+    from sklearn.svm import LinearSVC
+    from sklearn.calibration import CalibratedClassifierCV
+
+    train_X = source_adata.X
+    train_X = np.log1p(train_X)
+    train_Y = source_adata.obs['cell_type']
+    test_X = target_adata.X
+    test_X = np.log1p(test_X)
+
+    clf = CalibratedClassifierCV(LinearSVC())
+    start = time.perf_counter()
+    clf.fit(train_X, train_Y)
+    ref_time = time.perf_counter() - start
+    start = time.perf_counter()
+    predicted = clf.predict(test_X)
+    prob = np.max(clf.predict_proba(test_X), axis=1)
+    query_time = time.perf_counter() - start
+    unlabeled = np.where(prob < 0.)
+    predicted[unlabeled] = "unknown"
+
+    # EVAL UNLABELED
+    report = pd.DataFrame(
+        classification_report(
+            y_true=target_adata.obs['cell_type'],
+            y_pred=predicted,
+            labels=np.array(target_adata.obs['cell_type'].unique().tolist()),
+            output_dict=True
+        )
+    ).transpose()
+
+    return {
+        'reference_time': ref_time,
+        'query_time': query_time,
+        'classification_report_query': report,
+    }
+
+
 def evaluate_sfaira_mlp(target_adata, tissue: str):
     import sfaira
 
     ui = sfaira.ui.UserInterface(sfaira_repo=True)
+    superset_lookup = {'retina': 'eye', 'lungparenchyma': 'lung', 'ileum': 'intestine', 'lymphnode': 'spleen'}
+    if tissue in superset_lookup:
+        # use superset model if there is no direct model
+        tissue = superset_lookup[tissue]
     ui.zoo_celltype.model_id = sorted([
         model for model in ui.zoo_celltype.available_model_ids if model.startswith(f'celltype_human-{tissue}-mlp')
     ])[-1]
@@ -263,14 +305,13 @@ def evaluate_sfaira_mlp(target_adata, tissue: str):
     start = time.perf_counter()
     ui.predict_celltypes()
     query_time = time.perf_counter() - start
-
     # EVAL UNLABELED
     report = pd.DataFrame(
         classification_report(
             y_true=target_adata.obs['cell_type'],
             y_pred=ui.data.adata.obs['celltypes_sfaira'].to_numpy(),
             labels=np.array(target_adata.obs['cell_type'].unique().tolist()),
-            output_dict=True,
+            output_dict=True
         )
     ).transpose()
 
@@ -284,42 +325,32 @@ def evaluate_sfaira_mlp(target_adata, tissue: str):
 def evaluate_scanvi(source_adata, target_adata):
     import scarches as sca
 
-    sca.dataset.setup_anndata(source_adata, labels_key='cell_type')
+    source_adata = sca.dataset.setup_anndata(source_adata, labels_key='cell_type', copy=True)
     # TRAINING REFERENCE MODEL
     vae_ref = sca.models.SCVI(source_adata)
     ref_time = time.perf_counter()
     vae_ref.train()
-    vae_ref_scan = sca.models.SCANVI.from_scvi_model(
-        vae_ref,
-        unlabeled_category="Unknown",
-    )
+    vae_ref_scan = sca.models.SCANVI.from_scvi_model(vae_ref, "unknown")
     vae_ref_scan.train(max_epochs=20)
     ref_time = time.perf_counter() - ref_time
-    vae_ref_scan.save(f"{RES_PATH}/scanvi_model", overwrite=True)
-
     # TRAINING QUERY MODEL
     vae_q = sca.models.SCANVI.load_query_data(
-        target_adata,
-        f"{RES_PATH}/scanvi_model",
+        target_adata, vae_ref_scan, freeze_dropout=True
     )
     vae_q._unlabeled_indices = np.arange(target_adata.n_obs)
     vae_q._labeled_indices = []
     query_time = time.perf_counter()
     vae_q.train(
-        max_epochs=100,
-        plan_kwargs=dict(weight_decay=0.0),
-        check_val_every_n_epoch=10,
+        max_epochs=100, plan_kwargs=dict(weight_decay=0.0), check_val_every_n_epoch=10
     )
     query_time = time.perf_counter() - query_time
-    vae_q.save(f"{RES_PATH}/scanvi_query_model", overwrite=True)
-
     # EVAL UNLABELED
     report = pd.DataFrame(
         classification_report(
             y_true=target_adata.obs['cell_type'],
             y_pred=vae_q.predict(),
             labels=np.array(target_adata.obs['cell_type'].unique().tolist()),
-            output_dict=True,
+            output_dict=True
         )
     ).transpose()
 
@@ -355,6 +386,9 @@ def run(tissue: str, model: str):
     elif model == 'sfaira_mlp':
         print(f'Evaluating SFAIRA_MLP model on tissue={tissue}')
         results = evaluate_sfaira_mlp(target_data, tissue)
+    elif model == 'svm':
+        print(f'Evaluating LINEAR SVM model on tissue={tissue}')
+        results = evaluate_svm(source_data, target_data)
     else:
         raise ValueError(f'model: {model} is not implemented')
 
