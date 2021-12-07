@@ -325,7 +325,7 @@ def evaluate_sfaira_mlp(target_adata, tissue: str):
 def evaluate_scanvi(source_adata, target_adata):
     import scarches as sca
 
-    source_adata = sca.dataset.setup_anndata(source_adata, labels_key='cell_type', copy=True)
+    source_adata = sca.dataset.setup_anndata(source_adata, labels_key='cell_type', batch_key='id', copy=True)
     # TRAINING REFERENCE MODEL
     vae_ref = sca.models.SCVI(source_adata)
     ref_time = time.perf_counter()
@@ -343,12 +343,13 @@ def evaluate_scanvi(source_adata, target_adata):
     vae_q.train(
         max_epochs=100, plan_kwargs=dict(weight_decay=0.0), check_val_every_n_epoch=10
     )
+    preds = vae_q.predict()
     query_time = time.perf_counter() - query_time
     # EVAL UNLABELED
     report = pd.DataFrame(
         classification_report(
             y_true=target_adata.obs['cell_type'],
-            y_pred=vae_q.predict(),
+            y_pred=preds,
             labels=np.array(target_adata.obs['cell_type'].unique().tolist()),
             output_dict=True
         )
