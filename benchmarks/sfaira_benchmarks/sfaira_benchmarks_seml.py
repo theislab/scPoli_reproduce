@@ -283,10 +283,10 @@ def evaluate_lataq(source_adata, target_adata, model_type):
 
     start = time.perf_counter()
     tranvae_query.train(
-        n_epochs=500,
+        n_epochs=100,
         early_stopping_kwargs=early_stopping_kwargs,
         alpha_epoch_anneal=0.25 * 1e3 if model_type == 'tranvae' else 0.25 * 1e6,
-        pretraining_epochs=400,
+        pretraining_epochs=20,
         clustering_res=2,
         eta=10
     )
