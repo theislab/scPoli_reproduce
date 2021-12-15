@@ -9,6 +9,8 @@ import pandas as pd
 from sklearn.metrics import classification_report
 from scarches.dataset.trvae.data_handling import remove_sparsity
 from sacred import Experiment
+from scib.metrics import metrics
+from lataq_reproduce.utils import label_encoder
 
 
 ex = Experiment()
@@ -16,7 +18,6 @@ seml.setup_logger(ex)
 
 SFAIRA_DATA_PATH = '/storage/groups/ml01/workspace/david.fischer/sfairazero/data/store/h5ad'
 DATA_DIR = '/storage/groups/ml01/workspace/felix.fischer.2/lataq/data'
-RES_PATH = '/storage/groups/ml01/workspace/felix.fischer.2/lataq_reproduce/results/sfaira_benchmarks'
 
 
 DATA_SET_SPLITS = {
@@ -166,6 +167,64 @@ def preprocess_data(adata_reference, adata_query, n_genes: int = 4000) -> (annda
     return adata_reference, adata_query
 
 
+def eval_classification_performance(y_true: pd.Series, y_pred: pd.Series):
+    return pd.DataFrame(
+        classification_report(
+            y_true=y_true,
+            y_pred=y_pred,
+            labels=y_true.unique(),
+            output_dict=True
+        )
+    ).transpose()
+
+
+def eval_integration_performance(adata: anndata.AnnData, adata_latent: anndata.AnnData):
+    conditions, _ = label_encoder(adata, condition_key='id')
+    labels, _ = label_encoder(adata, condition_key='cell_type')
+    
+    adata.obs['batch'] = conditions.squeeze(axis=1)
+    adata.obs['cell_type'] = labels.squeeze(axis=1)
+    adata.obs['batch'] = adata.obs['batch'].astype('category')
+    adata.obs['cell_type'] = adata.obs['cell_type'].astype('category')
+    
+    adata_latent.obs['batch'] = conditions.squeeze(axis=1)
+    adata_latent.obs['cell_type'] = labels.squeeze(axis=1)
+    adata_latent.obs['batch'] = adata_latent.obs['batch'].astype('category')
+    adata_latent.obs['cell_type'] = adata_latent.obs['cell_type'].astype('category')
+    
+    sc.pp.pca(adata)
+    sc.pp.pca(adata_latent)
+    
+    scores = metrics(
+        adata,
+        adata_latent,
+        batch_key="batch",
+        label_key="cell_type",
+        isolated_labels_asw_=True,
+        silhouette_=True,
+        graph_conn_=True,
+        pcr_=True,
+        isolated_labels_f1_=True,
+        nmi_=True,
+        ari_=True,
+    ).T
+
+    scores = scores[
+        [
+            "NMI_cluster/label",
+            "ARI_cluster/label",
+            "ASW_label",
+            "ASW_label/batch",
+            "PCR_batch",
+            "isolated_label_F1",
+            "isolated_label_silhouette",
+            "graph_conn"
+        ]
+    ]
+    
+    return scores
+
+
 def evaluate_lataq(source_adata, target_adata, model_type):
     from lataq.models import EMBEDCVAE, TRANVAE
 
@@ -201,20 +260,23 @@ def evaluate_lataq(source_adata, target_adata, model_type):
     tranvae.train(
         n_epochs=500,
         early_stopping_kwargs=early_stopping_kwargs,
-        alpha_epoch_anneal=1e3 if model_type == 'tranvae' else 1e6,
+        alpha_epoch_anneal=0.25 * 1e3 if model_type == 'tranvae' else 0.25 * 1e6,
         pretraining_epochs=400,
         clustering_res=2,
         eta=10,
     )
     ref_time = time.perf_counter() - start
+    
+    y_true = target_adata.obs['cell_type'].copy()
+    target_adata.obs['cell_type'] = 'unknown'
 
     if model_type == "embedcvae":
         tranvae_query = EMBEDCVAE.load_query_data(
-            adata=target_adata, reference_model=tranvae, labeled_indices=[], unknown_ct_names=None
+            adata=target_adata, reference_model=tranvae, labeled_indices=[], unknown_ct_names=['unknown']
         )
     elif model_type == "tranvae":
         tranvae_query = TRANVAE.load_query_data(
-            adata=target_adata, reference_model=tranvae, labeled_indices=[], unknown_ct_names=None
+            adata=target_adata, reference_model=tranvae, labeled_indices=[], unknown_ct_names=['unknown']
         )
     else:
         raise ValueError(f'model_type can only be "tranvae" or "embedcvae". You supplied: {model_type}')
@@ -223,27 +285,29 @@ def evaluate_lataq(source_adata, target_adata, model_type):
     tranvae_query.train(
         n_epochs=500,
         early_stopping_kwargs=early_stopping_kwargs,
+        alpha_epoch_anneal=0.25 * 1e3 if model_type == 'tranvae' else 0.25 * 1e6,
         pretraining_epochs=400,
         clustering_res=2,
         eta=10
     )
-    preds = tranvae_query.classify(target_adata.X, target_adata.obs['id'])['cell_type']['preds']
+    y_pred = tranvae_query.classify(target_adata.X, target_adata.obs['id'])['cell_type']['preds']
     query_time = time.perf_counter() - start
-
-    # EVAL UNLABELED
-    report = pd.DataFrame(
-        classification_report(
-            y_true=target_adata.obs['cell_type'],
-            y_pred=preds,
-            labels=np.array(target_adata.obs['cell_type'].unique().tolist()),
-            output_dict=True
-        )
-    ).transpose()
+    
+    target_adata.obs['cell_type'] = y_true
+    
+    clf_report = eval_classification_performance(y_true=y_true, y_pred=y_pred)
+    
+    x_latent_query = tranvae_query.get_latent(x=target_adata.X, c=target_adata.obs['id'])
+    x_latent_ref = tranvae_query.get_latent(x=source_adata.X, c=source_adata.obs['id'])
+    adata_full = source_adata.concatenate(target_adata)
+    adata_latent_full = sc.AnnData(x_latent_ref).concatenate(sc.AnnData(x_latent_query))
+    integration_scores = eval_integration_performance(adata_full, adata_latent_full)
 
     return {
         'reference_time': ref_time,
         'query_time': query_time,
-        'classification_report_query': report
+        'classification_report_query': clf_report,
+        'integration_scores': integration_scores
     }
 
 
@@ -262,26 +326,19 @@ def evaluate_svm(source_adata, target_adata):
     clf.fit(train_X, train_Y)
     ref_time = time.perf_counter() - start
     start = time.perf_counter()
-    predicted = clf.predict(test_X)
+    y_pred = clf.predict(test_X)
     prob = np.max(clf.predict_proba(test_X), axis=1)
     query_time = time.perf_counter() - start
     unlabeled = np.where(prob < 0.)
-    predicted[unlabeled] = "unknown"
+    y_pred[unlabeled] = "unknown"
 
-    # EVAL UNLABELED
-    report = pd.DataFrame(
-        classification_report(
-            y_true=target_adata.obs['cell_type'],
-            y_pred=predicted,
-            labels=np.array(target_adata.obs['cell_type'].unique().tolist()),
-            output_dict=True
-        )
-    ).transpose()
+    clf_report = eval_classification_performance(y_true=target_adata.obs['cell_type'], y_pred=y_pred)
 
     return {
         'reference_time': ref_time,
         'query_time': query_time,
-        'classification_report_query': report,
+        'classification_report_query': clf_report,
+        'integration_scores': None
     }
 
 
@@ -304,21 +361,16 @@ def evaluate_sfaira_mlp(target_adata, tissue: str):
 
     start = time.perf_counter()
     ui.predict_celltypes()
+    y_pred = ui.data.adata.obs['celltypes_sfaira'].to_numpy()
     query_time = time.perf_counter() - start
-    # EVAL UNLABELED
-    report = pd.DataFrame(
-        classification_report(
-            y_true=target_adata.obs['cell_type'],
-            y_pred=ui.data.adata.obs['celltypes_sfaira'].to_numpy(),
-            labels=np.array(target_adata.obs['cell_type'].unique().tolist()),
-            output_dict=True
-        )
-    ).transpose()
+    
+    clf_report = eval_classification_performance(y_true=target_adata.obs['cell_type'], y_pred=y_pred)
 
     return {
         'reference_time': 0.,
         'query_time': query_time,
-        'classification_report_query': report
+        'classification_report_query': clf_report,
+        'integration_scores': None
     }
 
 
@@ -334,6 +386,9 @@ def evaluate_scanvi(source_adata, target_adata):
     vae_ref_scan.train(max_epochs=20)
     ref_time = time.perf_counter() - ref_time
     # TRAINING QUERY MODEL
+    true_labels = target_adata.obs['cell_type'].copy()
+    # set cell_type to 'unknown'
+    target_adata.obs['cell_type'] = 'unknown'
     vae_q = sca.models.SCANVI.load_query_data(
         target_adata, vae_ref_scan, freeze_dropout=True
     )
@@ -343,29 +398,31 @@ def evaluate_scanvi(source_adata, target_adata):
     vae_q.train(
         max_epochs=100, plan_kwargs=dict(weight_decay=0.0), check_val_every_n_epoch=10
     )
-    preds = vae_q.predict()
+    y_pred = vae_q.predict()
     query_time = time.perf_counter() - query_time
-    # EVAL UNLABELED
-    report = pd.DataFrame(
-        classification_report(
-            y_true=target_adata.obs['cell_type'],
-            y_pred=preds,
-            labels=np.array(target_adata.obs['cell_type'].unique().tolist()),
-            output_dict=True
-        )
-    ).transpose()
+    
+    # set cell_type col to real value again
+    target_adata.obs['cell_type'] = true_labels
+    
+    clf_report = eval_classification_performance(y_ture=true_labels, y_pred=y_pred)
+    
+    x_latent_ref = vae_q.get_latent_representation(source_adata)
+    x_latent_query = vae_q.get_latent_representation(target_adata)
+    adata_full = source_adata.concatenate(target_adata)
+    adata_latent_full = sc.AnnData(x_latent_ref).concatenate(sc.AnnData(x_latent_query))
+    integration_scores = eval_integration_performance(adata_full, adata_latent_full)
 
     return {
         'reference_time': ref_time,
         'query_time': query_time,
-        'classification_report_query': report,
+        'classification_report_query': clf_report,
+        'integration_scores': integration_scores
     }
 
 
 @ex.automain
 def run(tissue: str, model: str):
     print(f'Running benchmark for model={model} on tissue={tissue}')
-    os.makedirs(os.path.join(RES_PATH, model, tissue), exist_ok=True)
 
     source_data, target_data = create_anndata_objects(tissue)
     if model in ['scanvi', 'lataq']:

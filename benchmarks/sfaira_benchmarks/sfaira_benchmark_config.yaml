@@ -3,7 +3,7 @@ seml:
   name: lataq_sfaira_benchmark
   output_dir: /storage/groups/ml01/workspace/felix.fischer.2/lataq_reproduce/benchmarks/logs
   project_root_dir: ../..
-  conda_environment: lataq_cuda
+  conda_environment: lataq_cuda_2
 slurm:
   experiments_per_job: 1
   sbatch_options_template: GPU
@@ -34,6 +34,7 @@ grid:
     type: choice
     options:
       - lataq_embedcvae
+      - lataq_tranvae
       - scanvi
       - sfaira_mlp
       - svm
