@@ -404,7 +404,7 @@ def evaluate_scanvi(source_adata, target_adata):
     # set cell_type col to real value again
     target_adata.obs['cell_type'] = true_labels
     
-    clf_report = eval_classification_performance(y_ture=true_labels, y_pred=y_pred)
+    clf_report = eval_classification_performance(y_true=true_labels, y_pred=y_pred)
     
     x_latent_ref = vae_q.get_latent_representation(source_adata)
     x_latent_query = vae_q.get_latent_representation(target_adata)
