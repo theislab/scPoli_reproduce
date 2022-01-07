@@ -10,7 +10,7 @@ slurm:
   sbatch_options:
     mem: 80G          # memory
     cpus-per-task: 6  # num cores
-    time: 1-00:00     # max time, D-HH:MM
+    time: 2-00:00     # max time, D-HH:MM
     exclude: supergpu[05,07-08],gpusrv[09-18],supergpu02pxe
 
 ###### BEGIN PARAMETER CONFIGURATION ######
