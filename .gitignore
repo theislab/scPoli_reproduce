@@ -1,4 +1,7 @@
 .ipynb_checkpoints/
+*.h5ad
+*.pkl
+*.pt
 datasets/
 data/
 .idea/
@@ -16,3 +19,4 @@ results/
 notebooks/tmp/
 notebooks/trained_model/
 notebooks/**model/
+notebooks/*/

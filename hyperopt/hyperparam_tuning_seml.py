@@ -122,6 +122,7 @@ def run(
         # unlabeled_loss_metric=loss_metric,
         # hyperbolic_log1p=hyperbolic_log1p,
         eta=eta,
+        # weight_decay=0,
     )
     tranvae.save(REF_PATH, overwrite=True)
     logging.info("Model trained and saved, initiate surgery")
@@ -144,6 +145,7 @@ def run(
         pretraining_epochs=PRE_EPOCHS,
         clustering_res=clustering_res,
         eta=eta,
+        # weight_decay=0,
         # labeled_loss_metric=loss_metric,
         # unlabeled_loss_metric=loss_metric
     )

@@ -1,16 +1,20 @@
 import logging
 from shutil import rmtree
 
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import scanpy as sc
 import seml
-from exp_dict import EXPERIMENT_INFO
+# from lataq.metrics.metrics import metrics
 from lataq.models import EMBEDCVAE, TRANVAE
 from sacred import Experiment
 from scarches.dataset.trvae.data_handling import remove_sparsity
+from scIB.metrics import metrics
 from sklearn.metrics import classification_report
-from utils import entropy_batch_mixing, knn_purity, label_encoder
+
+from lataq_reproduce.exp_dict import EXPERIMENT_INFO
+from lataq_reproduce.utils import label_encoder
 
 np.random.seed(420)
 
@@ -53,8 +57,11 @@ def run(
         f"clustering res: {clustering_res}, hidden layers: {hidden_layers}"
     )
 
-    DATA_DIR = "/storage/groups/ml01/workspace/carlo.dedonno/LATAQ/data"
+    DATA_DIR = "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/data"
     REF_PATH = f"/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/tmp/ref_model_embedcvae_{overwrite}"
+    RES_PATH = (
+        f"/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/results/hyperopt"
+    )
     EXP_PARAMS = EXPERIMENT_INFO[data]
     FILE_NAME = EXP_PARAMS["file_name"]
     adata = sc.read(f"{DATA_DIR}/{FILE_NAME}")
@@ -64,12 +71,12 @@ def run(
     query = EXP_PARAMS["query"]
 
     adata = remove_sparsity(adata)
-    source_adata = adata[adata.obs.study.isin(reference)].copy()
-    target_adata = adata[adata.obs.study.isin(query)].copy()
+    source_adata = adata[adata.obs[condition_key].isin(reference)].copy()
+    target_adata = adata[adata.obs[condition_key].isin(query)].copy()
     logging.info("Data loaded succesfully")
 
     early_stopping_kwargs = {
-        "early_stopping_metric": "val_classifier_loss",
+        "early_stopping_metric": "val_landmark_loss",
         "mode": "min",
         "threshold": 0,
         "patience": 20,
@@ -80,6 +87,12 @@ def run(
 
     EPOCHS = n_epochs
     PRE_EPOCHS = n_pre_epochs
+    # hyperbolic_log1p = False
+
+    # if loss_metric == 'hyperbolic_log1p':
+    #    loss_metric = 'hyperbolic'
+    #    hyperbolic_log1p=True
+
     if model == "embedcvae":
         tranvae = EMBEDCVAE(
             adata=source_adata,
@@ -105,9 +118,11 @@ def run(
         alpha_epoch_anneal=alpha_epoch_anneal,
         pretraining_epochs=PRE_EPOCHS,
         clustering_res=clustering_res,
-        labeled_loss_metric=loss_metric,
-        unlabeled_loss_metric=loss_metric,
+        # labeled_loss_metric=loss_metric,
+        # unlabeled_loss_metric=loss_metric,
+        # hyperbolic_log1p=hyperbolic_log1p,
         eta=eta,
+        weight_decay=0,
     )
     tranvae.save(REF_PATH, overwrite=True)
     logging.info("Model trained and saved, initiate surgery")
@@ -130,9 +145,11 @@ def run(
         pretraining_epochs=PRE_EPOCHS,
         clustering_res=clustering_res,
         eta=eta,
-        labeled_loss_metric=loss_metric,
-        unlabeled_loss_metric=loss_metric,
+        weight_decay=0,
+        # labeled_loss_metric=loss_metric,
+        # unlabeled_loss_metric=loss_metric
     )
+
     logging.info("Computing metrics")
     results_dict = tranvae_query.classify(
         adata.X, adata.obs[condition_key], metric=loss_metric
@@ -161,22 +178,73 @@ def run(
         ).transpose()
 
     logging.info("Compute integration metrics")
-    latent_adata = tranvae_query.get_latent(x=adata.X, c=adata.obs[condition_key])
-    latent_adata = sc.AnnData(latent_adata)
-    latent_adata.obs[condition_key] = adata.obs[condition_key].tolist()
-    latent_adata.obs[cell_type_key[0]] = adata.obs[cell_type_key[0]].tolist()
-    conditions, _ = label_encoder(latent_adata, condition_key=condition_key)
-    labels, _ = label_encoder(latent_adata, condition_key=cell_type_key[0])
-    latent_adata.obs[condition_key] = conditions.squeeze(axis=1)
-    latent_adata.obs[cell_type_key[0]] = labels.squeeze(axis=1)
-    ebm = entropy_batch_mixing(latent_adata, condition_key, n_neighbors=15)
-    knn = knn_purity(latent_adata, cell_type_key[0], n_neighbors=15)
+    conditions, _ = label_encoder(adata, condition_key=condition_key)
+    labels, _ = label_encoder(adata, condition_key=cell_type_key[0])
+    adata.obs["batch"] = conditions.squeeze(axis=1)
+    adata.obs["celltype"] = labels.squeeze(axis=1)
+    adata.obs["batch"] = adata.obs["batch"].astype("category")
+    adata.obs["celltype"] = adata.obs["celltype"].astype("category")
 
+    adata_latent = tranvae_query.get_latent(x=adata.X, c=adata.obs[condition_key])
+    adata_latent = sc.AnnData(adata_latent)
+    adata_latent.obs[condition_key] = adata.obs[condition_key].tolist()
+    adata_latent.obs[cell_type_key[0]] = adata.obs[cell_type_key[0]].tolist()
+    conditions, _ = label_encoder(adata_latent, condition_key=condition_key)
+    labels, _ = label_encoder(adata_latent, condition_key=cell_type_key[0])
+    adata_latent.obs["batch"] = conditions.squeeze(axis=1)
+    adata_latent.obs["celltype"] = labels.squeeze(axis=1)
+    adata_latent.obs["batch"] = adata_latent.obs["batch"].astype("category")
+    adata_latent.obs["celltype"] = adata_latent.obs["celltype"].astype("category")
+    sc.pp.pca(adata)
+    sc.pp.pca(adata_latent)
+
+    sc.pp.neighbors(adata_latent)
+    sc.tl.umap(adata_latent)
+    sc.pl.umap(adata_latent, color=condition_key, show=False, frameon=False)
+    plt.savefig(
+        f"{RES_PATH}/condition_umap_{model}_{data}_{loss_metric}_{latent_dim}_{hidden_layers}.png",
+        bbox_inches="tight",
+    )
+    plt.close()
+    sc.pl.umap(adata_latent, color=cell_type_key[0], show=False, frameon=False)
+    plt.savefig(
+        f"{RES_PATH}/ct_umap_{model}_{data}_{loss_metric}_{latent_dim}_{hidden_layers}.png",
+        bbox_inches="tight",
+    )
+
+    # adata_latent.write(f"{RES_PATH}/adata_latent.h5ad")
+    # adata.write(f"{RES_PATH}/adata_original.h5ad")
+    scores = metrics(
+        adata,
+        adata_latent,
+        "batch",
+        "celltype",
+        isolated_labels_asw_=True,
+        silhouette_=True,
+        graph_conn_=True,
+        pcr_=True,
+        isolated_labels_f1_=True,
+        nmi_=True,
+        ari_=True,
+    )
+
+    scores = scores.T
+    scores = scores[
+        [
+            "NMI_cluster/label",
+            "ARI_cluster/label",
+            "ASW_label",
+            "ASW_label/batch",
+            "PCR_batch",
+            "isolated_label_F1",
+            "isolated_label_silhouette",
+            "graph_conn",
+        ]
+    ]
     results = {
         "classification_report": classification_df,
         "classification_report_query": classification_df_query,
-        "ebm": ebm,
-        "knn": knn,
+        "integration_scores": scores,
     }
 
     rmtree(REF_PATH)
