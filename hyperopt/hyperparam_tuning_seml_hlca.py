@@ -48,11 +48,6 @@ def run(
     eta: float,
     overwrite: int,
 ):
-    logging.info("Received the following configuration:")
-    logging.info(
-        f"Dataset: {data}, latent_dim: {latent_dim}, loss metric: {loss_metric},"
-        f"clustering res: {clustering_res}, hidden layers: {hidden_layers}"
-    )
 
     DATA_DIR = "/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/data"
     REF_PATH = f"/storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce/tmp/ref_model_embedcvae_hlca_{overwrite}"
@@ -132,13 +127,13 @@ def run(
     sc.tl.umap(adata_latent)
     sc.pl.umap(adata_latent, color=condition_key, show=False, frameon=False)
     plt.savefig(
-        f"{RES_PATH}/condition_umap_{model}_{data}_{loss_metric}_{latent_dim}_{hidden_layers}.png",
+        f"{RES_PATH}/condition_umap_{embedding_dim}_{latent_dim}_{hidden_layers}_{inject_condition_info}.png",
         bbox_inches="tight",
     )
     plt.close()
     sc.pl.umap(adata_latent, color=cell_type_key[0], show=False, frameon=False)
     plt.savefig(
-        f"{RES_PATH}/ct_umap_{model}_{data}_{loss_metric}_{latent_dim}_{hidden_layers}.png",
+        f"{RES_PATH}/ct_umap_{embedding_dim}_{latent_dim}_{hidden_layers}_{inject_condition_info}.png",
         bbox_inches="tight",
     )
 

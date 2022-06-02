@@ -1,0 +1,69 @@
+seml:
+  executable: hyperopt/no_landmarks.py
+  name: no_landmarks
+  output_dir: hyperopt/logs
+  project_root_dir: /storage/groups/ml01/workspace/carlo.dedonno/lataq_reproduce
+  conda_environment: lataq_cuda
+slurm:
+  experiments_per_job: 1
+  sbatch_options_template: GPU
+  sbatch_options:
+    mem: 50G          # memory
+    cpus-per-task: 6  # num cores
+    time: 2-00:00     # max time, D-HH:MM
+    nice: 100000
+  max_jobs_per_batch: 20
+
+###### BEGIN PARAMETER CONFIGURATION ######
+
+fixed:
+  n_epochs: 100
+  n_pre_epochs: 98
+
+grid:
+  data: 
+    type: choice
+    options:
+      - pancreas
+      - pbmc
+      - brain
+      - scvelo
+      - tumor
+      - lung
+      #- lung_h
+  model:
+    type: choice
+    options:
+      - embedcvae
+#random:
+#  samples: 100
+#  seed: 420
+  latent_dim:
+    type: choice
+    options:
+      - 25
+
+  clustering_res: #VERY DATA DEPENDENT
+    type: choice
+    options:
+      - 2.0
+
+  hidden_layers:
+    type: choice
+    options:
+      - 3
+    
+  eta:  #weight for landmark loss (both labeled and unlabeled)
+    type: choice
+    options: 
+      - 0
+
+  alpha_epoch_anneal:
+    type: choice
+    options:
+      - 1e3
+  
+  loss_metric: 
+    type: choice
+    options:
+      - dist
