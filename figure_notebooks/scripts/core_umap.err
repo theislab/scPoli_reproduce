@@ -1,0 +1,7 @@
+Global seed set to 0
+Traceback (most recent call last):
+  File "/home/icb/carlo.dedonno/projects/lataq_reproduce/figure_notebooks/scripts/core_umap_noct.py", line 29, in <module>
+    data_latent = lataq_model.get_latent(
+  File "/lustre/groups/ml01/workspace/carlo.dedonno/LATAQ/lataq/models/lataq_model.py", line 224, in get_latent
+    raise ValueError("Incorrect conditions")
+ValueError: Incorrect conditions

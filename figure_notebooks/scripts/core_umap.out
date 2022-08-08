@@ -1,0 +1,21 @@
+
+AnnData object with n_obs × n_vars = 584884 × 1897
+    obs: 'is_primary_data', 'assay_ontology_term_id', 'cell_type_ontology_term_id', 'development_stage_ontology_term_id', 'disease_ontology_term_id', 'ethnicity_ontology_term_id', 'tissue_ontology_term_id', 'organism_ontology_term_id', 'sex_ontology_term_id', 'sample', 'study', 'subject_ID', 'smoking_status', 'BMI', 'condition', 'subject_type', 'sample_type', "3'_or_5'", 'sequencing_platform', 'cell_ranger_version', 'fresh_or_frozen', 'dataset', 'anatomical_region_level_2', 'anatomical_region_level_3', 'anatomical_region_highest_res', 'age', 'ann_highest_res', 'n_genes', 'size_factors', 'log10_total_counts', 'mito_frac', 'ribo_frac', 'original_ann_level_1', 'original_ann_level_2', 'original_ann_level_3', 'original_ann_level_4', 'original_ann_level_5', 'original_ann_nonharmonized', 'scanvi_label', 'leiden_1', 'leiden_2', 'leiden_3', 'anatomical_region_ccf_score', 'entropy_study_leiden_3', 'entropy_dataset_leiden_3', 'entropy_subject_ID_leiden_3', 'entropy_original_ann_level_1_leiden_3', 'entropy_original_ann_level_2_clean_leiden_3', 'entropy_original_ann_level_3_clean_leiden_3', 'entropy_original_ann_level_4_clean_leiden_3', 'entropy_original_ann_level_5_clean_leiden_3', 'leiden_4', 'reannotation_type', 'leiden_5', 'ann_finest_level', 'ann_level_1', 'ann_level_2', 'ann_level_3', 'ann_level_4', 'ann_level_5', 'ann_coarse_for_GWAS_and_modeling', 'cell_type', 'assay', 'disease', 'organism', 'sex', 'tissue', 'ethnicity', 'development_stage'
+    var: 'n_cells', 'highly_variable', 'means', 'dispersions', 'feature_biotype', 'feature_is_filtered', 'feature_reference'
+    uns: 'X_normalization', 'batch_condition', 'contributors', 'default_embedding', 'schema_version', 'title'
+    obsm: 'X_scanvi_emb', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Embedding dictionary:
+ 	Num conditions: 166
+ 	Embedding dim: 20
+Encoder Architecture:
+	Input Layer in, out and cond: 1897 128 20
+	Hidden Layer 1 in/out: 128 128
+	Hidden Layer 2 in/out: 128 128
+	Mean/Var Layer in/out: 128 50
+Decoder Architecture:
+	First Layer in, out and cond:  50 128 20
+	Hidden Layer 1 in/out: 128 128
+	Hidden Layer 2 in/out: 128 128
+	Output Layer in/out:  128 1897 
+
