@@ -12,12 +12,6 @@ from lataq.models import EMBEDCVAE, TRANVAE
 adata_raw = sc.read(
     '../../data/hlca_counts_commonvars.h5ad'
 )
-adata_raw.obs['ann_finest_level'] = [
-        adata_raw.obs.loc[cell, f"ann_level_{highest_lev}"]
-        for cell, highest_lev in zip(
-            adata_raw.obs.index, adata_raw.obs.ann_highest_res
-        )
-]
 
 condition_key = 'sample'
 cell_type_key = ['ann_finest_level']

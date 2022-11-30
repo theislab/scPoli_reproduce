@@ -1,8 +1,8 @@
 
-Lataq Reproducibility Repo
+scPoli Reproducibility Repo
 =========================================================================
 .. raw:: html
-Repository for all scripts used for LATAQ paper.
+Repository for scripts and notebooks used for scPoli paper.
 
 Usage and installation
 -------------------------------
@@ -19,7 +19,7 @@ Scib:
    pip install git+https://github.com/theislab/scib
 
 Mars
-  Nothing to install here atm. Repo is cloned in this one.
+  Since the model is not packaged, we cloned the repository in this one.
   
   
 Seurat
@@ -27,6 +27,5 @@ Seurat
   Install Seurat (4.0.3)
   Install SeuratDisk (0.0.0.9019)
 
-LATAQ
-   Scripts are in the LATAQ repo at the moment for easier testing during development.
-
+scPoli
+  Please use the scPoli-legacy repository for reproducibility. That code will not be maintained. For any other use refer to scArches.

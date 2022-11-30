@@ -1,97 +1,14 @@
-/home/icb/carlo.dedonno/anaconda3/envs/lataq_cuda/lib/python3.8/site-packages/anndata/_core/anndata.py:794: UserWarning: 
+Global seed set to 0
+/home/icb/carlo.dedonno/anaconda3/envs/lataq_cuda/lib/python3.8/site-packages/anndata/_core/anndata.py:798: UserWarning: 
 AnnData expects .var.index to contain strings, but got values like:
     ['RP11-34P13.3', 'FAM138A', 'OR4F5', 'RP11-34P13.7', 'RP11-34P13.8']
 
     Inferred to be: categorical
 
   value_idx = self._prep_dim_index(value.index, attr)
-/home/icb/carlo.dedonno/anaconda3/envs/lataq_cuda/lib/python3.8/site-packages/anndata/_core/anndata.py:120: ImplicitModificationWarning: Transforming to str index.
+/home/icb/carlo.dedonno/anaconda3/envs/lataq_cuda/lib/python3.8/site-packages/anndata/_core/anndata.py:121: ImplicitModificationWarning: Transforming to str index.
   warnings.warn("Transforming to str index.", ImplicitModificationWarning)
-Trying to set attribute `.obs` of view, copying.
-... storing 'assay_ontology_term_id' as categorical
-... storing 'cell_type_ontology_term_id' as categorical
-... storing 'development_stage_ontology_term_id' as categorical
-... storing 'disease_ontology_term_id' as categorical
-... storing 'ethnicity_ontology_term_id' as categorical
-... storing 'tissue_ontology_term_id' as categorical
-... storing 'organism_ontology_term_id' as categorical
-... storing 'sex_ontology_term_id' as categorical
-... storing 'sample' as categorical
-... storing 'study' as categorical
-... storing 'subject_ID' as categorical
-... storing 'smoking_status' as categorical
-... storing 'condition' as categorical
-... storing 'subject_type' as categorical
-... storing 'sample_type' as categorical
-... storing "3'_or_5'" as categorical
-... storing 'sequencing_platform' as categorical
-... storing 'cell_ranger_version' as categorical
-... storing 'fresh_or_frozen' as categorical
-... storing 'dataset' as categorical
-... storing 'anatomical_region_level_2' as categorical
-... storing 'anatomical_region_level_3' as categorical
-... storing 'age' as categorical
-... storing 'original_ann_level_1' as categorical
-... storing 'original_ann_level_2' as categorical
-... storing 'original_ann_level_3' as categorical
-... storing 'original_ann_level_4' as categorical
-... storing 'original_ann_level_5' as categorical
-... storing 'original_ann_nonharmonized' as categorical
-... storing 'scanvi_label' as categorical
-... storing 'leiden_1' as categorical
-... storing 'leiden_2' as categorical
-... storing 'leiden_3' as categorical
-... storing 'leiden_4' as categorical
-... storing 'reannotation_type' as categorical
-... storing 'leiden_5' as categorical
-... storing 'ann_finest_level' as categorical
-... storing 'ann_level_1' as categorical
-... storing 'ann_level_2' as categorical
-... storing 'ann_level_3' as categorical
-... storing 'ann_level_4' as categorical
-... storing 'ann_level_5' as categorical
-... storing 'ann_coarse_for_GWAS_and_modeling' as categorical
-... storing 'cell_type' as categorical
-... storing 'assay' as categorical
-... storing 'disease' as categorical
-... storing 'organism' as categorical
-... storing 'sex' as categorical
-... storing 'tissue' as categorical
-... storing 'ethnicity' as categorical
-... storing 'development_stage' as categorical
-... storing 'original_celltype_ann' as categorical
-... storing 'study_long' as categorical
-... storing 'last_author_PI' as categorical
-... storing 'subject_ID_as_published' as categorical
-... storing 'pre_or_postnatal' as categorical
-... storing 'age_range' as categorical
-... storing 'mixed_ethnicity' as categorical
-... storing 'smoking_history' as categorical
-... storing 'known_lung_disease' as categorical
-... storing 'cause_of_death' as categorical
-... storing 'anatomical_region_coarse' as categorical
-... storing 'anatomical_region_detailed' as categorical
-... storing 'tissue_dissociation_protocol' as categorical
-... storing 'cells_or_nuclei' as categorical
-... storing 'single_cell_platform' as categorical
-... storing 'enrichment' as categorical
-... storing 'reference_genome_coarse' as categorical
-... storing 'disease_status' as categorical
-... storing 'cultured' as categorical
-... storing 'comments' as categorical
-... storing 'Processing_site' as categorical
-... storing 'anatomical_region_level_1' as categorical
-... storing 'original_ann_level_1_clean' as categorical
-... storing 'original_ann_level_2_clean' as categorical
-... storing 'original_ann_level_3_clean' as categorical
-... storing 'original_ann_level_4_clean' as categorical
-... storing 'original_ann_level_5_clean' as categorical
-... storing 'cluster_annotated' as categorical
-... storing 'manual_ann' as categorical
-... storing 'manual_ann_grouped' as categorical
-... storing 'meyer_leiden_1' as categorical
-... storing 'meyer_leiden_2' as categorical
-... storing 'meyer_leiden_3' as categorical
-... storing 'meyer_leiden_4' as categorical
-... storing 'pred' as categorical
-... storing 'ann_finest_level_pred' as categorical
+/home/icb/carlo.dedonno/projects/lataq_reproduce/figure_notebooks/scripts/healthy_umap_amir.py:107: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
+  adata_raw.obs['ann_finest_level'] = [
+/home/icb/carlo.dedonno/anaconda3/envs/lataq_cuda/lib/python3.8/site-packages/anndata/_core/anndata.py:1785: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  [AnnData(sparse.csr_matrix(a.shape), obs=a.obs) for a in all_adatas],

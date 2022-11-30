@@ -1,146 +1,0 @@
-Starting job 8135149
-SLURM assigned me the node(s): gpusrv12
-gpusrv17
-gpusrv13
-gpusrv17
-gpusrv09
-gpusrv12
-supergpu05
-gpusrv11
-gpusrv10
-gpusrv11
-gpusrv10
-gpusrv09
-gpusrv16
-supergpu05
-supergpu05
-supergpu05
-Experiments are running under the following process IDs:
-Experiment ID: 45	Process ID: 48290
-
-During startup - Warning messages:
-1: package ‘methods’ was built under R version 3.6.3 
-2: package ‘datasets’ was built under R version 3.6.3 
-3: package ‘utils’ was built under R version 3.6.3 
-4: package ‘grDevices’ was built under R version 3.6.3 
-5: package ‘graphics’ was built under R version 3.6.3 
-6: package ‘stats’ was built under R version 3.6.3 
-2022-05-19 14:28:27 (INFO): Running command 'run'
-2022-05-19 14:28:27 (INFO): Started run with ID "45"
-2022-05-19 14:28:29 (INFO): Data loaded succesfully
-2022-05-19 14:28:29 (INFO): Model instantiated
-Embedding dictionary:
- 	Num conditions: 8
- 	Embedding dim: 10
-Encoder Architecture:
-	Input Layer in, out and cond: 4000 128 0
-	Hidden Layer 1 in/out: 128 128
-	Hidden Layer 2 in/out: 128 128
-	Mean/Var Layer in/out: 128 25
-Decoder Architecture:
-	First Layer in, out and cond:  25 128 10
-	Hidden Layer 1 in/out: 128 128
-	Hidden Layer 2 in/out: 128 128
-	Output Layer in/out:  128 4000 
-
-loaders init
-loaders init done
-0.259091854095459
- |--------------------| 1.0%  - val_loss: 1213.2648481889 - val_trvae_loss: 1213.2648481889 |--------------------| 2.0%  - val_loss: 1166.3093594638 - val_trvae_loss: 1166.3093594638 |--------------------| 3.0%  - val_loss: 1135.7994606712 - val_trvae_loss: 1135.7994606712 |--------------------| 4.0%  - val_loss: 1109.6667369496 - val_trvae_loss: 1109.6667369496 |█-------------------| 5.0%  - val_loss: 1091.5578724254 - val_trvae_loss: 1091.5578724254 |█-------------------| 6.0%  - val_loss: 1081.9769952947 - val_trvae_loss: 1081.9769952947 |█-------------------| 7.0%  - val_loss: 1073.0286754261 - val_trvae_loss: 1073.0286754261 |█-------------------| 8.0%  - val_loss: 1066.5649192116 - val_trvae_loss: 1066.5649192116 |█-------------------| 9.0%  - val_loss: 1061.1431607333 - val_trvae_loss: 1061.1431607333 |██------------------| 10.0%  - val_loss: 1056.4560602362 - val_trvae_loss: 1056.4560602362 |██------------------| 11.0%  - val_loss: 1053.7525079901 - val_trvae_loss: 1053.7525079901 |██------------------| 12.0%  - val_loss: 1050.7130293413 - val_trvae_loss: 1050.7130293413 |██------------------| 13.0%  - val_loss: 1047.6037708629 - val_trvae_loss: 1047.6037708629 |██------------------| 14.0%  - val_loss: 1045.8256780451 - val_trvae_loss: 1045.8256780451 |███-----------------| 15.0%  - val_loss: 1043.6130704013 - val_trvae_loss: 1043.6130704013 |███-----------------| 16.0%  - val_loss: 1042.2699806907 - val_trvae_loss: 1042.2699806907 |███-----------------| 17.0%  - val_loss: 1040.5360884233 - val_trvae_loss: 1040.5360884233 |███-----------------| 18.0%  - val_loss: 1039.5655961470 - val_trvae_loss: 1039.5655961470 |███-----------------| 19.0%  - val_loss: 1038.1421009411 - val_trvae_loss: 1038.1421009411 |████----------------| 20.0%  - val_loss: 1036.9709417170 - val_trvae_loss: 1036.9709417170 |████----------------| 21.0%  - val_loss: 1036.3631203391 - val_trvae_loss: 1036.3631203391 |████----------------| 22.0%  - val_loss: 1035.2328047319 - val_trvae_loss: 1035.2328047319 |████----------------| 23.0%  - val_loss: 1034.2170077237 - val_trvae_loss: 1034.2170077237 |████----------------| 24.0%  - val_loss: 1033.7630781694 - val_trvae_loss: 1033.7630781694 |█████---------------| 25.0%  - val_loss: 1032.8880448775 - val_trvae_loss: 1032.8880448775 |█████---------------| 26.0%  - val_loss: 1032.3993696733 - val_trvae_loss: 1032.3993696733 |█████---------------| 27.0%  - val_loss: 1031.8174771396 - val_trvae_loss: 1031.8174771396 |█████---------------| 28.0%  - val_loss: 1031.0162963867 - val_trvae_loss: 1031.0162963867 |█████---------------| 29.0%  - val_loss: 1031.4330777255 - val_trvae_loss: 1031.4330777255 |██████--------------| 30.0%  - val_loss: 1030.1765913530 - val_trvae_loss: 1030.1765913530 |██████--------------| 31.0%  - val_loss: 1030.2841796875 - val_trvae_loss: 1030.2841796875 |██████--------------| 32.0%  - val_loss: 1029.3439830433 - val_trvae_loss: 1029.3439830433 |██████--------------| 33.0%  - val_loss: 1029.3997303356 - val_trvae_loss: 1029.3997303356 |██████--------------| 34.0%  - val_loss: 1028.8991810192 - val_trvae_loss: 1028.8991810192 |███████-------------| 35.0%  - val_loss: 1028.7480468750 - val_trvae_loss: 1028.7480468750 |███████-------------| 36.0%  - val_loss: 1028.4883589311 - val_trvae_loss: 1028.4883589311 |███████-------------| 37.0%  - val_loss: 1028.6548295455 - val_trvae_loss: 1028.6548295455 |███████-------------| 38.0%  - val_loss: 1027.7918978604 - val_trvae_loss: 1027.7918978604 |███████-------------| 39.0%  - val_loss: 1027.6496526545 - val_trvae_loss: 1027.6496526545 |████████------------| 40.0%  - val_loss: 1027.6409967596 - val_trvae_loss: 1027.6409967596 |████████------------| 41.0%  - val_loss: 1027.7682994496 - val_trvae_loss: 1027.7682994496 |████████------------| 42.0%  - val_loss: 1028.0635764382 - val_trvae_loss: 1028.0635764382 |████████------------| 43.0%  - val_loss: 1026.8985373757 - val_trvae_loss: 1026.8985373757 |████████------------| 44.0%  - val_loss: 1027.0183105469 - val_trvae_loss: 1027.0183105469 |█████████-----------| 45.0%  - val_loss: 1026.8591530540 - val_trvae_loss: 1026.8591530540 |█████████-----------| 46.0%  - val_loss: 1026.5835127397 - val_trvae_loss: 1026.5835127397 |█████████-----------| 47.0%  - val_loss: 1026.6366688121 - val_trvae_loss: 1026.6366688121 |█████████-----------| 48.0%  - val_loss: 1027.1392322887 - val_trvae_loss: 1027.1392322887 |█████████-----------| 49.0%  - val_loss: 1026.6522050337 - val_trvae_loss: 1026.6522050337 |██████████----------| 50.0%  - val_loss: 1025.9416337447 - val_trvae_loss: 1025.9416337447 |██████████----------| 51.0%  - val_loss: 1026.7722112482 - val_trvae_loss: 1026.7722112482 |██████████----------| 52.0%  - val_loss: 1026.2011607777 - val_trvae_loss: 1026.2011607777 |██████████----------| 53.0%  - val_loss: 1025.4841863459 - val_trvae_loss: 1025.4841863459 |██████████----------| 54.0%  - val_loss: 1026.1427667791 - val_trvae_loss: 1026.1427667791 |███████████---------| 55.0%  - val_loss: 1025.8671542081 - val_trvae_loss: 1025.8671542081 |███████████---------| 56.0%  - val_loss: 1026.0924238725 - val_trvae_loss: 1026.0924238725 |███████████---------| 57.0%  - val_loss: 1025.6965165572 - val_trvae_loss: 1025.6965165572 |███████████---------| 58.0%  - val_loss: 1025.4630515359 - val_trvae_loss: 1025.4630515359 |███████████---------| 59.0%  - val_loss: 1025.8595470082 - val_trvae_loss: 1025.8595470082 |████████████--------| 60.0%  - val_loss: 1025.5396673029 - val_trvae_loss: 1025.5396673029 |████████████--------| 61.0%  - val_loss: 1025.4921653054 - val_trvae_loss: 1025.4921653054 |████████████--------| 62.0%  - val_loss: 1025.3940485174 - val_trvae_loss: 1025.3940485174 |████████████--------| 63.0%  - val_loss: 1025.0811046254 - val_trvae_loss: 1025.0811046254 |████████████--------| 64.0%  - val_loss: 1025.1759532582 - val_trvae_loss: 1025.1759532582 |█████████████-------| 65.0%  - val_loss: 1025.0411876332 - val_trvae_loss: 1025.0411876332 |█████████████-------| 66.0%  - val_loss: 1025.0298794833 - val_trvae_loss: 1025.0298794833 |█████████████-------| 67.0%  - val_loss: 1024.6449141069 - val_trvae_loss: 1024.6449141069 |█████████████-------| 68.0%  - val_loss: 1024.9315684925 - val_trvae_loss: 1024.9315684925 |█████████████-------| 69.0%  - val_loss: 1025.1001586914 - val_trvae_loss: 1025.1001586914 |██████████████------| 70.0%  - val_loss: 1024.6666537198 - val_trvae_loss: 1024.6666537198 |██████████████------| 71.0%  - val_loss: 1024.7157870206 - val_trvae_loss: 1024.7157870206 |██████████████------| 72.0%  - val_loss: 1025.2322276722 - val_trvae_loss: 1025.2322276722 |██████████████------| 73.0%  - val_loss: 1024.6805808327 - val_trvae_loss: 1024.6805808327 |██████████████------| 74.0%  - val_loss: 1024.6219926314 - val_trvae_loss: 1024.6219926314 |███████████████-----| 75.0%  - val_loss: 1024.6315640536 - val_trvae_loss: 1024.6315640536 |███████████████-----| 76.0%  - val_loss: 1024.2508267489 - val_trvae_loss: 1024.2508267489 |███████████████-----| 77.0%  - val_loss: 1024.6305098100 - val_trvae_loss: 1024.6305098100 |███████████████-----| 78.0%  - val_loss: 1024.5048550692 - val_trvae_loss: 1024.5048550692 |███████████████-----| 79.0%  - val_loss: 1024.3956076882 - val_trvae_loss: 1024.3956076882 |████████████████----| 80.0%  - val_loss: 1023.9574973366 - val_trvae_loss: 1023.9574973366 |████████████████----| 81.0%  - val_loss: 1031.5427634499 - val_trvae_loss: 1027.1536587802 - val_landmark_loss: 4.3891083977 - val_labeled_loss: 4.3891083977 |████████████████----| 82.0%  - val_loss: 1030.6320689808 - val_trvae_loss: 1026.7016102184 - val_landmark_loss: 3.9304705100 - val_labeled_loss: 3.9304705100 |████████████████----| 83.0%  - val_loss: 1029.3051702326 - val_trvae_loss: 1025.7663130327 - val_landmark_loss: 3.5388588580 - val_labeled_loss: 3.5388588580 |████████████████----| 84.0%  - val_loss: 1029.3489712802 - val_trvae_loss: 1026.4640391957 - val_landmark_loss: 2.8849028024 - val_labeled_loss: 2.8849028024 |█████████████████---| 85.0%  - val_loss: 1027.8853926225 - val_trvae_loss: 1025.3198852539 - val_landmark_loss: 2.5655238412 - val_labeled_loss: 2.5655238412 |█████████████████---| 86.0%  - val_loss: 1028.5198475231 - val_trvae_loss: 1026.0268776634 - val_landmark_loss: 2.4929784320 - val_labeled_loss: 2.4929784320 |█████████████████---| 87.0%  - val_loss: 1027.6976040927 - val_trvae_loss: 1025.3290682706 - val_landmark_loss: 2.3685294227 - val_labeled_loss: 2.3685294227 |█████████████████---| 88.0%  - val_loss: 1028.1067060991 - val_trvae_loss: 1025.5079678622 - val_landmark_loss: 2.5987449126 - val_labeled_loss: 2.5987449126 |█████████████████---| 89.0%  - val_loss: 1027.5509088690 - val_trvae_loss: 1025.4826826616 - val_landmark_loss: 2.0682217045 - val_labeled_loss: 2.0682217045 |██████████████████--| 90.0%  - val_loss: 1027.4475541548 - val_trvae_loss: 1025.2703358043 - val_landmark_loss: 2.1772209406 - val_labeled_loss: 2.1772209406 |██████████████████--| 91.0%  - val_loss: 1026.7933959961 - val_trvae_loss: 1024.9458507191 - val_landmark_loss: 1.8475503325 - val_labeled_loss: 1.8475503325 |██████████████████--| 92.0%  - val_loss: 1027.5564908114 - val_trvae_loss: 1025.4857399680 - val_landmark_loss: 2.0707473321 - val_labeled_loss: 2.0707473321 |██████████████████--| 93.0%  - val_loss: 1027.3102306019 - val_trvae_loss: 1025.2102883079 - val_landmark_loss: 2.0999436108 - val_labeled_loss: 2.0999436108 |██████████████████--| 94.0%  - val_loss: 1027.0246803977 - val_trvae_loss: 1025.0821977095 - val_landmark_loss: 1.9424818592 - val_labeled_loss: 1.9424818592 |███████████████████-| 95.0%  - val_loss: 1026.4990789240 - val_trvae_loss: 1025.0391346325 - val_landmark_loss: 1.4599328312 - val_labeled_loss: 1.4599328312 |███████████████████-| 96.0%  - val_loss: 1026.8350053267 - val_trvae_loss: 1024.9063276811 - val_landmark_loss: 1.9286724004 - val_labeled_loss: 1.9286724004 |███████████████████-| 97.0%  - val_loss: 1027.2263461026 - val_trvae_loss: 1025.1044755415 - val_landmark_loss: 2.1218697700 - val_labeled_loss: 2.1218697700 |███████████████████-| 98.0%  - val_loss: 1026.6290116744 - val_trvae_loss: 1024.6931818182 - val_landmark_loss: 1.9358360822 - val_labeled_loss: 1.9358360822 |███████████████████-| 99.0%  - val_loss: 1026.5027188388 - val_trvae_loss: 1024.3914018111 - val_landmark_loss: 2.1113110130 - val_labeled_loss: 2.1113110130 |████████████████████| 100.0%  - val_loss: 1026.5190485174 - val_trvae_loss: 1024.6947132457 - val_landmark_loss: 1.8243479404 - val_labeled_loss: 1.8243479404
-2022-05-19 14:30:44 (INFO): Model trained and saved, initiate surgery
-Saving best state of network...
-Best State was in Epoch 94
-AnnData object with n_obs × n_vars = 2285 × 4000
-    obs: 'study', 'cell_type', 'pred_label', 'pred_score'
-    obsm: 'X_seurat', 'X_symphony'
-Embedding dictionary:
- 	Num conditions: 9
- 	Embedding dim: 10
-Encoder Architecture:
-	Input Layer in, out and cond: 4000 128 0
-	Hidden Layer 1 in/out: 128 128
-	Hidden Layer 2 in/out: 128 128
-	Mean/Var Layer in/out: 128 25
-Decoder Architecture:
-	First Layer in, out and cond:  25 128 10
-	Hidden Layer 1 in/out: 128 128
-	Hidden Layer 2 in/out: 128 128
-	Output Layer in/out:  128 4000 
-
-8
-loaders init
-loaders init done
-0.015248537063598633
- |--------------------| 1.0%  - val_loss: 1888.7615966797 - val_trvae_loss: 1888.7615966797 |--------------------| 2.0%  - val_loss: 1887.4201660156 - val_trvae_loss: 1887.4201660156 |--------------------| 3.0%  - val_loss: 1886.0716552734 - val_trvae_loss: 1886.0716552734 |--------------------| 4.0%  - val_loss: 1879.3138427734 - val_trvae_loss: 1879.3138427734 |█-------------------| 5.0%  - val_loss: 1876.5773315430 - val_trvae_loss: 1876.5773315430 |█-------------------| 6.0%  - val_loss: 1872.5283813477 - val_trvae_loss: 1872.5283813477 |█-------------------| 7.0%  - val_loss: 1868.3872070312 - val_trvae_loss: 1868.3872070312 |█-------------------| 8.0%  - val_loss: 1863.0857543945 - val_trvae_loss: 1863.0857543945 |█-------------------| 9.0%  - val_loss: 1855.7903442383 - val_trvae_loss: 1855.7903442383 |██------------------| 10.0%  - val_loss: 1852.4911499023 - val_trvae_loss: 1852.4911499023 |██------------------| 11.0%  - val_loss: 1846.1494140625 - val_trvae_loss: 1846.1494140625 |██------------------| 12.0%  - val_loss: 1842.2232055664 - val_trvae_loss: 1842.2232055664 |██------------------| 13.0%  - val_loss: 1836.7673339844 - val_trvae_loss: 1836.7673339844 |██------------------| 14.0%  - val_loss: 1830.8479003906 - val_trvae_loss: 1830.8479003906 |███-----------------| 15.0%  - val_loss: 1828.7586669922 - val_trvae_loss: 1828.7586669922 |███-----------------| 16.0%  - val_loss: 1823.4223022461 - val_trvae_loss: 1823.4223022461 |███-----------------| 17.0%  - val_loss: 1819.6350097656 - val_trvae_loss: 1819.6350097656 |███-----------------| 18.0%  - val_loss: 1816.0844726562 - val_trvae_loss: 1816.0844726562 |███-----------------| 19.0%  - val_loss: 1815.0078125000 - val_trvae_loss: 1815.0078125000 |████----------------| 20.0%  - val_loss: 1811.1091918945 - val_trvae_loss: 1811.1091918945 |████----------------| 21.0%  - val_loss: 1807.0086059570 - val_trvae_loss: 1807.0086059570 |████----------------| 22.0%  - val_loss: 1806.0102539062 - val_trvae_loss: 1806.0102539062 |████----------------| 23.0%  - val_loss: 1803.4795532227 - val_trvae_loss: 1803.4795532227 |████----------------| 24.0%  - val_loss: 1802.1357421875 - val_trvae_loss: 1802.1357421875 |█████---------------| 25.0%  - val_loss: 1798.4653320312 - val_trvae_loss: 1798.4653320312 |█████---------------| 26.0%  - val_loss: 1795.9692993164 - val_trvae_loss: 1795.9692993164 |█████---------------| 27.0%  - val_loss: 1793.3410034180 - val_trvae_loss: 1793.3410034180 |█████---------------| 28.0%  - val_loss: 1791.3178100586 - val_trvae_loss: 1791.3178100586 |█████---------------| 29.0%  - val_loss: 1791.0637817383 - val_trvae_loss: 1791.0637817383 |██████--------------| 30.0%  - val_loss: 1786.6994018555 - val_trvae_loss: 1786.6994018555 |██████--------------| 31.0%  - val_loss: 1786.1771850586 - val_trvae_loss: 1786.1771850586 |██████--------------| 32.0%  - val_loss: 1782.5391235352 - val_trvae_loss: 1782.5391235352 |██████--------------| 33.0%  - val_loss: 1781.5836181641 - val_trvae_loss: 1781.5836181641 |██████--------------| 34.0%  - val_loss: 1780.8601684570 - val_trvae_loss: 1780.8601684570 |███████-------------| 35.0%  - val_loss: 1777.4960937500 - val_trvae_loss: 1777.4960937500 |███████-------------| 36.0%  - val_loss: 1775.9884643555 - val_trvae_loss: 1775.9884643555 |███████-------------| 37.0%  - val_loss: 1774.5494995117 - val_trvae_loss: 1774.5494995117 |███████-------------| 38.0%  - val_loss: 1772.9538574219 - val_trvae_loss: 1772.9538574219 |███████-------------| 39.0%  - val_loss: 1770.3233032227 - val_trvae_loss: 1770.3233032227 |████████------------| 40.0%  - val_loss: 1771.2488403320 - val_trvae_loss: 1771.2488403320 |████████------------| 41.0%  - val_loss: 1768.9806518555 - val_trvae_loss: 1768.9806518555 |████████------------| 42.0%  - val_loss: 1766.4993896484 - val_trvae_loss: 1766.4993896484 |████████------------| 43.0%  - val_loss: 1764.3970336914 - val_trvae_loss: 1764.3970336914 |████████------------| 44.0%  - val_loss: 1763.4380493164 - val_trvae_loss: 1763.4380493164 |█████████-----------| 45.0%  - val_loss: 1761.8208007812 - val_trvae_loss: 1761.8208007812 |█████████-----------| 46.0%  - val_loss: 1761.3116455078 - val_trvae_loss: 1761.3116455078 |█████████-----------| 47.0%  - val_loss: 1760.1843872070 - val_trvae_loss: 1760.1843872070 |█████████-----------| 48.0%  - val_loss: 1758.6290283203 - val_trvae_loss: 1758.6290283203 |█████████-----------| 49.0%  - val_loss: 1756.5414428711 - val_trvae_loss: 1756.5414428711 |██████████----------| 50.0%  - val_loss: 1754.4722290039 - val_trvae_loss: 1754.4722290039 |██████████----------| 51.0%  - val_loss: 1754.1282348633 - val_trvae_loss: 1754.1282348633 |██████████----------| 52.0%  - val_loss: 1752.2446899414 - val_trvae_loss: 1752.2446899414 |██████████----------| 53.0%  - val_loss: 1753.7537231445 - val_trvae_loss: 1753.7537231445 |██████████----------| 54.0%  - val_loss: 1751.5614624023 - val_trvae_loss: 1751.5614624023 |███████████---------| 55.0%  - val_loss: 1749.9284057617 - val_trvae_loss: 1749.9284057617 |███████████---------| 56.0%  - val_loss: 1749.7894287109 - val_trvae_loss: 1749.7894287109 |███████████---------| 57.0%  - val_loss: 1747.8268432617 - val_trvae_loss: 1747.8268432617 |███████████---------| 58.0%  - val_loss: 1745.9904785156 - val_trvae_loss: 1745.9904785156 |███████████---------| 59.0%  - val_loss: 1745.4684448242 - val_trvae_loss: 1745.4684448242 |████████████--------| 60.0%  - val_loss: 1743.6226196289 - val_trvae_loss: 1743.6226196289 |████████████--------| 61.0%  - val_loss: 1742.2050170898 - val_trvae_loss: 1742.2050170898 |████████████--------| 62.0%  - val_loss: 1741.3427734375 - val_trvae_loss: 1741.3427734375 |████████████--------| 63.0%  - val_loss: 1740.3720703125 - val_trvae_loss: 1740.3720703125 |████████████--------| 64.0%  - val_loss: 1738.1310424805 - val_trvae_loss: 1738.1310424805 |█████████████-------| 65.0%  - val_loss: 1736.1336669922 - val_trvae_loss: 1736.1336669922 |█████████████-------| 66.0%  - val_loss: 1737.9929199219 - val_trvae_loss: 1737.9929199219 |█████████████-------| 67.0%  - val_loss: 1736.0159301758 - val_trvae_loss: 1736.0159301758 |█████████████-------| 68.0%  - val_loss: 1735.5921020508 - val_trvae_loss: 1735.5921020508 |█████████████-------| 69.0%  - val_loss: 1732.7690429688 - val_trvae_loss: 1732.7690429688 |██████████████------| 70.0%  - val_loss: 1732.4562988281 - val_trvae_loss: 1732.4562988281 |██████████████------| 71.0%  - val_loss: 1731.8399047852 - val_trvae_loss: 1731.8399047852 |██████████████------| 72.0%  - val_loss: 1732.9807739258 - val_trvae_loss: 1732.9807739258 |██████████████------| 73.0%  - val_loss: 1731.6732177734 - val_trvae_loss: 1731.6732177734 |██████████████------| 74.0%  - val_loss: 1728.4328002930 - val_trvae_loss: 1728.4328002930 |███████████████-----| 75.0%  - val_loss: 1728.1334228516 - val_trvae_loss: 1728.1334228516 |███████████████-----| 76.0%  - val_loss: 1728.3564453125 - val_trvae_loss: 1728.3564453125 |███████████████-----| 77.0%  - val_loss: 1727.7883300781 - val_trvae_loss: 1727.7883300781 |███████████████-----| 78.0%  - val_loss: 1727.1232299805 - val_trvae_loss: 1727.1232299805 |███████████████-----| 79.0%  - val_loss: 1726.0673828125 - val_trvae_loss: 1726.0673828125 |████████████████----| 80.0%  - val_loss: 1724.1895141602 - val_trvae_loss: 1724.1895141602
-Initializing unlabeled landmarks with Leiden-Clustering with an unknown number of clusters.
-Leiden Clustering succesful. Found 13 clusters.
- |████████████████----| 81.0%  - val_loss: 1723.6802368164 - val_trvae_loss: 1723.6749877930 - val_landmark_loss: 0.0052406488 - val_unlabeled_loss: 5.2406485081 |████████████████----| 82.0%  - val_loss: 1723.2401123047 - val_trvae_loss: 1723.2359008789 - val_landmark_loss: 0.0041764245 - val_unlabeled_loss: 4.1764241457 |████████████████----| 83.0%  - val_loss: 1722.5333862305 - val_trvae_loss: 1722.5292358398 - val_landmark_loss: 0.0041570776 - val_unlabeled_loss: 4.1570775509 |████████████████----| 84.0%  - val_loss: 1723.0319213867 - val_trvae_loss: 1723.0277099609 - val_landmark_loss: 0.0041687888 - val_unlabeled_loss: 4.1687886715 |█████████████████---| 85.0%  - val_loss: 1721.2778930664 - val_trvae_loss: 1721.2736816406 - val_landmark_loss: 0.0041990166 - val_unlabeled_loss: 4.1990163326 |█████████████████---| 86.0%  - val_loss: 1720.1334228516 - val_trvae_loss: 1720.1292724609 - val_landmark_loss: 0.0041656053 - val_unlabeled_loss: 4.1656050682 |█████████████████---| 87.0%  - val_loss: 1717.9050292969 - val_trvae_loss: 1717.9011840820 - val_landmark_loss: 0.0038343089 - val_unlabeled_loss: 3.8343086243 |█████████████████---| 88.0%  - val_loss: 1718.7954101562 - val_trvae_loss: 1718.7901611328 - val_landmark_loss: 0.0052286824 - val_unlabeled_loss: 5.2286821604 |█████████████████---| 89.0%  - val_loss: 1718.4031372070 - val_trvae_loss: 1718.3986816406 - val_landmark_loss: 0.0044353250 - val_unlabeled_loss: 4.4353246689 |██████████████████--| 90.0%  - val_loss: 1716.7463378906 - val_trvae_loss: 1716.7421264648 - val_landmark_loss: 0.0041687534 - val_unlabeled_loss: 4.1687531471 |██████████████████--| 91.0%  - val_loss: 1717.2764282227 - val_trvae_loss: 1717.2722778320 - val_landmark_loss: 0.0041838572 - val_unlabeled_loss: 4.1838569641 |██████████████████--| 92.0%  - val_loss: 1716.2837524414 - val_trvae_loss: 1716.2785644531 - val_landmark_loss: 0.0052374123 - val_unlabeled_loss: 5.2374120951 |██████████████████--| 93.0%  - val_loss: 1715.0947265625 - val_trvae_loss: 1715.0905761719 - val_landmark_loss: 0.0041675138 - val_unlabeled_loss: 4.1675136089 |██████████████████--| 94.0%  - val_loss: 1716.2378540039 - val_trvae_loss: 1716.2339477539 - val_landmark_loss: 0.0039399206 - val_unlabeled_loss: 3.9399204254 |███████████████████-| 95.0%  - val_loss: 1713.0898437500 - val_trvae_loss: 1713.0845947266 - val_landmark_loss: 0.0052456103 - val_unlabeled_loss: 5.2456099987 |███████████████████-| 96.0%  - val_loss: 1714.8211059570 - val_trvae_loss: 1714.8169555664 - val_landmark_loss: 0.0041647499 - val_unlabeled_loss: 4.1647496223 |███████████████████-| 97.0%  - val_loss: 1711.9646606445 - val_trvae_loss: 1711.9605102539 - val_landmark_loss: 0.0041838052 - val_unlabeled_loss: 4.1838048697 |███████████████████-| 98.0%  - val_loss: 1712.8704833984 - val_trvae_loss: 1712.8661499023 - val_landmark_loss: 0.0043348384 - val_unlabeled_loss: 4.3348380327 |███████████████████-| 99.0%  - val_loss: 1712.1282958984 - val_trvae_loss: 1712.1232299805 - val_landmark_loss: 0.0050553544 - val_unlabeled_loss: 5.0553543568 |████████████████████| 100.0%  - val_loss: 1710.4135131836 - val_trvae_loss: 1710.4093627930 - val_landmark_loss: 0.0041668911 - val_unlabeled_loss: 4.1668908596
-/home/icb/carlo.dedonno/anaconda3/envs/lataq_cuda/lib/python3.8/site-packages/seaborn/_decorators.py:36: FutureWarning: Pass the following variables as keyword args: x, y, hue. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
-  warnings.warn(
-2022-05-19 14:31:10 (INFO): Computing metrics
-/home/icb/carlo.dedonno/anaconda3/envs/lataq_cuda/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1248: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, msg_start, len(result))
-/home/icb/carlo.dedonno/anaconda3/envs/lataq_cuda/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1248: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, msg_start, len(result))
-/home/icb/carlo.dedonno/anaconda3/envs/lataq_cuda/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1248: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, msg_start, len(result))
-2022-05-19 14:31:10 (INFO): Compute integration metrics
-... storing 'study' as categorical
-... storing 'cell_type' as categorical
-Saving best state of network...
-Best State was in Epoch 86
-NMI...
-ARI...
-Silhouette score...
-PC regression...
-Isolated labels F1...
-Isolated labels ASW...
-Graph connectivity...
-2022-05-19 14:34:07 (INFO): Result: {'distances':     condition  cos_dist  eucl_dist
-0  fluidigmc1  0.978443   0.973021
-1     inDrop1  0.818181   0.874776
-2     inDrop2  0.843559   0.847365
-3     inDrop3  0.818181   0.874776
-4     inDrop4  0.843559   0.847365
-5     smarter  0.987610   1.035879
-6   smartseq2  0.923887   0.919013
-7      celseq  0.373240   0.587221
-8     celseq2  0.373240   0.587221, 'classification_report':                     precision    recall  f1-score       support
-acinar               0.896608  0.982025  0.937375   1669.000000
-activated_stellate   0.952381  0.991379  0.971489    464.000000
-alpha                0.989831  0.992354  0.991091   5493.000000
-beta                 0.993435  0.980091  0.986718   4169.000000
-delta                0.972538  0.973460  0.972999   1055.000000
-ductal               0.985478  0.918768  0.950954   2142.000000
-endothelial          0.987382  1.000000  0.993651    313.000000
-epsilon              0.882353  0.937500  0.909091     32.000000
-gamma                0.989986  0.989986  0.989986    699.000000
-macrophage           0.619835  0.949367  0.750000     79.000000
-mast                 0.000000  0.000000  0.000000     42.000000
-quiescent_stellate   0.947368  0.932642  0.939948    193.000000
-schwann              1.000000  1.000000  1.000000     25.000000
-t_cell               0.000000  0.000000  0.000000      7.000000
-accuracy             0.973385  0.973385  0.973385      0.973385
-macro avg            0.801228  0.831969  0.813807  16382.000000
-weighted avg         0.973027  0.973385  0.972663  16382.000000, 'classification_report_query':                     precision    recall  f1-score      support
-acinar               0.985240  0.974453  0.979817   274.000000
-activated_stellate   0.891089  1.000000  0.942408    90.000000
-alpha                0.994012  0.984579  0.989273   843.000000
-beta                 0.973451  0.988764  0.981048   445.000000
-delta                0.979798  0.955665  0.967581   203.000000
-ductal               0.980989  1.000000  0.990403   258.000000
-endothelial          1.000000  1.000000  1.000000    21.000000
-epsilon              1.000000  0.750000  0.857143     4.000000
-gamma                0.990909  0.990909  0.990909   110.000000
-macrophage           0.736842  0.933333  0.823529    15.000000
-mast                 0.000000  0.000000  0.000000     6.000000
-quiescent_stellate   1.000000  0.500000  0.666667    12.000000
-schwann              1.000000  1.000000  1.000000     4.000000
-t_cell               0.000000  0.000000  0.000000     0.000000
-accuracy             0.978556  0.978556  0.978556     0.978556
-macro avg            0.823738  0.791264  0.799198  2285.000000
-weighted avg         0.977829  0.978556  0.977477  2285.000000, 'integration_scores':    NMI_cluster/label  ARI_cluster/label  ...  isolated_label_silhouette  graph_conn
-0           0.922819           0.950985  ...                   0.826725    0.940685
-
-[1 rows x 8 columns]}
-2022-05-19 14:34:07 (INFO): Completed after 0:05:40
