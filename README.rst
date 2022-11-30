@@ -19,7 +19,7 @@ Scib:
    pip install git+https://github.com/theislab/scib
 
 Mars
-  Since the model is not packaged, we cloned the repository in this one.
+  Since the model is not packaged, we had to clone the repository in this one.
   
   
 Seurat
