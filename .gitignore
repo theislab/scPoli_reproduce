@@ -4,6 +4,7 @@
 *.pickle
 *.png
 *.pt
+*.csv
 datasets/
 data/
 .idea/
