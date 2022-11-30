@@ -1,3 +1,0 @@
-Global seed set to 0
-/home/icb/carlo.dedonno/anaconda3/envs/lataq_cuda/lib/python3.8/site-packages/anndata/_core/anndata.py:1785: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  [AnnData(sparse.csr_matrix(a.shape), obs=a.obs) for a in all_adatas],
