@@ -28,4 +28,4 @@ Seurat
   Install SeuratDisk (0.0.0.9019)
 
 scPoli
-  Please use the [scPoli_legacy](https://github.com/theislab/scPoli_legacy) repository for reproducibility. That code will not be maintained. For any other use refer to [scArches](https://github.com/theislab/scarches/).
+  Please use the [scPoli_legacy](https://github.com/theislab/scPoli_legacy) repository for reproducibility. That code is not maintained. For any other use refer to [scArches](https://github.com/theislab/scarches/).
