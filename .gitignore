@@ -18,4 +18,3 @@ figure_notebooks/*/
 notebooks/tmp/
 notebooks/trained_model/
 notebooks/**model/
-notebooks/*/
