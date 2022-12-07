@@ -1,9 +1,8 @@
 
 scPoli Reproducibility Repo
 =========================================================================
-.. raw:: html
 Repository for scripts and notebooks used for scPoli paper. All the datasets used in the work are public.
-Data for the PBMC atlas can be downloaded `here https://figshare.com/projects/scPoli_data/155018`_ .
+Data for the PBMC atlas can be downloaded `here <https://figshare.com/projects/scPoli_data/155018>`_.
 
 Usage and installation
 -------------------------------
