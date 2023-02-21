@@ -4,6 +4,8 @@ scPoli Reproducibility Repo
 Repository for scripts and notebooks used for scPoli paper. All the datasets used in the work are public.
 Data for the PBMC atlas can be downloaded `here <https://figshare.com/projects/scPoli_data/155018>`_.
 
+This code is not maintained and the core code has been moved and integrate in the `scArches <https://github.com/theislab/scarches/>`_ package. A tutorial for scPoli usage is available `here <https://scarches.readthedocs.io/en/latest/scpoli_surgery_pipeline.html>`_.
+
 Usage and installation
 -------------------------------
 ScVI & ScANVI:
