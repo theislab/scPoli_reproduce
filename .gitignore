@@ -1,7 +1,10 @@
 .ipynb_checkpoints/
 *.h5ad
 *.pkl
+*.pickle
+*.png
 *.pt
+*.csv
 datasets/
 data/
 .idea/
@@ -11,12 +14,7 @@ own_tests/
 *.egg-info
 build/
 dist/
-tmp/
-hyperopt/logs/
-benchmarks/logs/
-hierarchical/logs/
-results/
+figure_notebooks/*/
 notebooks/tmp/
 notebooks/trained_model/
 notebooks/**model/
-

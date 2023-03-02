@@ -1,5 +1,0 @@
-Starting job 3783105
-SLURM assigned me the node(s): gpusrv13
-WARNING: Experiment with ID 21 does not have status PENDING and will not be run.
-Experiments are running under the following process IDs:
-
