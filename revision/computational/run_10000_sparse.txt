@@ -1,0 +1,23 @@
+	Command being timed: "python main.py --n_obs=10000"
+	User time (seconds): 178.99
+	System time (seconds): 23.72
+	Percent of CPU this job got: 113%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:58.30
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 4562272
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 39
+	Minor (reclaiming a frame) page faults: 409574
+	Voluntary context switches: 32297
+	Involuntary context switches: 2930755
+	Swaps: 0
+	File system inputs: 416
+	File system outputs: 72
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
