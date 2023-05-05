@@ -1,0 +1,61 @@
+seml:
+  executable: hyperopt_scpoli/hyperparam_tuning_revision_seml.py
+  name: hyperparam_tuning_revision
+  output_dir: hyperopt/logs
+  project_root_dir: /lustre/groups/ml01/workspace/carlo.dedonno/lataq_reproduce_backup/lataq_reproduce
+  conda_environment: scarches
+slurm:
+  experiments_per_job: 1
+  sbatch_options_template: GPU
+  sbatch_options:
+    mem: 50G          # memory
+    cpus-per-task: 6  # num cores
+    time: 2-00:00     # max time, D-HH:MM
+    nice: 100000
+###### BEGIN PARAMETER CONFIGURATION ######
+
+fixed:
+  n_epochs: 100
+  n_pre_epochs: 80
+
+grid:
+  data: 
+    type: choice
+    options:
+      - pancreas
+      - pbmc
+      - brain
+      - scvelo
+      - tumor
+      - lung
+      
+  embedding_dim:
+    type: choice
+    options:
+      - 5
+      
+  p_prototype_loss:
+    type: choice
+    options:
+      - 2
+      
+  latent_dim:
+    type: choice
+    options:
+      - 10
+
+  hidden_layers:
+    type: choice
+    options: 
+      - 1
+    
+  eta:  #weight for landmark loss (both labeled and unlabeled)
+    type: choice
+    options:
+      - 0
+
+  alpha_epoch_anneal:
+    type: choice
+    options:
+      - 1e2
+  
